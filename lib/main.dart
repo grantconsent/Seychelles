@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grantconsent/screens/splash_screen.dart';
+import 'package:grantconsent/screens/authentication/splash_screen.dart';
 
 void main() {
   runApp(GrantConsent());
@@ -12,7 +12,7 @@ class GrantConsent extends StatelessWidget {
       title: 'Grant Consent',
       theme: ThemeData(
      //   primarySwatch: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home:SplashScreen(),
     );
