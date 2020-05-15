@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/styles.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final _signInkey = GlobalKey<FormState>();
+  // final _signInkey = GlobalKey<FormState>();
   bool checkBoxValue = false;
   @override
   Widget build(BuildContext context) {
@@ -86,8 +87,10 @@ class _SignInState extends State<SignIn> {
                                 }),
                             Text(
                               'remember me',
-                              style: TextStyle(color: kButtonTextColor2),
-                            ),
+                              style: GoogleFonts.quicksand(
+                                textStyle: TextStyle(color: kButtonTextColor2),
+                              ),
+                            )
                           ]),
                           Text(
                             'forgot password?',
@@ -120,9 +123,10 @@ class _SignInState extends State<SignIn> {
                                       children: <Widget>[
                                         Text(
                                           'Sign In',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 13),
+                                          style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18)),
                                         ),
                                         Icon(Icons.keyboard_arrow_right),
                                       ],
@@ -133,8 +137,9 @@ class _SignInState extends State<SignIn> {
                             ),
                             Text(
                               "OR",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 15.0),
+                              style: GoogleFonts.roboto(
+                                  textStyle: TextStyle(
+                                      color: Colors.black, fontSize: 45.0)),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 15.0),
@@ -155,8 +160,10 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     title: Text(
                                       'Sign In with Google',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 13),
+                                      style: GoogleFonts.roboto(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18)),
                                     ),
                                     leading: Image(
                                       image: kGoogleLogo,
@@ -213,7 +220,8 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        style: TextStyle(color: kButtonTextColor2),
+        style:
+            GoogleFonts.roboto(textStyle: TextStyle(color: kButtonTextColor2)),
         obscureText: obscure == null ? false : obscure,
         decoration: InputDecoration(
           hintText: hintText,
