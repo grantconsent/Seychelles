@@ -165,10 +165,10 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.white,
                                               fontSize: 18)),
                                     ),
-                                    leading: Image(
-                                      image: kGoogleLogo,
-                                      color: Colors.white,
-                                    ),
+                                    // leading: Image(
+                                    //   image: kGoogleLogo,
+                                    //   color: Colors.white,
+                                    // ),
                                   ),
                                 ),
                               ),
