@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,6 +17,7 @@ import 'styles.dart';
 ///
 class GrantConsentLogo extends StatelessWidget {
   final LogoType type;
+
   GrantConsentLogo(this.type);
 
   final Widget mediumLogoImage = ConstrainedBox(
@@ -31,6 +33,7 @@ class GrantConsentLogo extends StatelessWidget {
       image: kGrantConsentLogo,
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     if (type == LogoType.mediumWithoutText)
@@ -55,7 +58,8 @@ class GrantConsentLogo extends StatelessWidget {
           ],
         ),
       );
-    else /*  (type == LogoType.largeWithText) */
+    else
+      /*  (type == LogoType.largeWithText) */
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +112,9 @@ class AppIconButton extends StatelessWidget {
 ///SlideIndicatorPane ```
 class SlideIndicatorDot extends StatelessWidget {
   final bool isActive;
+
   SlideIndicatorDot(this.isActive);
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -140,7 +146,7 @@ class SlideIndicatorPane extends StatelessWidget {
   ];
 
   void prepIndicators() {
-  //  _slideIndicators.clear();
+    //  _slideIndicators.clear();
     _slideIndicators.setAll(0, _slideIndicatorsBlank);
     _slideIndicators[currentPage] = SlideIndicatorDot(true);
   }
@@ -180,6 +186,7 @@ class UserActionButton extends StatelessWidget {
   final String label;
   final bool filled;
   bool isfilled;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -215,19 +222,18 @@ class UserActionButton extends StatelessWidget {
   }
 }
 
-
 class UserGoogleButton extends StatelessWidget {
-
   UserGoogleButton({this.onTap});
+
   final Function onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xff4285f4),
-            borderRadius: BorderRadius.circular(5)),
+            color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
         height: 50,
         child: ListTile(
           onTap: null,
@@ -239,15 +245,26 @@ class UserGoogleButton extends StatelessWidget {
             'Sign In with Google',
             style: TextStyle(color: Colors.white, fontSize: 13),
           ),
-          leading: Image(
-            image: AssetImage('assets/Google Logo.png'),
-            // color: Colors.white,
+          leading: Padding(
+            padding: const EdgeInsets.only(bottom: 6.0),
+            child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: Colors.white),
+
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightForFinite(width: 40, height: 40),
+                child: Image(
+                  image: AssetImage('assets/Google Logo.png'),
+                  // color: Colors.white,
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 }
+
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
       {@required this.hintText, this.icon, this.textInputType, this.obscure});
@@ -275,7 +292,3 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: textInputType);
   }
 }
-
-
-
-
