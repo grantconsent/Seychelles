@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/sign_up.dart';
+import 'package:grantconsent/screens/sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -55,7 +56,9 @@ class GetStarted extends StatelessWidget {
               ),
               UserActionButton(
                 onTap: () {
-                  print('Sign In was preseed');
+         Navigator.push(context,
+          MaterialPageRoute(builder: (context) => SignIn()));
+
                 },
                 label: 'Sign In',
                 filled: false,

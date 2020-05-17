@@ -7,6 +7,7 @@ const Color kButtonColor = Color(0xFFCAB480);
 const Color kButtonTextColor1 = Color(0xFF222222);
 const Color kButtonTextColor2 = Color(0xFFCAB480);
 const Color kInactiveSlideDotColor = Color(0xFF535353);
+const Color kGoogleButtonColor = Color(0xff4285f4);
 //Text Styles
 
 final kBody1TextStyle = GoogleFonts.quicksand(
@@ -27,4 +28,14 @@ final kButtonTextStyle = GoogleFonts.roboto(
   height: 1.20,
   fontWeight: FontWeight.w300,
   color: kButtonTextColor1,
+);
+final kOrTextStyle = GoogleFonts.roboto(
+  fontSize: 20,
+  color:Colors.white,
+);
+final kGoogleButtonLabelStyle = GoogleFonts.roboto(
+  fontSize: 15,
+  height: 1.20,
+  fontWeight: FontWeight.w300,
+  color: Colors.white,
 );

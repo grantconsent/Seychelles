@@ -163,6 +163,7 @@ class SlideIndicatorPane extends StatelessWidget {
 /// + and [label] String as title.
 ///
 ///
+///
 class UserActionButton extends StatelessWidget {
   UserActionButton({
     @required this.onTap,
@@ -213,3 +214,68 @@ class UserActionButton extends StatelessWidget {
     );
   }
 }
+
+
+class UserGoogleButton extends StatelessWidget {
+
+  UserGoogleButton({this.onTap});
+  final Function onTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color(0xff4285f4),
+            borderRadius: BorderRadius.circular(5)),
+        height: 50,
+        child: ListTile(
+          onTap: null,
+          trailing: Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Sign In with Google',
+            style: TextStyle(color: Colors.white, fontSize: 13),
+          ),
+          leading: Image(
+            image: AssetImage('assets/Google Logo.png'),
+            // color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+class CustomTextFormField extends StatelessWidget {
+  CustomTextFormField(
+      {@required this.hintText, this.icon, this.textInputType, this.obscure});
+
+  final String hintText;
+  final Icon icon;
+  final TextInputType textInputType;
+  final bool obscure;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        style: TextStyle(color: kButtonTextColor2),
+        obscureText: obscure == null ? false : obscure,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(color: kButtonTextColor2),
+          filled: true,
+          suffixIcon: icon,
+          fillColor: Color.fromRGBO(202, 180, 128, 0.3),
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+        ),
+        keyboardType: textInputType);
+  }
+}
+
+
+
+
