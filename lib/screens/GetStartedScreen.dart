@@ -62,7 +62,6 @@ class GetStarted extends StatelessWidget {
                 children: <Widget>[
                   Text('Sign Up',
                     style: TextStyle(
-
                       fontSize: 15,
                     ),),
                   Icon(Icons.arrow_forward_ios,
