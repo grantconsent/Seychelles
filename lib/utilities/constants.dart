@@ -9,6 +9,7 @@ ImageProvider kSplashPage1Image = AssetImage('assets/Splash image 1.png');
 ImageProvider kSplashPage2Image = AssetImage('assets/Splash image 2.png');
 ImageProvider kGetStartedScreenBackground =
     AssetImage('assets/seductive_woman.png');
+ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
 const int kNumberOfSplashPages = 2;
 
 //Strings

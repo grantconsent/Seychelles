@@ -41,28 +41,26 @@ class _SignInState extends State<SignIn> {
             flex: 2,
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                padding: const EdgeInsets.symmetric(horizontal: 38.0),
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: CustomTextFormField(
                         hintText: "Phone Number",
                         textInputType: TextInputType.number,
                       ),
                     ),
+                    CustomTextFormField(
+                        obscure: true,
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                          size: 15,
+                          color: kButtonTextColor2,
+                        ),
+                        hintText: "Password"),
                     Padding(
-                        padding: const EdgeInsets.only(bottom: 3.0),
-                        child: CustomTextFormField(
-                            obscure: true,
-                            icon: Icon(
-                              Icons.remove_red_eye,
-                              size: 15,
-                              color: kButtonTextColor2,
-                            ),
-                            hintText: "Password")),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[

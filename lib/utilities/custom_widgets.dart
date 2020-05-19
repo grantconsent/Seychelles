@@ -190,7 +190,7 @@ class UserActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 2.5),
+      margin: EdgeInsets.symmetric(vertical: 1),
       constraints:
           BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
       decoration: BoxDecoration(
@@ -234,29 +234,46 @@ class UserGoogleButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
-        height: 50,
-        child: ListTile(
-          onTap: null,
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
+        height: 40,
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 1),
+          constraints:
+              BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
           ),
-          title: Text(
-            'Sign In with Google',
-            style: TextStyle(color: Colors.white, fontSize: 13),
-          ),
-          leading: Padding(
-            padding: const EdgeInsets.only(bottom: 6.0),
-            child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: Colors.white),
-
-              child: ConstrainedBox(
-                constraints: BoxConstraints.tightForFinite(width: 40, height: 40),
-                child: Image(
-                  image: AssetImage('assets/Google Logo.png'),
-                  // color: Colors.white,
+          child: RawMaterialButton(
+            padding: EdgeInsets.only(left: 2, right: 14.4),
+            onPressed: onTap,
+            constraints: BoxConstraints.expand(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Ink(
+                      child: Image(image: kGoogleLogo),
+                      padding: EdgeInsets.all(5),
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Text(
+                      'Sign Up with Google',
+                      style: kGoogleButtonLabelStyle,
+                    ),
+                  ],
                 ),
-              ),
+                Icon(
+                  Icons.chevron_right,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ],
             ),
           ),
         ),
@@ -280,6 +297,7 @@ class CustomTextFormField extends StatelessWidget {
         style: TextStyle(color: kButtonTextColor2),
         obscureText: obscure == null ? false : obscure,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
           hintText: hintText,
           hintStyle: TextStyle(color: kButtonTextColor2),
           filled: true,

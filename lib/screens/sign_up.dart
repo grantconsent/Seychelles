@@ -21,7 +21,7 @@ class SignUp extends StatelessWidget {
               GrantConsentLogo(LogoType.mediumWithText),
               Spacer(flex: 2),
               Padding(
-                padding: const EdgeInsets.only(bottom: 3.0),
+                padding: const EdgeInsets.only(bottom: 5.0),
                 child: CustomTextFormField(
                   hintText: 'Name',
 //                  labelText: 'Name',
@@ -29,7 +29,7 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 3.0),
+                padding: const EdgeInsets.only(bottom: 5.0),
                 child: CustomTextFormField(
                   hintText: 'Email',
 //                  labelText: 'Email',
@@ -37,7 +37,7 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 3.0),
+                padding: const EdgeInsets.only(bottom: 5.0),
                 child: CustomTextFormField(
                   hintText: 'Phone Number',
 //                  labelText: 'Phone Number',
@@ -45,7 +45,7 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 3.0),
+                padding: const EdgeInsets.only(bottom: 5.0),
                 child: CustomTextFormField(
                   hintText: 'Password',
 //                  labelText: 'Password',
