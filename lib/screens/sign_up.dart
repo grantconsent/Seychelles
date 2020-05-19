@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/sodiq/firstscreen.dart';
+import 'package:grantconsent/sodiq/signin.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class SignUp extends StatefulWidget {
@@ -34,8 +36,8 @@ class _SignUpState extends State<SignUp> {
                         fit: BoxFit.fitWidth,
                         child: Text(
                           "CONSENT",
-                          style: TextStyle(
-                              fontSize: 25, color: kButtonTextColor2),
+                          style:
+                              TextStyle(fontSize: 25, color: kButtonTextColor2),
                         ),
                       ),
                     ],
@@ -57,8 +59,7 @@ class _SignUpState extends State<SignUp> {
                         style: TextStyle(color: kButtonTextColor2),
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: kButtonTextColor2),
+                              borderSide: BorderSide(color: kButtonTextColor2),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -76,8 +77,7 @@ class _SignUpState extends State<SignUp> {
                         style: TextStyle(color: kButtonTextColor2),
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: kButtonTextColor2),
+                              borderSide: BorderSide(color: kButtonTextColor2),
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5)),
@@ -94,8 +94,7 @@ class _SignUpState extends State<SignUp> {
                         style: TextStyle(color: kButtonTextColor2),
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: kButtonTextColor2),
+                              borderSide: BorderSide(color: kButtonTextColor2),
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5)),
@@ -112,8 +111,7 @@ class _SignUpState extends State<SignUp> {
                         style: TextStyle(color: kButtonTextColor2),
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: kButtonTextColor2),
+                              borderSide: BorderSide(color: kButtonTextColor2),
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5)),
@@ -135,8 +133,7 @@ class _SignUpState extends State<SignUp> {
                         style: TextStyle(color: kButtonTextColor2),
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: kButtonTextColor2),
+                              borderSide: BorderSide(color: kButtonTextColor2),
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5)),
@@ -169,10 +166,11 @@ class _SignUpState extends State<SignUp> {
                                 height: 50,
 //                                color: kButtonTextColor2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 30.0, right: 15),
+                                  padding: const EdgeInsets.only(
+                                      left: 30.0, right: 15),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
                                         'Sign Up',
@@ -188,14 +186,24 @@ class _SignUpState extends State<SignUp> {
                           ),
                           Text(
                             "OR",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 15.0),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 15.0),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15.0),
                             child: GestureDetector(
                               onTap: () {
 //                                on tap google sign up
+                                // print('omo! git sef');
+                                signInWithGoogle().whenComplete(() {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return FirstScreen();
+                                      },
+                                    ),
+                                  );
+                                });
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -210,11 +218,12 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   title: Text(
                                     'Sign Up with Google',
-                                    style: TextStyle(color: Colors.white, fontSize: 13),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 13),
                                   ),
                                   leading: Image(
                                     image: AssetImage('assets/Google Logo.png'),
-                                   // color: Colors.white,
+                                    // color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -238,8 +247,14 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Already have an account? ', style: TextStyle(color: kButtonTextColor2, fontSize: 11),),
-                  Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 11),)
+                  Text(
+                    'Already have an account? ',
+                    style: TextStyle(color: kButtonTextColor2, fontSize: 11),
+                  ),
+                  Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white, fontSize: 11),
+                  )
                 ],
               ),
             ),
