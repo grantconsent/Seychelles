@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:grantconsent/screens/upload_user_picture.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../utilities/constants.dart';
 import '../utilities/constants.dart';
 import '../utilities/custom_widgets.dart';
+
+ValueNotifier displayedImage = ValueNotifier(null);
 
 class GetUserPicture extends StatelessWidget {
   @override
@@ -17,10 +20,23 @@ class GetUserPicture extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Spacer(flex: 3,),
+            Spacer(
+              flex: 3,
+            ),
             SelectAndDisplayImage(),
-            Spacer(flex: 2,),
-            UserActionButton(onTap: null, label: 'Continue'),
+            Spacer(
+              flex: 2,
+            ),
+            UserActionButton(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UploadPicture(),
+                    ),
+                  );
+                },
+                label: 'Continue'),
             Spacer(flex: 3),
           ],
         ),
