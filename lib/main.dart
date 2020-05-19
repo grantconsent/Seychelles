@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/loading_animation.dart';
+
+import 'utilities/styles.dart';
+import 'utilities/styles.dart';
+import 'utilities/styles.dart';
 //import 'package:grantconsent/screens/splash_screen.dart';
 
 void main() {
@@ -12,8 +16,9 @@ class GrantConsent extends StatelessWidget {
     return MaterialApp(
       title: 'Grant Consent',
       theme: ThemeData(
-          //   primarySwatch: Colors.white,
-          // visualDensity: VisualDensity.adaptivePlatformDensity,
+          scaffoldBackgroundColor: kBackgroundColor,
+          accentColor: kButtonColor,
+          primaryColor: kButtonColor,
           ),
       home: LoadingAnimation(),
     );

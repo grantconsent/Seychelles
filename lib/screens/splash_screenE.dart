@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
+import 'package:grantconsent/screens/get_user_picture.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/constants.dart';
@@ -26,16 +27,22 @@ class SplashScreenE extends StatelessWidget {
           Spacer(flex: 1),
           Expanded(
             flex: 8,
-            child: PageView.builder(
-              itemCount: kNumberOfSplashPages,
-              itemBuilder: (context, page) {
-                return SplashPage(page: page);
+            child: GestureDetector(
+              onDoubleTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GetUserPicture()));
+
               },
-              onPageChanged: (page) {
-                pageNotifier.value = page;
-              },
-              controller: splashPageController,
-              physics: BouncingScrollPhysics(),
+                          child: PageView.builder(
+                itemCount: kNumberOfSplashPages,
+                itemBuilder: (context, page) {
+                  return SplashPage(page: page);
+                },
+                onPageChanged: (page) {
+                  pageNotifier.value = page;
+                },
+                controller: splashPageController,
+                physics: BouncingScrollPhysics(),
+              ),
             ),
           ),
           Flexible(
