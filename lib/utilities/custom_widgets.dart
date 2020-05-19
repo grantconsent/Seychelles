@@ -140,7 +140,7 @@ class SlideIndicatorPane extends StatelessWidget {
   ];
 
   void prepIndicators() {
-  //  _slideIndicators.clear();
+    //  _slideIndicators.clear();
     _slideIndicators.setAll(0, _slideIndicatorsBlank);
     _slideIndicators[currentPage] = SlideIndicatorDot(true);
   }
@@ -169,17 +169,24 @@ class UserActionButton extends StatelessWidget {
     @required this.onTap,
     @required this.label,
     this.filled,
+    this.locked,
   }) {
     if (filled == null)
       isfilled = true;
     else
       isfilled = filled;
+    if (locked == null)
+      islocked = false;
+    else
+      islocked = locked;
   }
 
   final Function onTap;
   final String label;
   final bool filled;
   bool isfilled;
+  final bool locked;
+  bool islocked;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -193,7 +200,7 @@ class UserActionButton extends StatelessWidget {
       ),
       child: RawMaterialButton(
         padding: EdgeInsets.only(left: 40, right: 14.4),
-        onPressed: onTap,
+        onPressed: islocked ? null : onTap,
         constraints: BoxConstraints.expand(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,9 +222,7 @@ class UserActionButton extends StatelessWidget {
   }
 }
 
-
 class UserGoogleButton extends StatelessWidget {
-
   UserGoogleButton({this.onTap});
   final Function onTap;
   @override
@@ -226,8 +231,7 @@ class UserGoogleButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xff4285f4),
-            borderRadius: BorderRadius.circular(5)),
+            color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
         height: 50,
         child: ListTile(
           onTap: null,
@@ -248,6 +252,7 @@ class UserGoogleButton extends StatelessWidget {
     );
   }
 }
+
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
       {@required this.hintText, this.icon, this.textInputType, this.obscure});
@@ -275,7 +280,3 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: textInputType);
   }
 }
-
-
-
-

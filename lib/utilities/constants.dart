@@ -26,6 +26,7 @@ Widget kUploadedGIF = Image.asset(
   fit: BoxFit.cover,
 );
 
+Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
 const int kNumberOfSplashPages = 2;
 
 //Strings

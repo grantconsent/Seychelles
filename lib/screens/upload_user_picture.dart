@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../utilities/constants.dart';
-import '../utilities/constants.dart';
-import '../utilities/constants.dart';
-import '../utilities/constants.dart';
-import '../utilities/constants.dart';
-import '../utilities/styles.dart';
+import 'package:grantconsent/utilities/constants.dart';
+import 'package:grantconsent/utilities/styles.dart';
 
 class UploadPicture extends StatelessWidget {
   ///This variable controls which GIF and text is displayed
