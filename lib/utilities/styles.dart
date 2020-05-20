@@ -30,7 +30,7 @@ final kButtonTextStyle = GoogleFonts.roboto(
   color: kButtonTextColor1,
 );
 final kOrTextStyle = GoogleFonts.roboto(
-  fontSize: 20,
+  fontSize: 15,
   color:Colors.white,
 );
 final kGoogleButtonLabelStyle = GoogleFonts.roboto(

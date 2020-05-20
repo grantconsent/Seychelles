@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:grantconsent/utilities/constants.dart';
-import 'package:grantconsent/utilities/styles.dart';
-import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/screens/sign_up.dart';
+import 'package:grantconsent/utilities/constants.dart';
+import 'package:grantconsent/utilities/custom_widgets.dart';
+import 'package:grantconsent/utilities/styles.dart';
+
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
@@ -10,6 +11,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool checkBoxValue = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +28,9 @@ class _SignInState extends State<SignIn> {
                   Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 35.0, right: 35.0, top: 35.0, bottom: 5),
-                        child:GrantConsentLogo(LogoType.largeWithText)
-                      ),
-
+                          padding: const EdgeInsets.only(
+                              left: 35.0, right: 35.0, top: 35.0, bottom: 5),
+                          child: GrantConsentLogo(LogoType.mediumWithText)),
                     ],
                   ),
                 ],
@@ -41,34 +41,31 @@ class _SignInState extends State<SignIn> {
             flex: 2,
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                padding: const EdgeInsets.symmetric(horizontal: 38.0),
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
+                      padding: const EdgeInsets.only(bottom: 5.0),
                       child: CustomTextFormField(
                         hintText: "Phone Number",
                         textInputType: TextInputType.number,
                       ),
                     ),
+                    CustomTextFormField(
+                        obscure: true,
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                          size: 15,
+                          color: kButtonTextColor2,
+                        ),
+                        hintText: "Password"),
                     Padding(
-                        padding: const EdgeInsets.only(bottom: 3.0),
-                        child: CustomTextFormField(
-                            obscure: true,
-                            icon: Icon(
-                              Icons.remove_red_eye,
-                              size: 15,
-                              color: kButtonTextColor2,
-                            ),
-                            hintText: "Password")),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Row(children: <Widget>[
                             Checkbox(
-
                                 value: checkBoxValue,
                                 activeColor: kButtonTextColor2,
                                 onChanged: (bool newValue) {
@@ -88,38 +85,32 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(top: 50.0),
                       child: Column(
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(bottom: 15.0),
-                            child:  UserActionButton(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SignIn()));
-
-                              },
-                              label: 'Sign In',
-                              filled: true
-
-                            ),
+                            child: UserActionButton(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignIn()));
+                                },
+                                label: 'Sign In',
+                                filled: true),
                           ),
-                          Text(
-                            "OR",
-                            style:kOrTextStyle
-                          ),
+                          Text("OR", style: kOrTextStyle),
                           Padding(
                             padding: const EdgeInsets.only(top: 15.0),
-                            child:  UserGoogleButton(
+                            child: UserGoogleButton(
                               onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SignIn()));
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignIn()));
                               },
-
-
                             ),
                           ),
                         ],
@@ -138,16 +129,16 @@ class _SignInState extends State<SignIn> {
               children: <Widget>[
                 Text(
                   'Don\'t have an account? ',
-                  style: TextStyle(color: kButtonTextColor2, fontSize: 15),
+                  style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SignUp()));
                   },
                   child: Text(
                     'Sign Up',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 )
               ],
@@ -158,4 +149,3 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
-

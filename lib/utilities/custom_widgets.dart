@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,6 +17,7 @@ import 'styles.dart';
 ///
 class GrantConsentLogo extends StatelessWidget {
   final LogoType type;
+
   GrantConsentLogo(this.type);
 
   final Widget mediumLogoImage = ConstrainedBox(
@@ -31,6 +33,7 @@ class GrantConsentLogo extends StatelessWidget {
       image: kGrantConsentLogo,
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     if (type == LogoType.mediumWithoutText)
@@ -55,7 +58,8 @@ class GrantConsentLogo extends StatelessWidget {
           ],
         ),
       );
-    else /*  (type == LogoType.largeWithText) */
+    else
+      /*  (type == LogoType.largeWithText) */
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +112,9 @@ class AppIconButton extends StatelessWidget {
 ///SlideIndicatorPane ```
 class SlideIndicatorDot extends StatelessWidget {
   final bool isActive;
+
   SlideIndicatorDot(this.isActive);
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -140,7 +146,7 @@ class SlideIndicatorPane extends StatelessWidget {
   ];
 
   void prepIndicators() {
-  //  _slideIndicators.clear();
+    //  _slideIndicators.clear();
     _slideIndicators.setAll(0, _slideIndicatorsBlank);
     _slideIndicators[currentPage] = SlideIndicatorDot(true);
   }
@@ -180,10 +186,11 @@ class UserActionButton extends StatelessWidget {
   final String label;
   final bool filled;
   bool isfilled;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 2.5),
+      margin: EdgeInsets.symmetric(vertical: 1),
       constraints:
           BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
       decoration: BoxDecoration(
@@ -215,39 +222,66 @@ class UserActionButton extends StatelessWidget {
   }
 }
 
-
 class UserGoogleButton extends StatelessWidget {
-
   UserGoogleButton({this.onTap});
+
   final Function onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xff4285f4),
-            borderRadius: BorderRadius.circular(5)),
-        height: 50,
-        child: ListTile(
-          onTap: null,
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
+            color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
+        height: 40,
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 1),
+          constraints:
+              BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
           ),
-          title: Text(
-            'Sign In with Google',
-            style: TextStyle(color: Colors.white, fontSize: 13),
-          ),
-          leading: Image(
-            image: AssetImage('assets/Google Logo.png'),
-            // color: Colors.white,
+          child: RawMaterialButton(
+            padding: EdgeInsets.only(left: 2, right: 14.4),
+            onPressed: onTap,
+            constraints: BoxConstraints.expand(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Ink(
+                      child: Image(image: kGoogleLogo),
+                      padding: EdgeInsets.all(5),
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Text(
+                      'Sign Up with Google',
+                      style: kGoogleButtonLabelStyle,
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
       {@required this.hintText, this.icon, this.textInputType, this.obscure});
@@ -263,6 +297,7 @@ class CustomTextFormField extends StatelessWidget {
         style: TextStyle(color: kButtonTextColor2),
         obscureText: obscure == null ? false : obscure,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
           hintText: hintText,
           hintStyle: TextStyle(color: kButtonTextColor2),
           filled: true,
@@ -275,7 +310,3 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: textInputType);
   }
 }
-
-
-
-
