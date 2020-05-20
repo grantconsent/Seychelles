@@ -3,12 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
-import 'package:grantconsent/screens/splash_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
+
+import 'get_started_screen.dart';
 
 class LoadingAnimation extends StatelessWidget {
   @override
@@ -28,21 +27,8 @@ class AnimatedLogo extends StatefulWidget {
 }
 
 class _AnimatedLogoState extends State<AnimatedLogo>
-    with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation<double> splashScreenAnimation;
-  int repeatAnimation = 0;
-
-  void loadApp() {
-    splashScreenAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.reverse) repeatAnimation++;
-      if (repeatAnimation == 3) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SplashScreen()));
-        animationController.dispose();
-      }
-    });
-  }
+    with TickerProviderStateMixin {
+  var repeatAnimation = 0;
 
   @override
   void initState() {
@@ -56,7 +42,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         if (status == AnimationStatus.completed) {
           scaleAnimationController.reverse();
           scaleAnimationController.addStatusListener((status) {
-            if (status == AnimationStatus.dismissed) {
+            if(status == AnimationStatus.dismissed){
               slideAnimationController.forward();
               setState(() {
                 opacity = 1.0;
@@ -117,7 +103,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     return Stack(
       children: <Widget>[
         AnimatedOpacity(
-          child: SplashScreen(),
+          child: SplashScreenE(),
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),
@@ -153,25 +139,114 @@ class _AnimatedLogoState extends State<AnimatedLogo>
   }
 }
 
-//     animationController = AnimationController(
-//         vsync: this, duration: kLoadingScreenAnimationDuration);
-//     splashScreenAnimation =
-//         Tween<double>(begin: 1, end: kLoadingScreenAnimationScale)
-//             .animate(animationController)
-//               ..addListener(() {
-//                 setState(() {});
-//               });
-//     animationController.repeat(reverse: true);
+class SplashScreenE extends StatelessWidget {
+  final PageController splashPageController = PageController();
 
-//     loadApp();
-//   }
+  @override
+  Widget build(BuildContext context) {
+    ValueNotifier pageNotifier = ValueNotifier(0);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ScaleTransition(
-//       scale: splashScreenAnimation,
-//       alignment: Alignment.center,
-//       child: GrantConsentLogo(LogoType.mediumWithoutText),
-//     );
-//   }
-// }
+    return Scaffold(
+      backgroundColor: kBackgroundColor,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Spacer(flex: 2),
+//          Padding(
+//            padding: const EdgeInsets.only(left: 40.1),
+//            child: GrantConsentLogo(LogoType.mediumWithText),
+//          ),
+          Spacer(flex: 1),
+          Expanded(
+            flex: 8,
+            child: PageView.builder(
+              itemCount: kNumberOfSplashPages,
+              itemBuilder: (context, page) {
+                return SplashPage(page: page);
+              },
+              onPageChanged: (page) {
+                pageNotifier.value = page;
+              },
+              controller: splashPageController,
+              physics: BouncingScrollPhysics(),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(40, 0, 40, 46),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ValueListenableBuilder(
+                      valueListenable: pageNotifier,
+                      builder: (context, value, child) {
+                        return SlideIndicatorPane(currentPage: value);
+                      }),
+                  AppIconButton(onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GetStarted(),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+///Part of the Splash screen page that animates
+///Holds the list of pages
+class SplashPage extends StatelessWidget {
+  final int page;
+  final List<SplashPageContent> contentList = [
+    SplashPageContent(kSplashPage1Image, kSplashPage1Text),
+    SplashPageContent(kSplashPage2Image, kSplashPage2Text)
+  ];
+
+  SplashPage({this.page});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          ConstrainedBox(
+            constraints: BoxConstraints.tightFor(
+              width: 335,
+              height: 297,
+            ),
+            child: Image(
+              image: contentList[page].image,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 87.0),
+            child: Text(contentList[page].text, style: kBody1TextStyle),
+          ),
+          Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+///Object holding image and caption properties
+///for Splash Screen
+class SplashPageContent {
+  final ImageProvider image;
+  final String text;
+
+  SplashPageContent(this.image, this.text);
+}
