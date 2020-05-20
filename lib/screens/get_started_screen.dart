@@ -30,7 +30,20 @@ class GetStarted extends StatelessWidget {
               Spacer(
                 flex: 3,
               ),
-              GrantConsentLogo(LogoType.largeWithText),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Hero(child: GrantConsentLogo(LogoType.largeWithoutText), tag: "logoHeroTag",),
+                  Text(
+                    'CONSENT',
+                    style: GoogleFonts.quicksand(
+                      fontSize: 27,
+                      color: kButtonTextColor2,
+                    ),
+                  ),
+                ],
+              ),
               Spacer(
                 flex: 4,
               ),

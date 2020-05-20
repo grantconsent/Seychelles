@@ -39,6 +39,7 @@ const String kSplashPage2Text = 'Get consent before you get in trouble.';
 Size kScreenSize;
 
 //Animations
+
 const Duration kLoadingScreenAnimationDuration = Duration(seconds: 1);
 const double kLoadingScreenAnimationScale = 1.85;
 const Duration kSplashScreenPageAnimationDuration = Duration(milliseconds: 500);
