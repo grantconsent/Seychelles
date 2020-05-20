@@ -30,7 +30,6 @@ class GetStarted extends StatelessWidget {
               Spacer(
                 flex: 3,
               ),
-<<<<<<< HEAD
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,9 +44,6 @@ class GetStarted extends StatelessWidget {
                   ),
                 ],
               ),
-=======
-              GrantConsentLogo(LogoType.largeWithText),
->>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
               Spacer(
                 flex: 4,
               ),

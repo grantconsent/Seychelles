@@ -1,11 +1,10 @@
-
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:grantconsent/screens/splash_screenE.dart';
+import 'package:grantconsent/screens/splash_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -28,7 +27,6 @@ class AnimatedLogo extends StatefulWidget {
 }
 
 class _AnimatedLogoState extends State<AnimatedLogo>
-
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation<double> splashScreenAnimation;
@@ -39,7 +37,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
       if (status == AnimationStatus.reverse) repeatAnimation++;
       if (repeatAnimation == 3) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SplashScreenE()));
+            context, MaterialPageRoute(builder: (context) => SplashScreen()));
         animationController.dispose();
       }
     });
@@ -57,7 +55,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         if (status == AnimationStatus.completed) {
           scaleAnimationController.reverse();
           scaleAnimationController.addStatusListener((status) {
-            if(status == AnimationStatus.dismissed){
+            if (status == AnimationStatus.dismissed) {
               slideAnimationController.forward();
               setState(() {
                 opacity = 1.0;
@@ -118,7 +116,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     return Stack(
       children: <Widget>[
         AnimatedOpacity(
-          child: SplashScreenE(),
+          child: SplashScreen(),
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),
@@ -150,27 +148,29 @@ class _AnimatedLogoState extends State<AnimatedLogo>
           ),
         )
       ],
-=======
-    animationController = AnimationController(
-        vsync: this, duration: kLoadingScreenAnimationDuration);
-    splashScreenAnimation =
-        Tween<double>(begin: 1, end: kLoadingScreenAnimationScale)
-            .animate(animationController)
-              ..addListener(() {
-                setState(() {});
-              });
-    animationController.repeat(reverse: true);
-
-    loadApp();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: splashScreenAnimation,
-      alignment: Alignment.center,
-      child: GrantConsentLogo(LogoType.mediumWithoutText),
->>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
     );
   }
 }
+
+//     animationController = AnimationController(
+//         vsync: this, duration: kLoadingScreenAnimationDuration);
+//     splashScreenAnimation =
+//         Tween<double>(begin: 1, end: kLoadingScreenAnimationScale)
+//             .animate(animationController)
+//               ..addListener(() {
+//                 setState(() {});
+//               });
+//     animationController.repeat(reverse: true);
+
+//     loadApp();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ScaleTransition(
+//       scale: splashScreenAnimation,
+//       alignment: Alignment.center,
+//       child: GrantConsentLogo(LogoType.mediumWithoutText),
+//     );
+//   }
+// }
