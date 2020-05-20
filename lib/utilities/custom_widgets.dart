@@ -282,31 +282,61 @@ class UserGoogleButton extends StatelessWidget {
   }
 }
 
-class CustomTextFormField extends StatelessWidget {
+
+
+class CustomTextFormField extends StatefulWidget {
   CustomTextFormField(
-      {@required this.hintText, this.icon, this.textInputType, this.obscure});
+      {@required this.hintText, this.icon, this.textInputType, this.obscure = false});
 
   final String hintText;
   final Icon icon;
   final TextInputType textInputType;
-  final bool obscure;
+  final bool obscure  ;
 
+  @override
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool isVisible ;
+  @override
+
+  void initState() {
+
+    super.initState();
+    isVisible = !widget.obscure;
+  }
   @override
   Widget build(BuildContext context) {
     return TextFormField(
         style: TextStyle(color: kButtonTextColor2),
-        obscureText: obscure == null ? false : obscure,
+        obscureText: !isVisible,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(10),
-          hintText: hintText,
+
+          hintText: widget.hintText,
+
           hintStyle: TextStyle(color: kButtonTextColor2),
           filled: true,
-          suffixIcon: icon,
+          suffixIcon: widget.obscure ? IconButton(
+            icon: Icon(
+          // Based on passwordVisible state choose the icon
+          isVisible
+          ? Icons.visibility
+              : Icons.visibility_off,
+            color: kButtonColor,
+          ),
+            onPressed: (){
+              setState(() {
+                isVisible = !isVisible;
+              });
+            },
+          ) : null,
+
           fillColor: Color.fromRGBO(202, 180, 128, 0.3),
           border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
         ),
-        keyboardType: textInputType);
+        keyboardType: widget.textInputType);
   }
 }

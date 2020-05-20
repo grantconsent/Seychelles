@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 38.0),
                 child: Column(
-                  children: <Widget>[
+                  children: <Widget>[ 
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5.0),
                       child: CustomTextFormField(
