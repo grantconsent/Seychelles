@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grantconsent/screens/authentication/sign_up.dart';
+import 'package:grantconsent/screens/get_started_screen.dart';
+import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -105,7 +106,7 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SignUp(),
+                                    builder: (context) => GetStarted(),
                                   ),
                                 );
                               }),
