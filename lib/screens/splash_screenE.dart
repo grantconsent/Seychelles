@@ -19,10 +19,17 @@ class SplashScreenE extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Spacer(flex: 2),
+<<<<<<< HEAD
 //          Padding(
 //            padding: const EdgeInsets.only(left: 40.1),
 //            child: GrantConsentLogo(LogoType.mediumWithText),
 //          ),
+=======
+          Padding(
+            padding: const EdgeInsets.only(left: 40.1),
+            child: GrantConsentLogo(LogoType.mediumWithText),
+          ),
+>>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
           Spacer(flex: 1),
           Expanded(
             flex: 8,
@@ -39,6 +46,7 @@ class SplashScreenE extends StatelessWidget {
             ),
           ),
           Flexible(
+<<<<<<< HEAD
             flex: 2,
             child: Container(
               padding: EdgeInsets.fromLTRB(40, 0, 40, 46),
@@ -63,6 +71,39 @@ class SplashScreenE extends StatelessWidget {
               ),
             ),
           )
+=======
+              flex: 2,
+              child: Container(
+                padding: EdgeInsets.fromLTRB(40, 0, 40, 46),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    ValueListenableBuilder(
+                        valueListenable: pageNotifier,
+                        builder: (context, value, child) {
+                          return SlideIndicatorPane(currentPage: value);
+                        }),
+                    AppIconButton(onTap: () {
+                      if (splashPageController.page <
+                          kNumberOfSplashPages - 1) {
+                        splashPageController.nextPage(
+                          duration: kSplashScreenPageAnimationDuration,
+                          curve: Curves.easeOut,
+                        );
+                      } else {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GetStarted(),
+                          ),
+                        );
+                      }
+                    }),
+                  ],
+                ),
+              ))
+>>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
         ],
       ),
     );
@@ -77,7 +118,10 @@ class SplashPage extends StatelessWidget {
     SplashPageContent(kSplashPage1Image, kSplashPage1Text),
     SplashPageContent(kSplashPage2Image, kSplashPage2Text)
   ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
   SplashPage({this.page});
 
   @override

@@ -1,8 +1,10 @@
+
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:grantconsent/screens/splash_screenE.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -26,8 +28,22 @@ class AnimatedLogo extends StatefulWidget {
 }
 
 class _AnimatedLogoState extends State<AnimatedLogo>
-    with TickerProviderStateMixin {
-  var repeatAnimation = 0;
+
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  Animation<double> splashScreenAnimation;
+  int repeatAnimation = 0;
+
+  void loadApp() {
+    splashScreenAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.reverse) repeatAnimation++;
+      if (repeatAnimation == 3) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SplashScreenE()));
+        animationController.dispose();
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -134,6 +150,27 @@ class _AnimatedLogoState extends State<AnimatedLogo>
           ),
         )
       ],
+=======
+    animationController = AnimationController(
+        vsync: this, duration: kLoadingScreenAnimationDuration);
+    splashScreenAnimation =
+        Tween<double>(begin: 1, end: kLoadingScreenAnimationScale)
+            .animate(animationController)
+              ..addListener(() {
+                setState(() {});
+              });
+    animationController.repeat(reverse: true);
+
+    loadApp();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: splashScreenAnimation,
+      alignment: Alignment.center,
+      child: GrantConsentLogo(LogoType.mediumWithoutText),
+>>>>>>> ca9b7f5125e5bae6c6e5010bdf8f43f8de9d2c37
     );
   }
 }

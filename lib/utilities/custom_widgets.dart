@@ -40,7 +40,6 @@ class GrantConsentLogo extends StatelessWidget {
     else if (type == LogoType.mediumWithText)
       return Container(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -141,7 +140,7 @@ class SlideIndicatorPane extends StatelessWidget {
   ];
 
   void prepIndicators() {
-  //  _slideIndicators.clear();
+    //  _slideIndicators.clear();
     _slideIndicators.setAll(0, _slideIndicatorsBlank);
     _slideIndicators[currentPage] = SlideIndicatorDot(true);
   }
@@ -216,9 +215,7 @@ class UserActionButton extends StatelessWidget {
   }
 }
 
-
 class UserGoogleButton extends StatelessWidget {
-
   UserGoogleButton({this.onTap});
   final Function onTap;
   @override
@@ -227,8 +224,7 @@ class UserGoogleButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xff4285f4),
-            borderRadius: BorderRadius.circular(5)),
+            color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
         height: 50,
         child: ListTile(
           onTap: null,
@@ -249,6 +245,7 @@ class UserGoogleButton extends StatelessWidget {
     );
   }
 }
+
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
       {@required this.hintText, this.icon, this.textInputType, this.obscure});
@@ -276,7 +273,3 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: textInputType);
   }
 }
-
-
-
-
