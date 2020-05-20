@@ -66,7 +66,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     final screenHeight = MediaQuery.of(context).size.height;
 
     //Offset Points for the logo image
-    double logoImageYEndOffset = (screenHeight - 3.2) - screenHeight;
+    double logoImageYEndOffset = (screenHeight - 2.4) - screenHeight;
     double logoImageXEndOffset = -1.5;
 
     //Offset Points for the logo text
@@ -112,28 +112,29 @@ class _AnimatedLogoState extends State<AnimatedLogo>
             scale: scaleAnimationController.drive(scaleAnimation),
             child: SlideTransition(
               position: slideAnimationController.drive(logoImageSlideAnimation),
-              child: Hero(
-                child: GrantConsentLogo(LogoType.mediumWithoutText),
-                tag: "logoHeroTag",
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Hero(
+                    child: GrantConsentLogo(LogoType.mediumWithoutText),
+                    tag: "logoHeroTag",
+                  ),
+                  AnimatedOpacity(
+                    opacity: opacity,
+                    duration: kLoadingScreenAnimationDuration,
+                    child: Text(
+                      'CONSENT',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        color: kButtonTextColor2,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
         ),
-        Center(
-          child: Opacity(
-            opacity: opacity,
-            child: SlideTransition(
-              position: slideAnimationController.drive(logoTextSlideAnimation),
-              child: Text(
-                'CONSENT',
-                style: GoogleFonts.quicksand(
-                  fontSize: 18,
-                  color: kButtonTextColor2,
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     );
   }
