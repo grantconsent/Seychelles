@@ -27,6 +27,7 @@ Widget kUploadedGIF = Image.asset(
 );
 
 Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
+ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
 const int kNumberOfSplashPages = 2;
 
 //Strings

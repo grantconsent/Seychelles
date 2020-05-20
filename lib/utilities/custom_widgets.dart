@@ -1,3 +1,4 @@
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,6 +17,7 @@ import 'styles.dart';
 ///
 class GrantConsentLogo extends StatelessWidget {
   final LogoType type;
+
   GrantConsentLogo(this.type);
 
   final Widget mediumLogoImage = ConstrainedBox(
@@ -31,6 +33,7 @@ class GrantConsentLogo extends StatelessWidget {
       image: kGrantConsentLogo,
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     if (type == LogoType.mediumWithoutText)
@@ -55,7 +58,8 @@ class GrantConsentLogo extends StatelessWidget {
           ],
         ),
       );
-    else /*  (type == LogoType.largeWithText) */
+    else
+      /*  (type == LogoType.largeWithText) */
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +112,9 @@ class AppIconButton extends StatelessWidget {
 ///SlideIndicatorPane ```
 class SlideIndicatorDot extends StatelessWidget {
   final bool isActive;
+
   SlideIndicatorDot(this.isActive);
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -169,28 +175,22 @@ class UserActionButton extends StatelessWidget {
     @required this.onTap,
     @required this.label,
     this.filled,
-    this.locked,
   }) {
     if (filled == null)
       isfilled = true;
     else
       isfilled = filled;
-    if (locked == null)
-      islocked = false;
-    else
-      islocked = locked;
   }
 
   final Function onTap;
   final String label;
   final bool filled;
   bool isfilled;
-  final bool locked;
-  bool islocked;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 2.5),
+      margin: EdgeInsets.symmetric(vertical: 1),
       constraints:
           BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
       decoration: BoxDecoration(
@@ -200,7 +200,7 @@ class UserActionButton extends StatelessWidget {
       ),
       child: RawMaterialButton(
         padding: EdgeInsets.only(left: 40, right: 14.4),
-        onPressed: islocked ? null : onTap,
+        onPressed: onTap,
         constraints: BoxConstraints.expand(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -224,7 +224,9 @@ class UserActionButton extends StatelessWidget {
 
 class UserGoogleButton extends StatelessWidget {
   UserGoogleButton({this.onTap});
+
   final Function onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -232,20 +234,47 @@ class UserGoogleButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Color(0xff4285f4), borderRadius: BorderRadius.circular(5)),
-        height: 50,
-        child: ListTile(
-          onTap: null,
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
+        height: 40,
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 1),
+          constraints:
+              BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
           ),
-          title: Text(
-            'Sign In with Google',
-            style: TextStyle(color: Colors.white, fontSize: 13),
-          ),
-          leading: Image(
-            image: AssetImage('assets/Google Logo.png'),
-            // color: Colors.white,
+          child: RawMaterialButton(
+            padding: EdgeInsets.only(left: 2, right: 14.4),
+            onPressed: onTap,
+            constraints: BoxConstraints.expand(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Ink(
+                      child: Image(image: kGoogleLogo),
+                      padding: EdgeInsets.all(5),
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Text(
+                      'Sign Up with Google',
+                      style: kGoogleButtonLabelStyle,
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -253,30 +282,61 @@ class UserGoogleButton extends StatelessWidget {
   }
 }
 
-class CustomTextFormField extends StatelessWidget {
+
+
+class CustomTextFormField extends StatefulWidget {
   CustomTextFormField(
-      {@required this.hintText, this.icon, this.textInputType, this.obscure});
+      {@required this.hintText, this.icon, this.textInputType, this.obscure = false});
 
   final String hintText;
   final Icon icon;
   final TextInputType textInputType;
-  final bool obscure;
+  final bool obscure  ;
 
+  @override
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool isVisible ;
+  @override
+
+  void initState() {
+
+    super.initState();
+    isVisible = !widget.obscure;
+  }
   @override
   Widget build(BuildContext context) {
     return TextFormField(
         style: TextStyle(color: kButtonTextColor2),
-        obscureText: obscure == null ? false : obscure,
+        obscureText: !isVisible,
         decoration: InputDecoration(
-          hintText: hintText,
+
+          hintText: widget.hintText,
+
           hintStyle: TextStyle(color: kButtonTextColor2),
           filled: true,
-          suffixIcon: icon,
+          suffixIcon: widget.obscure ? IconButton(
+            icon: Icon(
+          // Based on passwordVisible state choose the icon
+          isVisible
+          ? Icons.visibility
+              : Icons.visibility_off,
+            color: kButtonColor,
+          ),
+            onPressed: (){
+              setState(() {
+                isVisible = !isVisible;
+              });
+            },
+          ) : null,
+
           fillColor: Color.fromRGBO(202, 180, 128, 0.3),
           border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.all(Radius.circular(5.0))),
         ),
-        keyboardType: textInputType);
+        keyboardType: widget.textInputType);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grantconsent/screens/splash_screenE.dart';
+import 'package:grantconsent/screens/splash_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -32,7 +32,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
       if (status == AnimationStatus.reverse) repeatAnimation++;
       if (repeatAnimation == 3) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SplashScreenE()));
+            context, MaterialPageRoute(builder: (context) => SplashScreen()));
         animationController.dispose();
       }
     });

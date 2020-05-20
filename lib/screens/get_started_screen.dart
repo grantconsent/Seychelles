@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grantconsent/screens/sign_up.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/screens/sign_in.dart';
+import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class GetStarted extends StatelessWidget {
   @override
@@ -56,9 +56,8 @@ class GetStarted extends StatelessWidget {
               ),
               UserActionButton(
                 onTap: () {
-         Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SignIn()));
-
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
                 },
                 label: 'Sign In',
                 filled: false,
