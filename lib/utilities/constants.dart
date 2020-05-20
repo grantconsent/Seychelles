@@ -9,6 +9,24 @@ ImageProvider kSplashPage1Image = AssetImage('assets/Splash image 1.png');
 ImageProvider kSplashPage2Image = AssetImage('assets/Splash image 2.png');
 ImageProvider kGetStartedScreenBackground =
     AssetImage('assets/seductive_woman.png');
+Widget kUploadingGIF = Image.asset(
+  'assets/GIFs/cloudloop.gif',
+  height: 90,
+  width: 90,
+  cacheHeight: 90,
+  cacheWidth: 90,
+  fit: BoxFit.cover,
+);
+Widget kUploadedGIF = Image.asset(
+  'assets/GIFs/successmark.gif',
+  height: 90,
+  width: 90,
+  cacheHeight: 90,
+  cacheWidth: 90,
+  fit: BoxFit.cover,
+);
+
+Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
 ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
 const int kNumberOfSplashPages = 2;
 
