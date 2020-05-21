@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
-import 'package:grantconsent/services/send_through_whatsapp.dart';
+
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -26,22 +26,16 @@ class SplashScreen extends StatelessWidget {
           //  Spacer(flex: 3),
           Expanded(
             flex: 8,
-            child: GestureDetector(
-               onDoubleTap: () {
-                  sendConsentViaWhatsapp(
-                      phoneNumber: '+2349060232128', link: 'https://grantconsent');
-                },
-                          child: PageView.builder(
-                itemCount: kNumberOfSplashPages,
-                itemBuilder: (context, page) {
-                  return SplashPage(page: page);
-                },
-                onPageChanged: (page) {
-                  pageNotifier.value = page;
-                },
-                controller: splashPageController,
-                physics: BouncingScrollPhysics(),
-              ),
+            child: PageView.builder(
+              itemCount: kNumberOfSplashPages,
+              itemBuilder: (context, page) {
+                return SplashPage(page: page);
+              },
+              onPageChanged: (page) {
+                pageNotifier.value = page;
+              },
+              controller: splashPageController,
+              physics: BouncingScrollPhysics(),
             ),
           ),
           Flexible(
