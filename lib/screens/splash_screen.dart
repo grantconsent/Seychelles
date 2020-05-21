@@ -17,12 +17,12 @@ class SplashScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Spacer(flex: 2),
-          Padding(
-            padding: const EdgeInsets.only(left: 40.1),
-            child: GrantConsentLogo(LogoType.mediumWithText),
-          ),
-          Spacer(flex: 1),
+          Spacer(flex: 5),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 40.1),
+          //   child: GrantConsentLogo(LogoType.mediumWithText),
+          // ),
+        //  Spacer(flex: 3),
           Expanded(
             flex: 8,
             child: PageView.builder(

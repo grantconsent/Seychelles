@@ -14,11 +14,11 @@ void main() {
 class GrantConsent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//    Orientation forced to portrait
-    SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-    );
-
+    SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+    
     return MaterialApp(
       title: 'Grant Consent',
       theme: ThemeData(
