@@ -2,10 +2,10 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
 /// Sender email address for mails
-const String grantConsentEmailAddress = 'address@gmail.com'; 
+const String grantConsentEmailAddress = 'grantconsent@gmail.com'; 
 
 ///Sender email password
-const String grantConsentEmailPassword = 'password'; 
+const String grantConsentEmailPassword = 'SeychellesAwesomeBunch'; 
 
 ///HTML template to be formatted and sent
 const String _emailTemplate = '''
