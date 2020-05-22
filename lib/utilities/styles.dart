@@ -39,3 +39,9 @@ final kGoogleButtonLabelStyle = GoogleFonts.roboto(
   fontWeight: FontWeight.w300,
   color: Colors.white,
 );
+final kGrantConsentTextStyle = GoogleFonts.quicksand(
+  fontWeight: FontWeight.normal,
+  //letterSpacing: 1.5,
+  fontSize: 15,
+  color: Colors.white,
+);

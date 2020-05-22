@@ -34,6 +34,8 @@ const int kNumberOfSplashPages = 2;
 const String kSplashPage1Text =
     'Digitise your consent. Yes is Yes and No is No.';
 const String kSplashPage2Text = 'Get consent before you get in trouble.';
+const String kWelcomeBack = 'Welcome back,';
+const String kGrantConsent = 'Grant consent today.';
 
 //Sizes
 Size kScreenSize;
