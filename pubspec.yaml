@@ -19,6 +19,7 @@ dependencies:
   image_picker: ^0.6.6
   contacts_service: ^0.4.6
   permission_handler: ^5.0.0
+  mailer: ^3.0.4
 
 dev_dependencies:
   flutter_test:
