@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
+
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -22,7 +23,7 @@ class SplashScreen extends StatelessWidget {
           //   padding: const EdgeInsets.only(left: 40.1),
           //   child: GrantConsentLogo(LogoType.mediumWithText),
           // ),
-        //  Spacer(flex: 3),
+          //  Spacer(flex: 3),
           Expanded(
             flex: 8,
             child: PageView.builder(
