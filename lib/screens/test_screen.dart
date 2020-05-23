@@ -1,6 +1,7 @@
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/services/send_through_email.dart';
 import 'package:grantconsent/services/send_through_whatsapp.dart';
+import 'package:grantconsent/utilities/styles.dart';
 
 //Use this screen to test your features and stuff.
 
@@ -11,6 +12,7 @@ class TestInterface extends StatefulWidget {
 
 class _TestInterfaceState extends State<TestInterface> {
   String data1, data2, data3;
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,35 @@ class _TestInterfaceState extends State<TestInterface> {
           setState(() {
             data1 = selectedContact.name;
             //  data2 = selectedContact.emailAddress;
-            data3 = selectedContact.phoneNumber.toString();
+            data2 = selectedContact.phoneNumber.toString();
+          });
+        }),
+        SizedBox(height: 20),
+        TextField(
+        textInputAction: TextInputAction.send,
+          keyboardType: TextInputType.emailAddress,
+          style: kBody1TextStyle,
+        
+          decoration: InputDecoration(
+
+            helperText: 'Enter your email address',
+            hintText: 'Email Address',
+            hintStyle: kBody1TextStyle,
+            helperStyle: kBody1TextStyle.copyWith(fontSize: 11),
+          ),
+          controller: emailController,
+        ),
+        RaisedButton(onPressed: () async {
+          setState(() {
+            data3 = "- - - -";
+          });
+          MailStatus status =
+              await sendConsentViaEmail(emailController.text, '1234567');
+          setState(() {
+            if (status == MailStatus.success)
+              data3 = 'Sent';
+            else
+              data3 = 'Failed to send';
           });
         })
       ],

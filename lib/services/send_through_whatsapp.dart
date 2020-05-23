@@ -26,7 +26,7 @@ const iOSLocalizedLabels = false;
 ///Format the string by replacing ```
 ///{link}```
 /// with the link to send.
-String _whatsappTemplate = '''Hello! \n 
+const String _whatsappTemplate = '''Hello! \n 
 a sexual consent request has been sent to you.\n
 Follow this link to review - {link} \n
 via Grant Consent.''';
