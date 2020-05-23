@@ -13,6 +13,7 @@ import 'get_started_screen.dart';
 class LoadingAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    kScreenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Center(
