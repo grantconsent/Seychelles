@@ -25,6 +25,7 @@ Widget kUploadedGIF = Image.asset(
   cacheWidth: 90,
   fit: BoxFit.cover,
 );
+Widget kLoaderGIF = Image.asset('assets/GIFs/loaderloop.gif');
 
 Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
 ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
