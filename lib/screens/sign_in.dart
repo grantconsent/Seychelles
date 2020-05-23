@@ -93,10 +93,7 @@ class _SignInState extends State<SignIn> {
                             padding: const EdgeInsets.only(bottom: 15.0),
                             child: UserActionButton(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignIn()));
+//                                  sign in
                                 },
                                 label: 'Sign In',
                                 filled: true),
