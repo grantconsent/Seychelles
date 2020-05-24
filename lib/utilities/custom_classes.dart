@@ -11,3 +11,12 @@ class ConsentUser {
       @required this.phoneNumber,
       this.pictureURL});
 }
+
+class ConsentUserSignIn {
+  String email;
+  ConsentUserSignIn(
+    {
+      @required this.email,
+    }
+  );
+}
