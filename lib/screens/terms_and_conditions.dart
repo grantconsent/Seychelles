@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -26,24 +27,28 @@ class Terms extends StatelessWidget {
               Spacer(
                 flex: 6,
               ),
-              Text('Terms and Conditions',
-              style: kBody1TextStyle.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),),
+              Text(
+                'Terms and Conditions',
+                style: kBody1TextStyle.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Spacer(
                 flex: 2,
               ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10,10,10,0),
-                      height: kScreenSize.height * 0.6,
-
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(topLeft:  Radius.circular(5), bottomLeft: Radius.circular(5)),
-                            color: Colors.white,
-                          ),
-                          child: SingleChildScrollView(
-                            child: Text('''Upload your ID card and wait for the admin to approve you.
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                height: kScreenSize.height * 0.6,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      bottomLeft: Radius.circular(5)),
+                  color: Colors.white,
+                ),
+                child: SingleChildScrollView(
+                  child: Text(
+                    '''Upload your ID card and wait for the admin to approve you.
     Form Details - What Ideas do you have for the main consent form?
     <<<<<<<<<This questions should probably be one per screen with funny emojis/images and all the user has to do is click yes/no and next/previous for questions>>descriptive images too>>>>>>>>
     Something like the question about Kissing.
@@ -99,30 +104,35 @@ Imagine receiving a consent proposal from your partner while you are at work and
                 I want to kiss <partner>.
                 `
                 BY CLICKING AGREE AND CONTINUE YOU HAVE AGREEDTO OUR TERMS OF SERVICE.''',
-    style: kBody1TextStyle.copyWith(
-      color: Colors.black,
-    ),),
-                          ),
-
-),
+                    style: kBody1TextStyle.copyWith(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
               Spacer(
                 flex: 2,
               ),
               UserActionButton(
                 label: 'Agree and Continue',
-                onTap: (){},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUp()));
+                },
                 filled: true,
               ),
               Spacer(
                 flex: 3,
               ),
               Center(
-                child: Text('Download Terms Of Service',
-                style: kBody1TextStyle.copyWith(
-                  color: Colors.white,
-                  fontSize: 11,
-                  decoration: TextDecoration.underline,
-                ),),
+                child: Text(
+                  'Download Terms Of Service',
+                  style: kBody1TextStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: 11,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
               ),
               Spacer(
                 flex: 3,

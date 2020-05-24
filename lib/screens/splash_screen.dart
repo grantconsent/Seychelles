@@ -51,22 +51,24 @@ class SplashScreen extends StatelessWidget {
                         builder: (context, value, child) {
                           return SlideIndicatorPane(currentPage: value);
                         }),
-                    AppIconButton(onTap: () {
-                      if (splashPageController.page <
-                          kNumberOfSplashPages - 1) {
-                        splashPageController.nextPage(
-                          duration: kSplashScreenPageAnimationDuration,
-                          curve: Curves.easeOut,
-                        );
-                      } else {
+                    AppIconButton(
+                      onTap: () {
+                        // if (splashPageController.page <
+                        //     kNumberOfSplashPages - 1) {
+                        //   splashPageController.nextPage(
+                        //     duration: kSplashScreenPageAnimationDuration,
+                        //     curve: Curves.easeOut,
+                        //   );
+                        // } else {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => GetStarted(),
                           ),
                         );
-                      }
-                    }),
+                        //     }
+                      },
+                    ),
                   ],
                 ),
               ))

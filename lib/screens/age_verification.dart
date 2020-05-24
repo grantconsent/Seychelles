@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/terms_and_conditions.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
+
 class AgeVerification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,36 +26,47 @@ class AgeVerification extends StatelessWidget {
               Spacer(
                 flex: 9,
               ),
-              Text('Verification',
-              style: kBody1TextStyle.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),),
-              Text('Age',
-              style: kWelcomeHeadingTextStyle,),
-              Text('verification',
-                style: kWelcomeHeadingTextStyle,),
+              Text(
+                'Verification',
+                style: kBody1TextStyle.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Age',
+                style: kWelcomeHeadingTextStyle,
+              ),
+              Text(
+                'verification',
+                style: kWelcomeHeadingTextStyle,
+              ),
               Spacer(
                 flex: 2,
               ),
-              Text('You attest that you are above eighteen (+18) years of age.',
-                style: kBody1TextStyle.copyWith(
-                  color: Colors.white
-                ),),
+              Text(
+                'You attest that you are above eighteen (+18) years of age.',
+                style: kBody1TextStyle.copyWith(color: Colors.white),
+              ),
               Spacer(
                 flex: 17,
               ),
               Center(
-                child: Text('See terms and conditions',
+                child: Text(
+                  'See terms and conditions',
                   style: kBody1TextStyle.copyWith(
                     color: Colors.white,
                     fontSize: 11,
-                  ),),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: UserActionButton(
-                  onTap: (){},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Terms()));
+                  },
                   label: 'Agree and Continue',
                   filled: true,
                 ),

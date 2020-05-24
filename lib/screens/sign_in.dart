@@ -18,24 +18,14 @@ class _SignInState extends State<SignIn> {
       backgroundColor: kBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              left: 35.0, right: 35.0, top: 35.0, bottom: 5),
-                          child: GrantConsentLogo(LogoType.mediumWithText)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.only(
+                    left: 35.0, right: 35.0, top: 90.0, bottom: 5),
+                child: GrantConsentLogo(LogoType.mediumWithText)),
           ),
           Expanded(
             flex: 2,
@@ -43,7 +33,7 @@ class _SignInState extends State<SignIn> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 38.0),
                 child: Column(
-                  children: <Widget>[ 
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5.0),
                       child: CustomTextFormField(
@@ -62,26 +52,25 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Row(children: <Widget>[
-                            Checkbox(
-                                value: checkBoxValue,
-                                activeColor: kButtonTextColor2,
-                                onChanged: (bool newValue) {
-                                  setState(() {
-                                    checkBoxValue = newValue;
-                                  });
-                                }),
-                            Text(
+                          Checkbox(
+                              value: checkBoxValue,
+                              activeColor: kButtonTextColor2,
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  checkBoxValue = newValue;
+                                });
+                              }),
+                          Expanded(
+                            child: Text(
                               'remember me',
                               style: TextStyle(color: kButtonTextColor2),
                             ),
-                          ]),
+                          ),
                           Text(
                             'forgot password?',
                             style: TextStyle(color: kButtonTextColor2),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -119,7 +108,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 15.0, top: 30),
+            padding: const EdgeInsets.only(bottom: 15.0, top: 15),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +119,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => SignUp()));
                   },
                   child: Text(

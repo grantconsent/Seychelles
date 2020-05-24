@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grantconsent/screens/age_verification.dart';
 import 'package:grantconsent/screens/sign_in.dart';
-import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/screens/test_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -72,7 +72,7 @@ class GetStarted extends StatelessWidget {
                 UserActionButton(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUp()));
+                        MaterialPageRoute(builder: (context) => AgeVerification()));
                   },
                   label: 'Sign Up',
                 ),

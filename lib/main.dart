@@ -28,7 +28,7 @@ class GrantConsent extends StatelessWidget {
           accentColor: kButtonColor,
           primaryColor: kButtonColor,
           ),
-      home: Terms(),
+      home: LoadingAnimation(),
     );
   }
 }
