@@ -25,6 +25,7 @@ Widget kUploadedGIF = Image.asset(
   cacheWidth: 90,
   fit: BoxFit.cover,
 );
+Widget kLoaderGIF = Image.asset('assets/GIFs/loaderloop.gif');
 
 Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
 ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
@@ -34,6 +35,8 @@ const int kNumberOfSplashPages = 2;
 const String kSplashPage1Text =
     'Digitise your consent. Yes is Yes and No is No.';
 const String kSplashPage2Text = 'Get consent before you get in trouble.';
+const String kWelcomeBack = 'Welcome back,';
+const String kGrantConsent = 'Grant consent today.';
 
 //Sizes
 Size kScreenSize;

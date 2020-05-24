@@ -50,22 +50,12 @@ class SignUp extends StatelessWidget {
                   hintText: 'Password',
 //                  labelText: 'Password',
                   obscure: true,
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    size: 15,
-                    color: kButtonTextColor2,
-                  ),
                 ),
               ),
               CustomTextFormField(
                 hintText: 'Confirm Password',
 //                labelText: 'Confirm Password',
                 obscure: true,
-                icon: Icon(
-                  Icons.remove_red_eye,
-                  size: 15,
-                  color: kButtonTextColor2,
-                ),
               ),
               Spacer(flex: 1),
               UserActionButton(
@@ -77,10 +67,7 @@ class SignUp extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: Text(
-                    "OR",
-                    style: kOrTextStyle
-                  ),
+                  child: Text("OR", style: kOrTextStyle),
                 ),
               ),
               UserGoogleButton(onTap: null),
@@ -97,12 +84,14 @@ class SignUp extends StatelessWidget {
                       Text(
                         'Already have an account? ',
                         style:
-                        TextStyle(color: kButtonTextColor2, fontSize: 13),
+                            TextStyle(color: kButtonTextColor2, fontSize: 13),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => SignIn()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignIn()));
                         },
                         child: Text(
                           'Sign In',
