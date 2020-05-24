@@ -348,18 +348,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 }
 
-
- SnackBar customSnackBar({String message, int durationInSeconds}) {
-    return SnackBar(
-      behavior: SnackBarBehavior.fixed,
-      duration: Duration(seconds: durationInSeconds ?? 2),
-      content: Container(
-        alignment: Alignment.center,
-        height: 20,
-        child: Text(
-          message ?? "",
-          style: kBody1TextStyle,
-        ),
+SnackBar customSnackBar({String message, int durationInSeconds}) {
+  return SnackBar(
+    behavior: SnackBarBehavior.fixed,
+    duration: Duration(seconds: durationInSeconds ?? 2),
+    content: Container(
+      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      alignment: Alignment.center,
+      height: 30,
+      child: Text(
+        message ?? "",
+        style: kBody1TextStyle,
       ),
-    );
-  }
+    ),
+  );
+}
