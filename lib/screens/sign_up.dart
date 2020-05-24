@@ -20,8 +20,18 @@ class SignUp extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Password fields do not match.'),
       );
+    } else   if (inputName.text == "") {
+      //If name is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Name cannot be empty'),
+      );
+    } else   if (inputPhoneNumber.text.length < 11) {
+      //If phone number is invalid
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Wrong Phone Number'),
+      );
     } else {
-      //if passwords match
+      //if input data is valid
       showDialog(context: context, builder: (context) => Loader());
       ConsentUser newUser = ConsentUser(
           name: inputName.text,
