@@ -22,6 +22,7 @@ class SignUp extends StatelessWidget {
       );
     } else {
       //if passwords match
+      showDialog(context: context, builder: (context) => Loader());
       ConsentUser newUser = ConsentUser(
           name: inputName.text,
           email: inputEmail.text,
@@ -30,6 +31,7 @@ class SignUp extends StatelessWidget {
           await signUpUser(newUser: newUser, password: inputPassword.text);
       if (operationStatus == SignUpStatus.success) {
         // If sign up was successfull
+        Navigator.pop(context);
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -51,7 +53,8 @@ class SignUp extends StatelessWidget {
                           'Please click the link the email sent to you to confirm and log in')),
                 ));
       } else
-        _handleExceptions(operationStatus); //If sign up was NOT successful
+        Navigator.pop(context);
+      _handleExceptions(operationStatus); //If sign up was NOT successful
     }
   }
 
@@ -142,10 +145,8 @@ class SignUp extends StatelessWidget {
               ),
               Spacer(flex: 1),
               UserActionButton(
-                onTap: () async {
-                  showDialog(context: context, builder: (context) => Loader());
-                  await _signUp(context);
-                  Navigator.pop(context);
+                onTap: () {
+                  _signUp(context);
                 },
                 label: 'Sign Up',
               ),
