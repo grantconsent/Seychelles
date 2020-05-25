@@ -6,8 +6,6 @@ Future signInUser({ConsentUserSignIn newUser, String password}) async {
   try {
     final result = await _auth.signInWithEmailAndPassword(
         email: newUser.email, password: password);
-    // FirebaseUser user = result.user;
-    // return user;
     if (result != null) {
       print('Worked!');
       return SignInStatus.success;

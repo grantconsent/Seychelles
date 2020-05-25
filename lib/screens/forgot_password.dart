@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
-import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/services/firebase_forgot_password.dart';
+import 'package:grantconsent/services/firebase_sign_in.dart';
+import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -66,31 +67,39 @@ class ForgotPassword extends StatelessWidget {
                         customSnackBar(message: 'Please enter your email.'),
                       );
                     } else {
-                      await forgotPassword(inputEmail.text);
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          actions: <Widget>[
-                            AppIconButton(onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  maintainState: true,
-                                  builder: (context) => GetStarted(),
-                                ),
-                              );
-                            })
-                          ],
-                          title: Text(
-                            'Retrieve Password',
-                            style: kWelcomeHeadingTextStyle,
+                      SignInStatus operationStatus =
+                          await forgotPassword(inputEmail.text);
+                      if (operationStatus == SignInStatus.success) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            actions: <Widget>[
+                              AppIconButton(onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    maintainState: true,
+                                    builder: (context) => GetStarted(),
+                                  ),
+                                );
+                              })
+                            ],
+                            title: Text(
+                              'Retrieve Password',
+                              style: kWelcomeHeadingTextStyle,
+                            ),
+                            content: Container(
+                              child: Text(
+                                  'Please click the link in the email sent to you to retrieve password.'),
+                            ),
                           ),
-                          content: Container(
-                            child: Text(
-                                'Please click the link in the email sent to you to retrieve password.'),
-                          ),
-                        ),
-                      );
+                        );
+                      } else {
+                        scaffoldKey.currentState.showSnackBar(
+                          customSnackBar(
+                              message: 'Please enter a valid email.'),
+                        );
+                      }
                     }
                   },
                   label: 'Retrieve Password',
