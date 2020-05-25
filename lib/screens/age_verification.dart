@@ -38,7 +38,7 @@ class AgeVerification extends StatelessWidget {
                 style: kWelcomeHeadingTextStyle,
               ),
               Text(
-                'Verification',
+                'verification',
                 style: kWelcomeHeadingTextStyle,
               ),
               Spacer(

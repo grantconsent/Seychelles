@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/screens/age_verification.dart';
 import 'package:grantconsent/screens/sign_in.dart';
-import 'package:grantconsent/screens/terms_and_conditions.dart';
 import 'package:grantconsent/screens/test_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -11,9 +10,7 @@ import 'package:grantconsent/utilities/styles.dart';
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    kScreenSize = MediaQuery
-        .of(context)
-        .size;
+    kScreenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
@@ -75,8 +72,7 @@ class GetStarted extends StatelessWidget {
                 UserActionButton(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(
-                            builder: (context) => AgeVerification()));
+                        MaterialPageRoute(builder: (context) => AgeVerification()));
                   },
                   label: 'Sign Up',
                 ),
@@ -90,18 +86,12 @@ class GetStarted extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Terms()));
-                    },
-                    child: Center(
-                      child: Text(
-                        'Terms and Conditions',
-                        style: GoogleFonts.quicksand(
-                          color: Colors.white,
-                          fontSize: 11,
-                        ),
+                  child: Center(
+                    child: Text(
+                      'Terms and Conditions',
+                      style: GoogleFonts.quicksand(
+                        color: Colors.white,
+                        fontSize: 11,
                       ),
                     ),
                   ),

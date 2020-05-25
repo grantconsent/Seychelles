@@ -116,7 +116,7 @@ Imagine receiving a consent proposal from your partner while you are at work and
               UserActionButton(
                 label: 'Agree and Continue',
                 onTap: () {
-                  Navigator.pushReplacement(context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SignUp()));
                 },
                 filled: true,
