@@ -162,7 +162,7 @@ class _DashboardState extends State<Dashboard> {
                 Spacer(),
                 bottomNavItem(2),
                 SizedBox(
-                  width: 6,
+                  width: 8,
                 ),
               ],
             ),
@@ -205,7 +205,8 @@ class _DashboardState extends State<Dashboard> {
           });
         } else if (index == 2) {
           setState(() {
-            leftValue = MediaQuery.of(context).size.width - 120;
+            leftValue = MediaQuery.of(context).size.width -
+                (MediaQuery.of(context).size.width - 292);
             profileVisible = true;
           });
           Timer(Duration(milliseconds: 200), () {
