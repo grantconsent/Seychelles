@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/forgot_password.dart';
 import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/screens/test_screen_2.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
@@ -14,10 +18,38 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool checkBoxValue = false;
+  bool _isEmailVerified;
+  Timer _timer;
 
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    Future(() async {
+      _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+        await FirebaseAuth.instance.currentUser()
+          ..reload();
+        var user = await FirebaseAuth.instance.currentUser();
+        if (user.isEmailVerified) {
+          setState(() {
+            _isEmailVerified = user.isEmailVerified;
+          });
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) {
+      _timer.cancel();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +111,8 @@ class _SignInState extends State<SignIn> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // _resetPassword(context);
+                              Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => ForgotPassword()));
                             },
                             child: Text(
                               'forgot password?',
@@ -150,15 +183,20 @@ class _SignInState extends State<SignIn> {
     );
   }
 
- 
   _signIn(BuildContext context) async {
     ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
     SignInStatus operationStatus =
         await signInUser(newUser: email, password: inputPassword.text);
     if (operationStatus == SignInStatus.success) {
       // If sign in was successfull
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => TestScreen2()));
+      if (_isEmailVerified) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => TestScreen2()));
+      } else {
+        scaffoldKey.currentState.showSnackBar(
+          customSnackBar(message: 'Please verify your email.'),
+        );
+      }
     } else {
       //If sign in was NOT successful
       scaffoldKey.currentState.showSnackBar(
