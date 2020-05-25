@@ -1,6 +1,12 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/forgot_password.dart';
 import 'package:grantconsent/screens/sign_up.dart';
+import 'package:grantconsent/screens/test_screen_2.dart';
+import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';
+import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -12,9 +18,14 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   bool checkBoxValue = false;
 
+  final TextEditingController inputEmail = TextEditingController();
+  final TextEditingController inputPassword = TextEditingController();
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: kBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,11 +48,13 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5.0),
                       child: CustomTextFormField(
-                        hintText: "Phone Number",
-                        textInputType: TextInputType.number,
+                        controller: inputEmail,
+                        hintText: "Email Address",
+                        textInputType: TextInputType.emailAddress,
                       ),
                     ),
                     CustomTextFormField(
+                        controller: inputPassword,
                         obscure: true,
                         icon: Icon(
                           Icons.remove_red_eye,
@@ -67,9 +80,15 @@ class _SignInState extends State<SignIn> {
                               style: TextStyle(color: kButtonTextColor2),
                             ),
                           ),
-                          Text(
-                            'forgot password?',
-                            style: TextStyle(color: kButtonTextColor2),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => ForgotPassword()));
+                            },
+                            child: Text(
+                              'forgot password?',
+                              style: TextStyle(color: kButtonTextColor2),
+                            ),
                           ),
                         ],
                       ),
@@ -82,7 +101,7 @@ class _SignInState extends State<SignIn> {
                             padding: const EdgeInsets.only(bottom: 15.0),
                             child: UserActionButton(
                                 onTap: () {
-//                                  sign in
+                                  _signIn(context);
                                 },
                                 label: 'Sign In',
                                 filled: true),
@@ -133,5 +152,39 @@ class _SignInState extends State<SignIn> {
         ],
       ),
     );
+  }
+
+  _signIn(BuildContext context) async {
+    final bool isValid = EmailValidator.validate(inputEmail.text);
+    if (!isValid) {
+      //If email is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Invalid Email'),
+      );
+    } else if (inputPassword.text == "") {
+      //If password is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Enter Password'),
+      );
+    } else {
+      ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
+      SignInStatus operationStatus =
+      await signInUser(newUser: email, password: inputPassword.text);
+      var user = await FirebaseAuth.instance.currentUser();
+      if (operationStatus == SignInStatus.success) {
+        if (user.isEmailVerified) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => TestScreen2()));
+        } else {
+          scaffoldKey.currentState.showSnackBar(
+            customSnackBar(message: 'Please verify your email.'),
+          );
+        }
+      } else {
+        scaffoldKey.currentState.showSnackBar(
+          customSnackBar(message: 'Incorrect Username or Password.'),
+        );
+      }
+    }
   }
 }
