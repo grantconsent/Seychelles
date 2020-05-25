@@ -1,8 +1,12 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/screens/splash_screen.dart';
+import 'package:grantconsent/screens/welcome_back.dart';
+import 'package:grantconsent/services/firebase_check_for_user.dart';
 import 'package:grantconsent/utilities/constants.dart';
+import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -11,7 +15,6 @@ class LoadingAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kBackgroundColor,
       body: Center(
         child: AnimatedLogo(),
       ),
@@ -26,7 +29,32 @@ class AnimatedLogo extends StatefulWidget {
 
 class _AnimatedLogoState extends State<AnimatedLogo>
     with TickerProviderStateMixin {
-  var repeatAnimation = 0;
+  bool _finishedCheckingPreviousUser = false; //bool to indicate if checking has finished and screen can proceed.
+  ConsentUser user; //is null if no current user, is NOT null if user exists. Screen responds to change in this value.
+
+  void _runAnimation() {
+    scaleAnimationController.forward();
+    scaleAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        scaleAnimationController.reverse();
+      }
+      if (status == AnimationStatus.dismissed) {
+        if (!_finishedCheckingPreviousUser) {
+          scaleAnimationController.forward();
+        } else {
+          slideAnimationController.forward();
+          setState(() {
+            opacity = 1.0;
+          });
+        }
+      }
+    });
+  }
+
+  void _checkPreviousUser() async {
+    user = await checkForUser();
+    _finishedCheckingPreviousUser = true;
+  }
 
   @override
   void initState() {
@@ -34,21 +62,9 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     slideAnimationController = AnimationController(
         vsync: this, duration: kLoadingScreenAnimationDuration);
     scaleAnimationController = AnimationController(
-        vsync: this, duration: kLoadingScreenAnimationDuration)
-      ..forward()
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          scaleAnimationController.reverse();
-          scaleAnimationController.addStatusListener((status) {
-            if(status == AnimationStatus.dismissed){
-              slideAnimationController.forward();
-              setState(() {
-                opacity = 1.0;
-              });
-            }
-          });
-        }
-      });
+        vsync: this, duration: kLoadingScreenAnimationDuration);
+    _runAnimation();
+    _checkPreviousUser();
   }
 
   @override
@@ -61,7 +77,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
       end: kLoadingScreenAnimationScale,
     ).chain(scaleCurveTween);
 
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = kScreenSize.height;
 
     //Offset Points for the logo image
     double logoImageYEndOffset = (screenHeight - 2.4) - screenHeight;
@@ -101,7 +117,9 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     return Stack(
       children: <Widget>[
         AnimatedOpacity(
-          child: SplashScreen(),
+          child: user == null
+              ? SplashScreen()
+              : WelcomeBack(), //Pass user to WelcomeBack() screen
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),
@@ -110,26 +128,28 @@ class _AnimatedLogoState extends State<AnimatedLogo>
             scale: scaleAnimationController.drive(scaleAnimation),
             child: SlideTransition(
               position: slideAnimationController.drive(logoImageSlideAnimation),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Hero(
-                    child: GrantConsentLogo(LogoType.mediumWithoutText),
-                    tag: "logoHeroTag",
-                  ),
-                  AnimatedOpacity(
-                    opacity: opacity,
-                    duration: kLoadingScreenAnimationDuration,
-                    child: Text(
-                      'CONSENT',
-                      style: GoogleFonts.quicksand(
-                        fontSize: 18,
-                        color: kButtonTextColor2,
-                      ),
+              child: user != null
+                  ? null
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Hero(
+                          child: GrantConsentLogo(LogoType.mediumWithoutText),
+                          tag: "logoHeroTag",
+                        ),
+                        AnimatedOpacity(
+                          opacity: opacity,
+                          duration: kLoadingScreenAnimationDuration,
+                          child: Text(
+                            'CONSENT',
+                            style: GoogleFonts.quicksand(
+                              fontSize: 18,
+                              color: kButtonTextColor2,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
             ),
           ),
         ),

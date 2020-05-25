@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'firebase_sign_out.dart';
 
 Future<SignUpStatus> signUpUser(
     {@required ConsentUser newUser, @required String password}) async {
@@ -49,11 +50,6 @@ void saveNewUserData(ConsentUser user) {
     'Email': user.email,
   });
   return;
-}
-
-void signOutUser() {
-  final _auth = FirebaseAuth.instance;
-  _auth.signOut();
 }
 
 enum SignUpStatus {

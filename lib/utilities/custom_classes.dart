@@ -8,15 +8,13 @@ class ConsentUser {
   ConsentUser(
       {@required this.name,
       @required this.email,
-      @required this.phoneNumber,
+      this.phoneNumber,
       this.pictureURL});
 }
 
 class ConsentUserSignIn {
   String email;
-  ConsentUserSignIn(
-    {
-      @required this.email,
-    }
-  );
+  ConsentUserSignIn({
+    @required this.email,
+  });
 }
