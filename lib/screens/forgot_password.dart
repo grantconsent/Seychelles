@@ -87,7 +87,7 @@ class ForgotPassword extends StatelessWidget {
                           ),
                           content: Container(
                             child: Text(
-                                'Please click the link the email sent to you to retrieve password.'),
+                                'Please click the link in the email sent to you to retrieve password.'),
                           ),
                         ),
                       );
