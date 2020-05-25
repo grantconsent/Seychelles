@@ -13,8 +13,6 @@ class Dashboard extends StatefulWidget {
 //right-> right: MediaQuery.of(context).size.width - 120
 
 class _DashboardState extends State<Dashboard> {
-  double leftValue = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +26,9 @@ class _DashboardState extends State<Dashboard> {
   }
 
   String getHeaderText() {
-    if (leftValue == 0) {
+    if (indicatorAlignment == Alignment.centerLeft) {
       return "Dashboard";
-    } else if (leftValue == MediaQuery.of(context).size.width / 2.8) {
+    } else if (indicatorAlignment == Alignment.center) {
       return "Consent";
     }
     return "Profile";
@@ -117,9 +115,9 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget getBody() {
-    if (leftValue == 0) {
+    if (indicatorAlignment == Alignment.centerLeft) {
       return Home();
-    } else if (leftValue == MediaQuery.of(context).size.width / 2.8) {
+    } else if (indicatorAlignment == Alignment.center) {
       return Consent();
     }
     return Profile();
@@ -167,15 +165,13 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-          AnimatedPositioned(
-            left: leftValue,
-            duration: Duration(milliseconds: 150),
+          AnimatedAlign(
+            alignment: indicatorAlignment,
+            duration: Duration(milliseconds: 200),
             child: Container(
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 2),
-              child: Opacity(
-                opacity: 0,
-                child: bottomNavItem(100),
-              ),
+              width: 100,
+              height: 45,
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 border: Border.all(color: Color(0xffCAB480)),
@@ -188,26 +184,33 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
+  Alignment indicatorAlignment = Alignment.centerLeft;
+
   Widget bottomNavItem(int index) {
     return GestureDetector(
       onTap: () {
         if (index == 0) {
           setState(() {
-            leftValue = 0;
+            indicatorAlignment = Alignment.centerLeft;
             profileVisible = false;
             profileBodyVisible = false;
+            //rightValue = null;
+            //leftValue = 0;
           });
         } else if (index == 1) {
           setState(() {
-            leftValue = MediaQuery.of(context).size.width / 2.8;
+            indicatorAlignment = Alignment.center;
             profileVisible = false;
             profileBodyVisible = false;
+            // leftValue = MediaQuery.of(context).size.width / 2.8;
+            //rightValue = null;
           });
         } else if (index == 2) {
           setState(() {
-            leftValue = MediaQuery.of(context).size.width -
-                (MediaQuery.of(context).size.width - 292);
+            indicatorAlignment = Alignment.centerRight;
             profileVisible = true;
+//            rightValue = 0;
+//            leftValue = null;
           });
           Timer(Duration(milliseconds: 200), () {
             setState(() {
@@ -228,7 +231,7 @@ class _DashboardState extends State<Dashboard> {
               getText(index),
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
-            SizedBox(width: 1),
+            SizedBox(width: 7),
           ],
         ),
       ),
