@@ -72,7 +72,7 @@ class _TestInterfaceState extends State<TestInterface> {
                       onPressed: () async {
                         _isLoading.value = true;
                         MailStatus status = await sendConsentViaEmail(
-                            emailController.text, '1234567');
+                            emailController.text, 'https://www.figma.com/file/DZDYkwJGMwn2gZtM7FtZLe/Seychelles-Consent?node-id=0%3A1');
                         setState(
                           () {
                             if (status == MailStatus.success)

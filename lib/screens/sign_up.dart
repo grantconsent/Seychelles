@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/screens/sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -13,21 +14,34 @@ class SignUp extends StatelessWidget {
   final TextEditingController inputPassword = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  // BuildContext context;
-  _signUp(BuildContext context) async {
-   
-    if (inputPassword.text != confirmPassword.text) {   //If password do not match
+  Future _signUp(BuildContext context) async {
+    if (inputPassword.text != confirmPassword.text) {
+      //If password do not match
       scaffoldKey.currentState.showSnackBar(
-        customSnackBar(message: 'Password do not match.'),
+        customSnackBar(message: 'Password fields do not match.'),
       );
-    } else { //if passwords match
+    } else   if (inputName.text == "") {
+      //If name is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Name cannot be empty'),
+      );
+    } else   if (inputPhoneNumber.text.length < 11) {
+      //If phone number is invalid
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Wrong Phone Number'),
+      );
+    } else {
+      //if input data is valid
+      showDialog(context: context, builder: (context) => Loader());
       ConsentUser newUser = ConsentUser(
           name: inputName.text,
           email: inputEmail.text,
           phoneNumber: inputPhoneNumber.text);
       SignUpStatus operationStatus =
           await signUpUser(newUser: newUser, password: inputPassword.text);
-      if (operationStatus == SignUpStatus.success) { // If sign up was successfull
+      if (operationStatus == SignUpStatus.success) {
+        // If sign up was successfull
+        Navigator.pop(context);
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -48,11 +62,42 @@ class SignUp extends StatelessWidget {
                       child: Text(
                           'Please click the link the email sent to you to confirm and log in')),
                 ));
-      } else { //If sign up was NOT successful
-        scaffoldKey.currentState.showSnackBar(
-          customSnackBar(message: 'You don fuck up sha'),
-        );
-      }
+      } else
+        Navigator.pop(context);
+      _handleExceptions(operationStatus); //If sign up was NOT successful
+    }
+  }
+
+  void _handleExceptions(SignUpStatus operationStatus) {
+    if (operationStatus == SignUpStatus.weakPassword) {
+      //If sign up was NOT successful - PASSWORD IS WEAK
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'Password must be at least six (6) characters long',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignUpStatus.invalidEmail) {
+      //If sign up was NOT successful - INVALID EMAIL ENTERED
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message:
+                'The email address you entered is invalid. Please check and try again',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignUpStatus.userExists) {
+      //If sign up was NOT successful - USER ALREADY EXISTS
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'This email address is tied to another user account',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignUpStatus.unknownException) {
+      //If sign up was NOT successful - UNKNOWN ERROR OCCURED
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'An unknown error occured. Try again',
+            durationInSeconds: 3),
+      );
     }
   }
 
