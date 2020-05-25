@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 
-import '../utilities/styles.dart';
 class GetUserPicture extends StatefulWidget {
   @override
   _GetUserPictureState createState() => _GetUserPictureState();
@@ -29,18 +28,7 @@ class _GetUserPictureState extends State<GetUserPicture> {
 
   void _showToastInformation() {
     keyToScaffold.currentState.showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.fixed,
-        duration: Duration(seconds: 2),
-        content: Container(
-          alignment: Alignment.center,
-          height: 20,
-          child: Text(
-            'Please, add a picture first.',
-            style: kBody1TextStyle,
-          ),
-        ),
-      ),
+      customSnackBar(message: 'Please pick a picture first.'),
     );
   }
 

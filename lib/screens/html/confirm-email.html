@@ -1,14 +1,4 @@
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
-
-/// Sender email address for mails
-const String grantConsentEmailAddress = 'grantconsent@gmail.com'; 
-
-///Sender email password
-const String grantConsentEmailPassword = 'SeychellesAwesomeBunch'; 
-
-///HTML template to be formatted and sent
-const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
@@ -124,7 +114,7 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
 	</style>
 </head>
 
-<body class="clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #f1f4f8;">
+<body class= "clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #f1f4f8;">
 <!--[if IE]><div class="ie-browser"><![endif]-->
 <table class="nl-container" style="table-layout: fixed; vertical-align: top; min-width: 320px; Margin: 0 auto; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f1f4f8; width: 100%;" cellpadding="0" cellspacing="0" role="presentation" width="100%" bgcolor="#f1f4f8" valign="top">
     <tbody>
@@ -254,18 +244,14 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
                                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 20px; padding-bottom: 15px; font-family: Tahoma, sans-serif"><![endif]-->
                                     <div style="color:#cab480;font-family:Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;line-height:1.2;padding-top:20px;padding-right:40px;padding-bottom:15px;padding-left:40px;">
                                         <div style="line-height: 1.2; font-size: 12px; color: #cab480; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: left; mso-line-height-alt: 29px; margin: 0;"><span style="font-size: 24px; color: #000000;">Hey,</span></p>
+                                            <p style="font-size: 46px; line-height: 1.2; word-break: break-word; text-align: left; mso-line-height-alt: 55px; margin: 0;"><span style="font-size: 46px; color: #000000;"><strong>Dear *|FNAME|*&nbsp;,</strong></span></p>
                                         </div>
                                     </div>
                                     <!--[if mso]></td></tr></table><![endif]-->
                                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 15px; padding-bottom: 10px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
                                     <div style="color:#000000;font-family:'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:1.5;padding-top:15px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
                                         <div style="line-height: 1.5; font-size: 12px; font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000000; mso-line-height-alt: 18px;">
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;"><br><span style="font-size: 20px;">Your consent has been requested to get it on 😉.</span></p>
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; font-size: 20px; mso-line-height-alt: 30px; margin: 0;"><span style="font-size: 20px;">Review the consent <a style="text-decoration: underline;" href="{{link}}" target="_blank" rel="noopener">here</a>.</span></p>
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; font-size: 20px; mso-line-height-alt: 30px; margin: 0;"><span style="font-size: 20px;">Remember, you're in charge. It is your inherent right to grant or deny consent requests.</span></p>
+                                            <p style="line-height: 1.5; word-break: break-word; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 18px; mso-line-height-alt: 27px; margin: 0;"><span style="font-size: 18px;">To finish your sign up process you need to confirm your email address.Please confirm your email address <a style="text-decoration: underline;" title="Confirm Email" href="urlll" target="_blank" rel="noopener">here</a></span></p>
                                             <p style="line-height: 1.5; word-break: break-word; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
                                             <p style="line-height: 1.5; word-break: break-word; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
                                         </div>
@@ -333,7 +319,7 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
                                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, sans-serif"><![endif]-->
                                     <div style="color:#C0C0C0;font-family:Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                                         <div style="line-height: 1.2; font-size: 12px; color: #C0C0C0; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 12px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 14px; margin: 0;"><span style="color: #000000;">Copyright © 2020 Grant Consent, All rights reserved. &nbsp;<br><br>Changed your mind? You can <a style="color: #000000;" href="[Unsubscribe]" target="_blank" rel="noopener">unsubscribe</a> at any time.</span></p>
+                                            <p style="font-size: 12px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 14px; margin: 0;"><span style="color: #000000;">Copyright © 2019 Grant Consent, All rights reserved. &nbsp;<br><br>Changed your mind? You can <a style="color: #000000;" href="[Unsubscribe]" target="_blank" rel="noopener">unsubscribe</a> at any time.</span></p>
                                         </div>
                                     </div>
                                     <!--[if mso]></td></tr></table><![endif]-->
@@ -417,41 +403,3 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
 </body>
 
 </html>
-''';
-
-
-
-Future<MailStatus> sendConsentViaEmail(
-    String recipientAddress, String link) async {
-  //Login to email account.
-  final smtpServer = gmail(grantConsentEmailAddress, grantConsentEmailPassword);
-
-  //Format template to be sent
-  String _emailMessage = _emailTemplate.replaceAll('{{link}}', link);
-
-  //Prepare Email message.
-  final consentEmail = Message()
-    ..from = Address(grantConsentEmailAddress, 'Grant Consent')
-    ..recipients.add(recipientAddress)
-    ..subject = 'New Consent Request'
-    ..html = _emailMessage;
-
-  //Send Email message.
-  try {
-    final sendMail = await send(consentEmail, smtpServer);
-
-    print('Message sent: ' + sendMail.toString());
-    return MailStatus.success;
-  } on MailerException catch (e) {
-    print('Message not sent.');
-    for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
-    }
-    return MailStatus.failed;
-  }
-}
-
-enum MailStatus {
-  success,
-  failed,
-}

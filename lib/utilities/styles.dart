@@ -45,3 +45,9 @@ final kGrantConsentTextStyle = GoogleFonts.quicksand(
   fontSize: 15,
   color: Colors.white,
 );
+
+final kInputTextStyle = GoogleFonts.roboto(
+  fontSize: 17,
+color: kButtonTextColor2,
+fontWeight: FontWeight.w400,
+);

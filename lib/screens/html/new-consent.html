@@ -1,14 +1,4 @@
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
-
-/// Sender email address for mails
-const String grantConsentEmailAddress = 'grantconsent@gmail.com'; 
-
-///Sender email password
-const String grantConsentEmailPassword = 'SeychellesAwesomeBunch'; 
-
-///HTML template to be formatted and sent
-const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
@@ -263,7 +253,7 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
                                         <div style="line-height: 1.5; font-size: 12px; font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000000; mso-line-height-alt: 18px;">
                                             <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;"><br><span style="font-size: 20px;">Your consent has been requested to get it on 😉.</span></p>
                                             <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
-                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; font-size: 20px; mso-line-height-alt: 30px; margin: 0;"><span style="font-size: 20px;">Review the consent <a style="text-decoration: underline;" href="{{link}}" target="_blank" rel="noopener">here</a>.</span></p>
+                                            <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; font-size: 20px; mso-line-height-alt: 30px; margin: 0;"><span style="font-size: 20px;">Review the consent <a style="text-decoration: underline;" href="consent link" target="_blank" rel="noopener">here</a>.</span></p>
                                             <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
                                             <p style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; word-break: break-word; font-size: 20px; mso-line-height-alt: 30px; margin: 0;"><span style="font-size: 20px;">Remember, you're in charge. It is your inherent right to grant or deny consent requests.</span></p>
                                             <p style="line-height: 1.5; word-break: break-word; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: NaNpx; margin: 0;">&nbsp;</p>
@@ -417,41 +407,3 @@ const String _emailTemplate = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tr
 </body>
 
 </html>
-''';
-
-
-
-Future<MailStatus> sendConsentViaEmail(
-    String recipientAddress, String link) async {
-  //Login to email account.
-  final smtpServer = gmail(grantConsentEmailAddress, grantConsentEmailPassword);
-
-  //Format template to be sent
-  String _emailMessage = _emailTemplate.replaceAll('{{link}}', link);
-
-  //Prepare Email message.
-  final consentEmail = Message()
-    ..from = Address(grantConsentEmailAddress, 'Grant Consent')
-    ..recipients.add(recipientAddress)
-    ..subject = 'New Consent Request'
-    ..html = _emailMessage;
-
-  //Send Email message.
-  try {
-    final sendMail = await send(consentEmail, smtpServer);
-
-    print('Message sent: ' + sendMail.toString());
-    return MailStatus.success;
-  } on MailerException catch (e) {
-    print('Message not sent.');
-    for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
-    }
-    return MailStatus.failed;
-  }
-}
-
-enum MailStatus {
-  success,
-  failed,
-}
