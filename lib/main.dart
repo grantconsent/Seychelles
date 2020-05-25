@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grantconsent/screens/dashboard.dart';
 import 'package:grantconsent/screens/loading_animation.dart';
 //import 'package:grantconsent/screens/loading_animation.dart';
 import 'screens/terms_and_conditions.dart';
@@ -28,7 +29,8 @@ class GrantConsent extends StatelessWidget {
           accentColor: kButtonColor,
           primaryColor: kButtonColor,
           ),
-      home: LoadingAnimation(),
+      home: Dashboard(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

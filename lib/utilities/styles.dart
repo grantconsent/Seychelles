@@ -8,6 +8,7 @@ const Color kButtonTextColor1 = Color(0xFF222222);
 const Color kButtonTextColor2 = Color(0xFFCAB480);
 const Color kInactiveSlideDotColor = Color(0xFF535353);
 const Color kGoogleButtonColor = Color(0xff4285f4);
+const Color kDashboardBackgroundColor = Color(0xffdcd4c4);
 //Text Styles
 
 final kBody1TextStyle = GoogleFonts.quicksand(
