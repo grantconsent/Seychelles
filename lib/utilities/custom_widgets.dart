@@ -287,13 +287,14 @@ class CustomTextFormField extends StatefulWidget {
       {@required this.hintText,
       this.icon,
       this.textInputType,
-      this.obscure = false});
+      this.obscure = false,
+      this.controller});
 
   final String hintText;
   final Icon icon;
   final TextInputType textInputType;
   final bool obscure;
-
+  final TextEditingController controller;
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
 }
@@ -311,35 +312,54 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return SizedBox(
       height: 40,
       child: TextFormField(
-          cursorColor: kButtonColor,
-          style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
-          obscureText: !isVisible,
-          decoration: InputDecoration(
-            hintText: widget.hintText,
-            hintStyle: kInputTextStyle.copyWith(fontSize: 11),
-            filled: true,
-            suffixIcon: widget.obscure
-                ? IconButton(
-                    icon: Icon(
-                      // Based on passwordVisible state choose the icon
-                      isVisible ? Icons.visibility : Icons.visibility_off,
-                      color: kButtonColor,
-                      size: 18,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isVisible = !isVisible;
-                      });
-                    },
-                  )
-                : null,
-            fillColor: Color.fromRGBO(202, 180, 128, 0.3),
-            border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(Radius.circular(3.0))),
-          ),
-          keyboardType: widget.textInputType,
-          textCapitalization: widget.obscure?TextCapitalization.none:TextCapitalization.words,),
+        controller: widget.controller,
+        cursorColor: kButtonColor,
+        style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
+        obscureText: !isVisible,
+        decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: kInputTextStyle.copyWith(fontSize: 11),
+          filled: true,
+          suffixIcon: widget.obscure
+              ? IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    isVisible ? Icons.visibility : Icons.visibility_off,
+                    color: kButtonColor,
+                    size: 18,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
+                )
+              : null,
+          fillColor: Color.fromRGBO(202, 180, 128, 0.3),
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(3.0))),
+        ),
+        keyboardType: widget.textInputType,
+        textCapitalization:
+            widget.obscure ? TextCapitalization.none : TextCapitalization.words,
+      ),
     );
   }
+}
+
+SnackBar customSnackBar({String message, int durationInSeconds}) {
+  return SnackBar(
+    behavior: SnackBarBehavior.fixed,
+    duration: Duration(seconds: durationInSeconds ?? 2),
+    content: Container(
+      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      alignment: Alignment.center,
+      height: 30,
+      child: Text(
+        message ?? "",
+        style: kBody1TextStyle,
+      ),
+    ),
+  );
 }
