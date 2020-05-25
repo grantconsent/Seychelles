@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
 import 'package:grantconsent/services/firebase_forgot_password.dart';
@@ -62,9 +63,10 @@ class ForgotPassword extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 15),
                 child: UserActionButton(
                   onTap: () async {
-                    if (inputEmail.text == "") {
+                    final bool isValid = EmailValidator.validate(inputEmail.text);
+                    if (!isValid) {
                       scaffoldKey.currentState.showSnackBar(
-                        customSnackBar(message: 'Please enter your email.'),
+                        customSnackBar(message: 'Invalid Email.'),
                       );
                     } else {
                       SignInStatus operationStatus =
@@ -97,7 +99,7 @@ class ForgotPassword extends StatelessWidget {
                       } else {
                         scaffoldKey.currentState.showSnackBar(
                           customSnackBar(
-                              message: 'Please enter a valid email.'),
+                              message: 'Please try again later.'),
                         );
                       }
                     }
