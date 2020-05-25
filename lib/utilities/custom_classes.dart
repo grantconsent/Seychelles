@@ -14,7 +14,9 @@ class ConsentUser {
 
 class ConsentUserSignIn {
   String email;
+
   ConsentUserSignIn({
     @required this.email,
   });
 }
+
