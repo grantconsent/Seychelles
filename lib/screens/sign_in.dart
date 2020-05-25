@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
@@ -154,10 +155,11 @@ class _SignInState extends State<SignIn> {
   }
 
   _signIn(BuildContext context) async {
-    if (inputEmail.text == "") {
-      //If name is empty
+    final bool isValid = EmailValidator.validate(inputEmail.text);
+    if (!isValid) {
+      //If email is empty
       scaffoldKey.currentState.showSnackBar(
-        customSnackBar(message: 'Enter Email Address'),
+        customSnackBar(message: 'Invalid Email'),
       );
     } else if (inputPassword.text == "") {
       //If password is empty
