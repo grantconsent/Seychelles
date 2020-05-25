@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
@@ -18,44 +17,12 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool checkBoxValue = false;
-  bool _isEmailVerified;
-  Timer _timer;
 
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  @override
-  void initState() {
-    super.initState();
-    Future(() async {
-      _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
-        await FirebaseAuth.instance.currentUser()
-          ..reload();
-        var user = await FirebaseAuth.instance.currentUser();
-        if (user.isEmailVerified) {
-          setState(() {
-            _isEmailVerified = user.isEmailVerified;
-          });
-          timer.cancel();
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    if (_timer != null) {
-      _timer.cancel();
-    }
-  }
-
-  final TextEditingController inputEmail = TextEditingController();
-  final TextEditingController inputPassword = TextEditingController();
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  @override
+ 
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -191,26 +158,40 @@ class _SignInState extends State<SignIn> {
 
 
   _signIn(BuildContext context) async {
-    ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
-    SignInStatus operationStatus =
-        await signInUser(newUser: email, password: inputPassword.text);
-    if (operationStatus == SignInStatus.success) {
-      // If sign in was successfull
 
-      if (_isEmailVerified) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => TestScreen2()));
+    final bool isValid = EmailValidator.validate(inputEmail.text);
+    if (!isValid) {
+      //If email is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Invalid Email'),
+      );
+    } else if (inputPassword.text == "") {
+      //If password is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Enter Password'),
+      );
+    } else {
+      ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
+      SignInStatus operationStatus =
+      await signInUser(newUser: email, password: inputPassword.text);
+      var user = await FirebaseAuth.instance.currentUser();
+      if (operationStatus == SignInStatus.success) {
+        if (user.isEmailVerified) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => TestScreen2()));
+        } else {
+          scaffoldKey.currentState.showSnackBar(
+            customSnackBar(message: 'Please verify your email.'),
+          );
+        }
+
       } else {
         scaffoldKey.currentState.showSnackBar(
-          customSnackBar(message: 'Please verify your email.'),
+          customSnackBar(message: 'Incorrect Username or Password.'),
         );
       }
 
-    } else {
-      //If sign in was NOT successful
-      scaffoldKey.currentState.showSnackBar(
-        customSnackBar(message: 'Incorrect Username or Password.'),
-      );
+
     }
   }
 }

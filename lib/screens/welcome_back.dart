@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/forgot_password.dart';
 import 'package:grantconsent/services/firebase_sign_out.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -40,14 +41,29 @@ class WelcomeBack extends StatelessWidget {
               padding: const EdgeInsets.only(top: 3.0),
               child: Align(
                 alignment: Alignment.bottomRight,
-                child: Text(
-                  'forgot password?',
-                  style: TextStyle(color: kButtonTextColor2, fontSize: 13),
+
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassword()));
+                  },
+                  child: Text(
+                    'forgot password?',
+                    style: TextStyle(color: kButtonTextColor2),
+                  ),
                 ),
               ),
             ),
             SizedBox(height: 20),
-            UserActionButton(onTap: () {signOutUser();}, label: 'Log In'),
+
+            UserActionButton(
+                onTap: () {
+                  signOutUser();
+                },
+                label: 'Log In'),
+
           ],
         ),
       ),
