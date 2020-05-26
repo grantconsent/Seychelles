@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
+import 'package:grantconsent/screens/get_started_screen.dart';
+import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/services/firebase_sign_out.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-
-class getUser {
-  getUser.user(ConsentUser name) {
-    print("The user is : $name");
-  }
-}
 
 class WelcomeBack extends StatelessWidget {
   WelcomeBack({this.currentUser});
@@ -19,6 +15,10 @@ class WelcomeBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String display = "${currentUser.name}";
+    if (display == '') {
+      display = currentUser.email;
+    }
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Container(
@@ -35,7 +35,7 @@ class WelcomeBack extends StatelessWidget {
               style: kWelcomeHeadingTextStyle,
             ),
             Text(
-              "${currentUser.name}",
+              "$display",
               style: kWelcomeHeadingTextStyle,
             ),
             Text(
@@ -68,9 +68,17 @@ class WelcomeBack extends StatelessWidget {
             SizedBox(height: 20),
             UserActionButton(
                 onTap: () {
-                  signOutUser();
+                  signInUser();
                 },
                 label: 'Log In'),
+            SizedBox(height: 20),
+            UserActionButton(
+                onTap: () {
+                  signOutUser();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => GetStarted()));
+                },
+                label: 'Not You?'),
           ],
         ),
       ),
