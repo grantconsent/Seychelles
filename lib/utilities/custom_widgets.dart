@@ -312,6 +312,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return SizedBox(
       height: 40,
       child: TextFormField(
+        enableSuggestions: true,
         controller: widget.controller,
         cursorColor: kButtonColor,
         style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),

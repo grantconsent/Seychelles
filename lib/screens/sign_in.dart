@@ -10,155 +10,111 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-class SignIn extends StatefulWidget {
-  @override
-  _SignInState createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
-  bool checkBoxValue = false;
-
+class SignIn extends StatelessWidget {
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
- 
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: kBackgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 35.0, right: 35.0, top: 90.0, bottom: 5),
-                child: GrantConsentLogo(LogoType.mediumWithText)),
-          ),
-          Expanded(
-            flex: 2,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 38.0),
-                child: Column(
+      body: SingleChildScrollView(
+        child: Container(
+          constraints: BoxConstraints.tight(kScreenSize),
+          padding: EdgeInsets.symmetric(horizontal: 38),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Spacer(flex: 3),
+              GrantConsentLogo(LogoType.mediumWithText),
+              Spacer(flex: 6),
+              CustomTextFormField(
+                controller: inputEmail,
+                hintText: "Email Address",
+                textInputType: TextInputType.emailAddress,
+              ),
+              SizedBox(height: 5),
+              CustomTextFormField(
+                  controller: inputPassword,
+                  obscure: true,
+                  hintText: "Password"),
+              SizedBox(height: 5),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedCheckBox(),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'remember me',
+                      style: TextStyle(color: kButtonTextColor2),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgotPassword()));
+                    },
+                    child: Text(
+                      'forgot password?',
+                      style: TextStyle(color: kButtonTextColor2),
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(flex: 2),
+              UserActionButton(
+                  onTap: () {
+                    _signIn(context);
+                  },
+                  label: 'Sign In',
+                  filled: true),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Center(child: Text("OR", style: kOrTextStyle)),
+              ),
+              UserGoogleButton(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
+                },
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0, top: 30),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: CustomTextFormField(
-                        controller: inputEmail,
-                        hintText: "Email Address",
-                        textInputType: TextInputType.emailAddress,
-                      ),
+                    Text(
+                      'Don\'t have an account? ',
+                      style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                     ),
-                    CustomTextFormField(
-                        controller: inputPassword,
-                        obscure: true,
-                        icon: Icon(
-                          Icons.remove_red_eye,
-                          size: 15,
-                          color: kButtonTextColor2,
-                        ),
-                        hintText: "Password"),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                      child: Row(
-                        children: <Widget>[
-                          Checkbox(
-                              value: checkBoxValue,
-                              activeColor: kButtonTextColor2,
-                              onChanged: (bool newValue) {
-                                setState(() {
-                                  checkBoxValue = newValue;
-                                });
-                              }),
-                          Expanded(
-                            child: Text(
-                              'remember me',
-                              style: TextStyle(color: kButtonTextColor2),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-
-                              Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => ForgotPassword()));
-
-                            },
-                            child: Text(
-                              'forgot password?',
-                              style: TextStyle(color: kButtonTextColor2),
-                            ),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => SignUp()));
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(color: Colors.white, fontSize: 13),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50.0),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 15.0),
-                            child: UserActionButton(
-                                onTap: () {
-                                  _signIn(context);
-                                },
-                                label: 'Sign In',
-                                filled: true),
-                          ),
-                          Text("OR", style: kOrTextStyle),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15.0),
-                            child: UserGoogleButton(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignIn()));
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15.0, top: 15),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Don\'t have an account? ',
-                  style: TextStyle(color: kButtonTextColor2, fontSize: 13),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => SignUp()));
-                  },
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(color: Colors.white, fontSize: 13),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-
   _signIn(BuildContext context) async {
-
     final bool isValid = EmailValidator.validate(inputEmail.text);
     if (!isValid) {
       //If email is empty
@@ -173,7 +129,7 @@ class _SignInState extends State<SignIn> {
     } else {
       ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
       SignInStatus operationStatus =
-      await signInUser(newUser: email, password: inputPassword.text);
+          await signInUser(newUser: email, password: inputPassword.text);
       var user = await FirebaseAuth.instance.currentUser();
       if (operationStatus == SignInStatus.success) {
         if (user.isEmailVerified) {
@@ -184,14 +140,35 @@ class _SignInState extends State<SignIn> {
             customSnackBar(message: 'Please verify your email.'),
           );
         }
-
       } else {
         scaffoldKey.currentState.showSnackBar(
           customSnackBar(message: 'Incorrect Username or Password.'),
         );
       }
-
-
     }
+  }
+}
+
+class SizedCheckBox extends StatefulWidget {
+  @override
+  _SizedCheckBoxState createState() => _SizedCheckBoxState();
+}
+
+class _SizedCheckBoxState extends State<SizedCheckBox> {
+  bool checkBoxValue = false;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 10,
+      width: 9,
+      child: Checkbox(
+          value: checkBoxValue,
+          activeColor: kButtonTextColor2,
+          onChanged: (bool newValue) {
+            setState(() {
+              checkBoxValue = newValue;
+            });
+          }),
+    );
   }
 }
