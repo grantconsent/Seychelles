@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
+import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/screens/test_screen_2.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
@@ -127,10 +128,12 @@ class SignIn extends StatelessWidget {
         customSnackBar(message: 'Enter Password'),
       );
     } else {
+      showDialog(context: context, builder: (context) => Loader());
       ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
       SignInStatus operationStatus =
           await signInUser(newUser: email, password: inputPassword.text);
       var user = await FirebaseAuth.instance.currentUser();
+      Navigator.pop(context);
       if (operationStatus == SignInStatus.success) {
         if (user.isEmailVerified) {
           Navigator.pushReplacement(
@@ -141,10 +144,40 @@ class SignIn extends StatelessWidget {
           );
         }
       } else {
-        scaffoldKey.currentState.showSnackBar(
-          customSnackBar(message: 'Incorrect Username or Password.'),
-        );
+        _handleExceptions(operationStatus); //If sign in was NOT successful
       }
+    }
+  }
+
+  void _handleExceptions(SignInStatus operationStatus) {
+    if (operationStatus == SignInStatus.invalidEmail) {
+      //If sign in was NOT successful - EMAIL IS INVALID
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'You have entered an invalid email. Please try again',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignInStatus.userNotFound) {
+      //If sign in was NOT successful - INVALID EMAIL ENTERED
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message:
+                'This email does NOT have an account. Please Sign Up instead',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignInStatus.wrongPassword) {
+      //If sign in was NOT successful - USER ALREADY EXISTS
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'You have entered a wrong password', durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignInStatus.unknownException) {
+      //If sign in was NOT successful - UNKNOWN ERROR OCCURED
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'An unknown error occured. Try again',
+            durationInSeconds: 3),
+      );
     }
   }
 }

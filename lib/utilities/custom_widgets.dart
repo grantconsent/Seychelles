@@ -351,15 +351,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
+          backgroundColor: kButtonColor,
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: EdgeInsets.fromLTRB(10, 4, 10, 5),
       alignment: Alignment.center,
-      height: 30,
+      height: 40,
       child: Text(
         message ?? "",
-        style: kBody1TextStyle,
+        style: kBody1TextStyle.copyWith(color: kBackgroundColor),
       ),
     ),
   );
