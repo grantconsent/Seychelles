@@ -355,11 +355,12 @@ SnackBar customSnackBar({String message, int durationInSeconds}) {
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(
-      padding: EdgeInsets.fromLTRB(10, 4, 10, 5),
+      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
       alignment: Alignment.center,
       height: 40,
       child: Text(
         message ?? "",
+        textAlign: TextAlign.center,
         style: kBody1TextStyle.copyWith(color: kBackgroundColor),
       ),
     ),
