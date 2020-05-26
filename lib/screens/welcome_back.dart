@@ -51,6 +51,7 @@ class WelcomeBack extends StatelessWidget {
               padding: const EdgeInsets.only(top: 3.0),
               child: Align(
                 alignment: Alignment.bottomRight,
+
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -66,11 +67,13 @@ class WelcomeBack extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+
             UserActionButton(
                 onTap: () {
                   signInUser();
                 },
                 label: 'Log In'),
+
             SizedBox(height: 20),
             UserActionButton(
                 onTap: () {
@@ -79,6 +82,7 @@ class WelcomeBack extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => GetStarted()));
                 },
                 label: 'Not You?'),
+
           ],
         ),
       ),

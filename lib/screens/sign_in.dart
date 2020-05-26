@@ -22,7 +22,7 @@ class _SignInState extends State<SignIn> {
   final TextEditingController inputPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  @override
+ 
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -82,8 +82,10 @@ class _SignInState extends State<SignIn> {
                           ),
                           GestureDetector(
                             onTap: () {
+
                               Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) => ForgotPassword()));
+
                             },
                             child: Text(
                               'forgot password?',
@@ -154,7 +156,9 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+
   _signIn(BuildContext context) async {
+
     final bool isValid = EmailValidator.validate(inputEmail.text);
     if (!isValid) {
       //If email is empty
@@ -180,11 +184,14 @@ class _SignInState extends State<SignIn> {
             customSnackBar(message: 'Please verify your email.'),
           );
         }
+
       } else {
         scaffoldKey.currentState.showSnackBar(
           customSnackBar(message: 'Incorrect Username or Password.'),
         );
       }
+
+
     }
   }
 }
