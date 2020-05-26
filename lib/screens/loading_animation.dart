@@ -29,8 +29,10 @@ class AnimatedLogo extends StatefulWidget {
 
 class _AnimatedLogoState extends State<AnimatedLogo>
     with TickerProviderStateMixin {
-  bool _finishedCheckingPreviousUser = false; //bool to indicate if checking has finished and screen can proceed.
-  ConsentUser user; //is null if no current user, is NOT null if user exists. Screen responds to change in this value.
+  bool _finishedCheckingPreviousUser =
+      false; //bool to indicate if checking has finished and screen can proceed.
+  ConsentUser
+      user; //is null if no current user, is NOT null if user exists. Screen responds to change in this value.
 
   void _runAnimation() {
     scaleAnimationController.forward();
@@ -119,7 +121,9 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         AnimatedOpacity(
           child: user == null
               ? SplashScreen()
-              : WelcomeBack(), //Pass user to WelcomeBack() screen
+              : WelcomeBack(
+                  currentUser: user,
+                ), //Pass user to WelcomeBack() screen
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),
