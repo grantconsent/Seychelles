@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-void signOutUser() {
+void signOutUser() async {
   final _auth = FirebaseAuth.instance;
-  _auth.signOut();
+  await _auth.signOut();
 }
