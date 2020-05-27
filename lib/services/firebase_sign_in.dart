@@ -7,10 +7,14 @@ Future signInUser({ConsentUserSignIn newUser, String password}) async {
     final result = await _auth.signInWithEmailAndPassword(
         email: newUser.email, password: password);
     if (result != null) {
-      print('Worked!');
-      return SignInStatus.success;
+      final user = await _auth.currentUser();
+      if (user.isEmailVerified) {
+  //      print('Worked!');
+        return SignInStatus.success;
+      } else
+        return SignInStatus.emailUnverified;
     } else {
-      print('Failed!');
+  //    print('Failed!');
     }
   } catch (e) {
     print(e);
@@ -30,4 +34,5 @@ enum SignInStatus {
   unknownException,
   userNotFound,
   wrongPassword,
+  emailUnverified
 }

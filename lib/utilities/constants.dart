@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 //Assets
-ImageProvider kGrantConsentLogo = AssetImage('assets/GrantConsentLogo.png');
-ImageProvider kGrantConsentGetStarted =
-    AssetImage('assets/GrantConsentGetStartedLogo.png');
-ImageProvider kConsentImage = AssetImage('assets/CONSENT.png');
-ImageProvider kSplashPage1Image = AssetImage('assets/Splash image 1.png');
-ImageProvider kSplashPage2Image = AssetImage('assets/Splash image 2.png');
-ImageProvider kGetStartedScreenBackground =
+final ImageProvider kGrantConsentLogo =
+    AssetImage('assets/GrantConsentLogo.png');
+
+final ImageProvider kSplashPage1Image = AssetImage('assets/Splash image 1.png');
+final ImageProvider kSplashPage2Image = AssetImage('assets/Splash image 2.png');
+final ImageProvider kGetStartedScreenBackground =
     AssetImage('assets/seductive_woman.png');
-Widget kUploadingGIF = Image.asset(
+final Widget kUploadingGIF = Image.asset(
   'assets/GIFs/cloudloop.gif',
   height: 90,
   width: 90,
@@ -17,7 +16,7 @@ Widget kUploadingGIF = Image.asset(
   cacheWidth: 90,
   fit: BoxFit.cover,
 );
-Widget kUploadedGIF = Image.asset(
+final Widget kUploadedGIF = Image.asset(
   'assets/GIFs/successmark.gif',
   height: 90,
   width: 90,
@@ -25,10 +24,11 @@ Widget kUploadedGIF = Image.asset(
   cacheWidth: 90,
   fit: BoxFit.cover,
 );
-Widget kLoaderGIF = Image.asset('assets/GIFs/loaderloop.gif');
+final Widget kLoaderGIF = Image.asset('assets/GIFs/loaderloop.gif');
 
-Widget kUserPicturePlaceholder = Image.asset('assets/GIFs/loaderloop.gif');
-ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
+final Widget kUserPicturePlaceholder =
+    Image.asset('assets/GIFs/loaderloop.gif');
+final ImageProvider kGoogleLogo = AssetImage('assets/Google Logo.png');
 const int kNumberOfSplashPages = 2;
 
 //Strings

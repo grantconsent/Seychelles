@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class Dashboard extends StatefulWidget {
@@ -70,12 +70,12 @@ class _DashboardState extends State<Dashboard> {
                   width: 60,
                 ),
                 Text(
-                  "Bami Ogunfemi",
+                  loggedInUser.name,
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "ogunfemiayobami@gmail.com",
+                  loggedInUser.email,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color(0xffCAB480),
@@ -290,7 +290,7 @@ class Home extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Hi, Bami",
+            "Hi, ${loggedInUser.name}",
             style: TextStyle(fontSize: 40),
           ),
         ),

@@ -32,7 +32,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
   ConsentUser
       user; //is null if no current user, is NOT null if user exists. Screen responds to change in this value.
 
-  void _runAnimation() {
+  void _runAnimation() async{
     scaleAnimationController.forward();
     scaleAnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -53,6 +53,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
 
   void _checkPreviousUser() async {
     user = await checkForUser();
+    loggedInUser = user;
     _finishedCheckingPreviousUser = true;
   }
 
@@ -119,9 +120,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         AnimatedOpacity(
           child: user == null
               ? SplashScreen()
-              : WelcomeBack(
-                  currentUser: user,
-                ), //Pass user to WelcomeBack() screen
+              : WelcomeBack(), //Pass user to WelcomeBack() screen //Global variable for user created and used 
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),

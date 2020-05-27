@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+ConsentUser loggedInUser;
+
 class ConsentUser {
   String name;
   String email;

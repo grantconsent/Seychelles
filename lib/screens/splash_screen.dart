@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
-
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -82,6 +81,8 @@ class SplashScreen extends StatelessWidget {
 ///Holds the list of pages
 class SplashPage extends StatelessWidget {
   final int page;
+
+  ///List of splash screen contents as [SplashPageContent] objects which hold the image and corresponding text.
   final List<SplashPageContent> contentList = [
     SplashPageContent(kSplashPage1Image, kSplashPage1Text),
     SplashPageContent(kSplashPage2Image, kSplashPage2Text)

@@ -9,13 +9,13 @@ import 'package:grantconsent/utilities/styles.dart';
 
 class ForgotPassword extends StatelessWidget {
   final TextEditingController inputEmail = TextEditingController();
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final scaffoldKey1 = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;
     return Scaffold(
-      key: scaffoldKey,
+      key: scaffoldKey1,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -63,9 +63,10 @@ class ForgotPassword extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 15),
                 child: UserActionButton(
                   onTap: () async {
-                    final bool isValid = EmailValidator.validate(inputEmail.text);
+                    final bool isValid =
+                        EmailValidator.validate(inputEmail.text);
                     if (!isValid) {
-                      scaffoldKey.currentState.showSnackBar(
+                      scaffoldKey1.currentState.showSnackBar(
                         customSnackBar(message: 'Invalid Email.'),
                       );
                     } else {
@@ -77,13 +78,14 @@ class ForgotPassword extends StatelessWidget {
                           builder: (context) => AlertDialog(
                             actions: <Widget>[
                               AppIconButton(onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    maintainState: true,
-                                    builder: (context) => GetStarted(),
-                                  ),
-                                );
+                                // Navigator.pushReplacement(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     maintainState: true,
+                                //     builder: (context) => GetStarted(),
+                                //   ),
+                                // );
+                                Navigator.pop(context);
                               })
                             ],
                             title: Text(
@@ -97,9 +99,8 @@ class ForgotPassword extends StatelessWidget {
                           ),
                         );
                       } else {
-                        scaffoldKey.currentState.showSnackBar(
-                          customSnackBar(
-                              message: 'Please try again later.'),
+                        scaffoldKey1.currentState.showSnackBar(
+                          customSnackBar(message: 'Please try again later.'),
                         );
                       }
                     }

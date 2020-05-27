@@ -1,10 +1,11 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/age_verification.dart';
+import 'package:grantconsent/screens/dashboard.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
 import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/screens/sign_up.dart';
-import 'package:grantconsent/screens/test_screen_2.dart';
+import 'package:grantconsent/services/firebase_check_for_user.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
@@ -98,7 +99,7 @@ class SignIn extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => SignUp()));
+                            MaterialPageRoute(builder: (context) => AgeVerification()));
                       },
                       child: Text(
                         'Sign Up',
@@ -132,17 +133,11 @@ class SignIn extends StatelessWidget {
       ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
       SignInStatus operationStatus =
           await signInUser(newUser: email, password: inputPassword.text);
-      var user = await FirebaseAuth.instance.currentUser();
       Navigator.pop(context);
       if (operationStatus == SignInStatus.success) {
-        if (user.isEmailVerified) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => TestScreen2()));
-        } else {
-          scaffoldKey.currentState.showSnackBar(
-            customSnackBar(message: 'Please verify your email.'),
-          );
-        }
+        loggedInUser = await checkForUser();
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Dashboard()));
       } else {
         _handleExceptions(operationStatus); //If sign in was NOT successful
       }
