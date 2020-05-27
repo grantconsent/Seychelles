@@ -18,3 +18,4 @@ class ConsentUserSignIn {
     @required this.email,
   });
 }
+

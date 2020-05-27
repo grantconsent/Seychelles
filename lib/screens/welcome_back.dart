@@ -64,6 +64,7 @@ class _WelcomeBackState extends State<WelcomeBack> {
               padding: const EdgeInsets.only(top: 3.0),
               child: Align(
                 alignment: Alignment.bottomRight,
+
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -79,6 +80,7 @@ class _WelcomeBackState extends State<WelcomeBack> {
               ),
             ),
             SizedBox(height: 20),
+
             UserActionButton(
                 onTap: () {
                   _signIn(context);
