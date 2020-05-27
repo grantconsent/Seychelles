@@ -312,6 +312,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return SizedBox(
       height: 40,
       child: TextFormField(
+        enableSuggestions: true,
         controller: widget.controller,
         cursorColor: kButtonColor,
         style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
@@ -350,15 +351,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
+          backgroundColor: kButtonColor,
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(
-      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
       alignment: Alignment.center,
-      height: 30,
+      height: 40,
       child: Text(
         message ?? "",
-        style: kBody1TextStyle,
+        textAlign: TextAlign.center,
+        style: kBody1TextStyle.copyWith(color: kBackgroundColor),
       ),
     ),
   );

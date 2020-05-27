@@ -15,64 +15,64 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Spacer(flex: 5),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 40.1),
-          //   child: GrantConsentLogo(LogoType.mediumWithText),
-          // ),
-          //  Spacer(flex: 3),
-          Expanded(
-            flex: 8,
-            child: PageView.builder(
-              itemCount: kNumberOfSplashPages,
-              itemBuilder: (context, page) {
-                return SplashPage(page: page);
-              },
-              onPageChanged: (page) {
-                pageNotifier.value = page;
-              },
-              controller: splashPageController,
-              physics: BouncingScrollPhysics(),
-            ),
-          ),
-          Flexible(
-              flex: 2,
-              child: Container(
-                padding: EdgeInsets.fromLTRB(40, 0, 40, 46),
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    ValueListenableBuilder(
-                        valueListenable: pageNotifier,
-                        builder: (context, value, child) {
-                          return SlideIndicatorPane(currentPage: value);
-                        }),
-                    AppIconButton(
-                      onTap: () {
-                        // if (splashPageController.page <
-                        //     kNumberOfSplashPages - 1) {
-                        //   splashPageController.nextPage(
-                        //     duration: kSplashScreenPageAnimationDuration,
-                        //     curve: Curves.easeOut,
-                        //   );
-                        // } else {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GetStarted(),
-                          ),
-                        );
-                        //     }
-                      },
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints.tight(kScreenSize),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Spacer(flex: 5),
+              Expanded(
+                flex: 8,
+                child: PageView.builder(
+                  itemCount: kNumberOfSplashPages,
+                  itemBuilder: (context, page) {
+                    return SplashPage(page: page);
+                  },
+                  onPageChanged: (page) {
+                    pageNotifier.value = page;
+                  },
+                  controller: splashPageController,
+                  physics: BouncingScrollPhysics(),
                 ),
-              ))
-        ],
+              ),
+              Flexible(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(40, 0, 40, 46),
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        ValueListenableBuilder(
+                            valueListenable: pageNotifier,
+                            builder: (context, value, child) {
+                              return SlideIndicatorPane(currentPage: value);
+                            }),
+                        AppIconButton(
+                          onTap: () {
+                            // if (splashPageController.page <
+                            //     kNumberOfSplashPages - 1) {
+                            //   splashPageController.nextPage(
+                            //     duration: kSplashScreenPageAnimationDuration,
+                            //     curve: Curves.easeOut,
+                            //   );
+                            // } else {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GetStarted(),
+                              ),
+                            );
+                            //     }
+                          },
+                        ),
+                      ],
+                    ),
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }

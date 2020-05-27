@@ -20,12 +20,12 @@ class SignUp extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Password fields do not match.'),
       );
-    } else   if (inputName.text == "") {
+    } else if (inputName.text == "") {
       //If name is empty
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Name cannot be empty'),
       );
-    } else   if (inputPhoneNumber.text.length < 11) {
+    } else if (inputPhoneNumber.text.length < 11) {
       //If phone number is invalid
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Wrong Phone Number'),
@@ -39,9 +39,9 @@ class SignUp extends StatelessWidget {
           phoneNumber: inputPhoneNumber.text);
       SignUpStatus operationStatus =
           await signUpUser(newUser: newUser, password: inputPassword.text);
+      Navigator.pop(context);
       if (operationStatus == SignUpStatus.success) {
         // If sign up was successfull
-        Navigator.pop(context);
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -63,8 +63,7 @@ class SignUp extends StatelessWidget {
                           'Please click the link the email sent to you to confirm and log in')),
                 ));
       } else
-        Navigator.pop(context);
-      _handleExceptions(operationStatus); //If sign up was NOT successful
+        _handleExceptions(operationStatus); //If sign up was NOT successful
     }
   }
 
