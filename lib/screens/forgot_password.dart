@@ -1,6 +1,5 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:grantconsent/screens/get_started_screen.dart';
 import 'package:grantconsent/services/firebase_forgot_password.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';

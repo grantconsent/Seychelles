@@ -6,7 +6,7 @@ class UploadPicture extends StatelessWidget {
   ///This variable controls which GIF and text is displayed
   ///
   ///Set to true after uploading picture successfully.
-  bool done = false;
+  final bool done = false;
   @override
   Widget build(BuildContext context) {
     kScreenSize = MediaQuery.of(context).size;

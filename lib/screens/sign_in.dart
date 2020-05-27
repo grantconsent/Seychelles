@@ -4,7 +4,6 @@ import 'package:grantconsent/screens/age_verification.dart';
 import 'package:grantconsent/screens/dashboard.dart';
 import 'package:grantconsent/screens/forgot_password.dart';
 import 'package:grantconsent/screens/loader.dart';
-import 'package:grantconsent/screens/sign_up.dart';
 import 'package:grantconsent/services/firebase_check_for_user.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';

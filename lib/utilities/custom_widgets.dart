@@ -140,7 +140,7 @@ class SlideIndicatorPane extends StatelessWidget {
     SlideIndicatorDot(false),
     SlideIndicatorDot(false),
   ];
-  List<SlideIndicatorDot> _slideIndicatorsBlank = [
+  final List<SlideIndicatorDot> _slideIndicatorsBlank = [
     SlideIndicatorDot(false),
     SlideIndicatorDot(false),
   ];
@@ -174,19 +174,12 @@ class UserActionButton extends StatelessWidget {
   UserActionButton({
     @required this.onTap,
     @required this.label,
-    this.filled,
-  }) {
-    if (filled == null)
-      isfilled = true;
-    else
-      isfilled = filled;
-  }
-
+    this.filled = true,
+  });
   final Function onTap;
   final String label;
   final bool filled;
-  bool isfilled;
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -195,8 +188,8 @@ class UserActionButton extends StatelessWidget {
           BoxConstraints.tightFor(width: kScreenSize.width, height: 40),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: isfilled ? kButtonColor : Colors.transparent,
-        border: isfilled ? null : Border.all(color: kButtonColor),
+        color: filled ? kButtonColor : Colors.transparent,
+        border: filled ? null : Border.all(color: kButtonColor),
       ),
       child: RawMaterialButton(
         padding: EdgeInsets.only(left: 40, right: 14.4),
@@ -207,13 +200,13 @@ class UserActionButton extends StatelessWidget {
           children: <Widget>[
             Text(
               label,
-              style: isfilled
+              style: filled
                   ? kButtonTextStyle
                   : kButtonTextStyle.copyWith(color: kButtonTextColor2),
             ),
             Icon(
               Icons.chevron_right,
-              color: isfilled ? kButtonTextColor1 : kButtonTextColor2,
+              color: filled ? kButtonTextColor1 : kButtonTextColor2,
             ),
           ],
         ),

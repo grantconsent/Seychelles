@@ -28,6 +28,7 @@ Future<SignUpStatus> signUpUser(
                 ? SignUpStatus.userExists
                 : SignUpStatus.unknownException;
   }
+  return SignUpStatus.unknownException;
 }
 
 Future sendVerificationEmail() async {
