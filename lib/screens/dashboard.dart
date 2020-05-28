@@ -170,10 +170,10 @@ class _DashboardState extends State<Dashboard> {
             duration: Duration(milliseconds: 200),
             child: Container(
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 2),
-              width: 100,
-              height: 45,
+              width: 94,
+              height: 40,
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: Colors.black12,
                 border: Border.all(color: Color(0xffCAB480)),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -225,11 +225,11 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(width: 7),
-            Image.asset(getUrl(index)),
+            Image.asset(getUrl(index), height: 20,),
             SizedBox(width: 5),
             Text(
               getText(index),
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: TextStyle(color: Colors.white, fontSize: 14),
             ),
             SizedBox(width: 7),
           ],
@@ -306,11 +306,19 @@ class Home extends StatelessWidget {
         Expanded(
           child: Card(
             elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             child: Container(
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Image.asset(
+                "assets/GIFs/peep.gif",
+                width: double.maxFinite,
+              ),
             ),
           ),
         ),
@@ -335,7 +343,8 @@ class Home extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.all(12.3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -345,6 +354,11 @@ class Home extends StatelessWidget {
                 color: Colors.black,
               )
             ],
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xff222222).withOpacity(0.4),
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
       ],
