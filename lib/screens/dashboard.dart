@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
-
+import 'package:grantconsent/utilities/constants.dart';
+import "dart:math";
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -13,6 +14,11 @@ class Dashboard extends StatefulWidget {
 //right-> right: MediaQuery.of(context).size.width - 120
 
 class _DashboardState extends State<Dashboard> {
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -279,9 +285,8 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class Home extends StatelessWidget {
-  const Home({
-    Key key,
-  }) : super(key: key);
+  static final _random = new Random();
+  var welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
 
   @override
   Widget build(BuildContext context) {
@@ -298,7 +303,7 @@ class Home extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Can we have dynamic texts here\nand here also",
+            welcomeText,
             style: TextStyle(fontSize: 18),
           ),
         ),
