@@ -7,6 +7,7 @@ import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class LoadingAnimation extends StatelessWidget {
   @override
@@ -64,10 +65,31 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         vsync: this, duration: kLoadingScreenAnimationDuration);
     scaleAnimationController = AnimationController(
         vsync: this, duration: kLoadingScreenAnimationDuration);
+    handleDynamicLinks();
     _runAnimation();
     _checkPreviousUser();
   }
+  Future handleDynamicLinks ()async{
+    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
+    _handleDeepLink(data);
 
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLinksData)async{
+          _handleDeepLink(dynamicLinksData);
+        },
+        onError: (OnLinkErrorException e)async{
+          print('Dynamic Link error ${e.message}');
+        }
+    );
+
+  }
+  void _handleDeepLink (PendingDynamicLinkData data){
+    Uri deeplink = data?.link;
+    if (deeplink != null){
+      print('deeplink : $deeplink');
+    Navigator.pushNamed(context, deeplink.path);
+    }
+  }
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
