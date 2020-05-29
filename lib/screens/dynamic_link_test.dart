@@ -21,7 +21,7 @@ class _DynamicLinkTestState extends State<DynamicLinkTest> {
              RaisedButton(
                onPressed: ()async{
                  //YOU CAN CHANGE THE 'getstarted' to another route on main.dart
-                 await dynamicLinksService.createDynamicLinks('getstarted');
+                 await dynamicLinksService.createDynamicLinks('whateverWeWantToSendToAPPThroughLink');
                  setState(() {
                   myLink = dynamicLinksService.myLink;
                  });

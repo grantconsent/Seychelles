@@ -54,7 +54,6 @@ class _AnimatedLogoState extends State<AnimatedLogo>
 
   void _checkPreviousUser() async {
     user = await checkForUser();
-    loggedInUser = user;
     _finishedCheckingPreviousUser = true;
   }
 
