@@ -10,13 +10,6 @@ class DynamicLinkTest extends StatefulWidget {
 class _DynamicLinkTestState extends State<DynamicLinkTest> {
    DynamicLinksService dynamicLinksService = DynamicLinksService();
    String myLink;
-   String dataReturned;
-@override
-void initState() {
-    super.initState();
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +21,7 @@ void initState() {
              RaisedButton(
                onPressed: ()async{
                  //YOU CAN CHANGE THE 'getstarted' to another route on main.dart
-                 await dynamicLinksService.createDynamicLinks('WHATIWANTTOSHOW');
+                 await dynamicLinksService.createDynamicLinks('getstarted');
                  setState(() {
                   myLink = dynamicLinksService.myLink;
                  });

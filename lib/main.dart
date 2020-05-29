@@ -18,6 +18,7 @@ class GrantConsent extends StatelessWidget {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
   ]);
+
     return MaterialApp(
       title: 'Grant Consent',
       theme: ThemeData(
