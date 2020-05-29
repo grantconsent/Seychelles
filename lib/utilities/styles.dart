@@ -32,11 +32,15 @@ final kDashboardOptionTextStyle = GoogleFonts.roboto(
 
 
 );
-final kDasboardLoogedInEmailTextStyle = GoogleFonts.openSans(
+final kDashboardLoggedInEmailTextStyle = GoogleFonts.openSans(
   fontWeight: FontWeight.bold,
   color: Color(0xffCAB480),
 );
-final kDasboardLoogedInNameTextStyle = GoogleFonts.openSans(
+final kDashboardFooterTextStyle = GoogleFonts.openSans(
+    color: Colors.white,
+    fontSize: 14
+);
+final kDashboardLoggedInNameTextStyle = GoogleFonts.openSans(
     fontSize: 18
 );
 final kDashboardHeaderTextStyle = GoogleFonts.quicksand(

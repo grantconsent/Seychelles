@@ -71,12 +71,12 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Text(
                   loggedInUser.name,
-                  style: kDasboardLoogedInNameTextStyle,
+                  style: kDashboardLoggedInNameTextStyle,
                 ),
                 SizedBox(height: 4),
                 Text(
                   loggedInUser.email,
-                  style: kDasboardLoogedInEmailTextStyle,
+                  style: kDashboardLoggedInEmailTextStyle,
                 ),
                 SizedBox(height: 4),
                 RaisedButton(
@@ -226,7 +226,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(width: 5),
             Text(
               getText(index),
-              style: TextStyle(color: Colors.white, fontSize: 14),
+              style: kDashboardFooterTextStyle ,
             ),
             SizedBox(width: 7),
           ],
