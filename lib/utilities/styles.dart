@@ -9,6 +9,20 @@ const Color kButtonTextColor2 = Color(0xFFCAB480);
 const Color kInactiveSlideDotColor = Color(0xFF535353);
 const Color kGoogleButtonColor = Color(0xff4285f4);
 const Color kDashboardBackgroundColor = Color(0xffdcd4c4);
+const Map<ColorType, Color> yesColor = {
+  ColorType.border: Color(0xFF00A313),
+  ColorType.fill: Color(0xFF9BC791),
+};
+enum ColorType { border, fill }
+const Map<ColorType, Color> noColor = {
+  ColorType.border: Color(0xFFD11100),
+  ColorType.fill: Color(0xFFDA9C8B),
+};
+
+const Map<ColorType, Color> neutralColor = {
+  ColorType.border: Color(0xFFFFFFFF),
+  ColorType.fill: Color(0xFFE8E3D8),
+};
 //Text Styles
 
 final kBody1TextStyle = GoogleFonts.quicksand(

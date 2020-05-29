@@ -342,6 +342,48 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 }
 
+class ConsentOptionButton extends StatelessWidget {
+  ConsentOptionButton(
+      {@required this.type,
+      this.label,
+      this.selected = false,
+      @required this.responseTap});
+  final ConsentOptionType type;
+  final String label;
+  final bool selected;
+  final Function responseTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 5, top: 8),
+      constraints: BoxConstraints.tightFor(height: 23, width: 43),
+      decoration: BoxDecoration(
+        color: selected
+            ? (type == ConsentOptionType.no
+                ? noColor[ColorType.fill]
+                : yesColor[ColorType.fill])
+            : neutralColor[ColorType.fill],
+        border: Border.all(
+          color: selected
+              ? (type == ConsentOptionType.no
+                  ? noColor[ColorType.border]
+                  : yesColor[ColorType.border])
+              : neutralColor[ColorType.border],
+        ),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: FlatButton(
+        onPressed: responseTap,
+        padding: EdgeInsets.zero,
+        child: Text(label ?? '',
+            style:
+                GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w400)),
+      ),
+    );
+  }
+}
+
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
           backgroundColor: kButtonColor,
