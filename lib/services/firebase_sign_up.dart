@@ -31,6 +31,7 @@ Future<SignUpStatus> signUpUser(
   return SignUpStatus.unknownException;
 }
 
+
 Future sendVerificationEmail() async {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
