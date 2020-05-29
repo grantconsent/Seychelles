@@ -23,7 +23,31 @@ final kWelcomeHeadingTextStyle = GoogleFonts.quicksand(
   fontWeight: FontWeight.w500,
   color: kButtonTextColor2,
 );
+final kWelcomeDashboardTextStyle = GoogleFonts.quicksand(
+  fontSize: 40,
+  fontWeight: FontWeight.w500,
 
+);
+final kDashboardOptionTextStyle = GoogleFonts.roboto(
+
+
+);
+final kDasboardLoogedInEmailTextStyle = GoogleFonts.openSans(
+  fontWeight: FontWeight.bold,
+  color: Color(0xffCAB480),
+);
+final kDasboardLoogedInNameTextStyle = GoogleFonts.openSans(
+    fontSize: 18
+);
+final kDashboardHeaderTextStyle = GoogleFonts.quicksand(
+
+  fontWeight: FontWeight.w500,
+);
+final kDashboardDynamicTextStyle = GoogleFonts.quicksand(
+  fontSize: 20,
+  fontWeight: FontWeight.w300,
+
+);
 final kButtonTextStyle = GoogleFonts.roboto(
   fontSize: 15,
   height: 1.20,

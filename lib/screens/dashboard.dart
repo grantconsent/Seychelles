@@ -48,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(width: 20),
-              Text(getHeaderText()),
+              Text(getHeaderText(),style:kDashboardHeaderTextStyle),
               Spacer(),
               Opacity(
                 opacity: profileVisible ? 0 : 1,
@@ -71,15 +71,12 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Text(
                   loggedInUser.name,
-                  style: TextStyle(fontSize: 18),
+                  style: kDasboardLoogedInNameTextStyle,
                 ),
                 SizedBox(height: 4),
                 Text(
                   loggedInUser.email,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xffCAB480),
-                  ),
+                  style: kDasboardLoogedInEmailTextStyle,
                 ),
                 SizedBox(height: 4),
                 RaisedButton(
@@ -291,7 +288,7 @@ class Home extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Hi, ${loggedInUser.name}",
-            style: TextStyle(fontSize: 40),
+            style: kWelcomeDashboardTextStyle,
           ),
         ),
         SizedBox(height: 10),
@@ -299,7 +296,7 @@ class Home extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Can we have dynamic texts here\nand here also",
-            style: TextStyle(fontSize: 18),
+            style: kDashboardDynamicTextStyle,
           ),
         ),
         SizedBox(height: 10),
@@ -329,7 +326,8 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Create Consent"),
+              Text("Create Consent",
+                  style:kDashboardOptionTextStyle),
               Icon(
                 Icons.add,
                 color: Colors.black,
@@ -348,7 +346,8 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Review a consent"),
+              Text("Review a consent",
+                  style:kDashboardOptionTextStyle),
               Icon(
                 Icons.info_outline,
                 color: Colors.black,
