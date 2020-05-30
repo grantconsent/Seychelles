@@ -74,19 +74,9 @@ class SignIn extends StatelessWidget {
                   },
                   label: 'Sign In',
                   filled: true),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Center(child: Text("OR", style: kOrTextStyle)),
-              ),
-              UserGoogleButton(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignIn()));
-                },
-              ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.only(bottom: 15.0, top: 30),
+                padding: const EdgeInsets.only(bottom: 30.0, top: 30),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.center,

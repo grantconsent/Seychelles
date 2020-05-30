@@ -159,15 +159,8 @@ class SignUp extends StatelessWidget {
                 },
                 label: 'Sign Up',
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: Text("OR", style: kOrTextStyle),
-                ),
-              ),
-              UserGoogleButton(onTap: null),
               Padding(
-                padding: const EdgeInsets.only(bottom: 15.0, top: 30),
+                padding: const EdgeInsets.only(bottom: 30.0, top: 100),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.center,
