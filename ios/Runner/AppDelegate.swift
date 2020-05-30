@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 
+
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -11,3 +12,10 @@ import Flutter
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
+ — (void)applicationWillResignActive:(UIApplication *)application {
+   self.window.hidden = YES;
+ }
+ // Show your app’s key window when your app becomes active again.
+ — (void)applicationDidBecomeActive:(UIApplication *)application {
+   self.window.hidden = NO;
+   }

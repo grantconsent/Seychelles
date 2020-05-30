@@ -54,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(width: 20),
-              Text(getHeaderText()),
+              Text(getHeaderText(),style:kDashboardHeaderTextStyle),
               Spacer(),
               Opacity(
                 opacity: profileVisible ? 0 : 1,
@@ -77,15 +77,12 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Text(
                   loggedInUser.name,
-                  style: TextStyle(fontSize: 18),
+                  style: kDashboardLoggedInNameTextStyle,
                 ),
                 SizedBox(height: 4),
                 Text(
                   loggedInUser.email,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xffCAB480),
-                  ),
+                  style: kDashboardLoggedInEmailTextStyle,
                 ),
                 SizedBox(height: 4),
                 RaisedButton(
@@ -176,10 +173,10 @@ class _DashboardState extends State<Dashboard> {
             duration: Duration(milliseconds: 200),
             child: Container(
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 2),
-              width: 100,
-              height: 45,
+              width: 94,
+              height: 40,
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: Colors.black12,
                 border: Border.all(color: Color(0xffCAB480)),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -231,11 +228,11 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(width: 7),
-            Image.asset(getUrl(index)),
+            Image.asset(getUrl(index), height: 20,),
             SizedBox(width: 5),
             Text(
               getText(index),
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: kDashboardFooterTextStyle ,
             ),
             SizedBox(width: 7),
           ],
@@ -286,7 +283,7 @@ class _DashboardState extends State<Dashboard> {
 
 class Home extends StatelessWidget {
   static final _random = new Random();
-  var welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
+  final welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
 
   @override
   Widget build(BuildContext context) {
@@ -296,26 +293,36 @@ class Home extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Hi, ${loggedInUser.name}",
-            style: TextStyle(fontSize: 40),
+            style: kWelcomeDashboardTextStyle,
           ),
         ),
         SizedBox(height: 10),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
+
             welcomeText,
             style: TextStyle(fontSize: 18),
+
           ),
         ),
         SizedBox(height: 10),
         Expanded(
           child: Card(
             elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             child: Container(
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Image.asset(
+                "assets/GIFs/peep.gif",
+                width: double.maxFinite,
+              ),
             ),
           ),
         ),
@@ -326,7 +333,8 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Create Consent"),
+              Text("Create Consent",
+                  style:kDashboardOptionTextStyle),
               Icon(
                 Icons.add,
                 color: Colors.black,
@@ -340,16 +348,23 @@ class Home extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.all(12.3),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Review a consent"),
+              Text("Review a consent",
+                  style:kDashboardOptionTextStyle),
               Icon(
                 Icons.info_outline,
                 color: Colors.black,
               )
             ],
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xff222222).withOpacity(0.4),
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
       ],

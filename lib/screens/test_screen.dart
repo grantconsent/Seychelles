@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/dynamic_link_test.dart';
+import 'package:grantconsent/services/dynamic_links_services.dart';
 import 'package:grantconsent/services/send_through_email.dart';
 import 'package:grantconsent/services/send_through_whatsapp.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -40,21 +42,23 @@ class _TestInterfaceState extends State<TestInterface> {
                       data3 ?? 'null',
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
-                    RaisedButton(onPressed: () async {
-                      LocalContact selectedContact = await pickAContact();
-                      if (selectedContact != null)
-                        sendConsentViaWhatsapp(
-                            phoneNumber: selectedContact.phoneNumber[0],
-                            link: 'you link input to the function');
-                      else
-                        return;
+                    RaisedButton(
+                        child: Text('Test whatsapp feature'),
+                        onPressed: () async {
+                          LocalContact selectedContact = await pickAContact();
+                          if (selectedContact != null)
+                            sendConsentViaWhatsapp(
+                                phoneNumber: selectedContact.phoneNumber[0],
+                                link: 'you link input to the function');
+                          else
+                            return;
 
-                      setState(() {
-                        data1 = selectedContact.name;
-                        //  data2 = selectedContact.emailAddress;
-                        data2 = selectedContact.phoneNumber.toString();
-                      });
-                    }),
+                          setState(() {
+                            data1 = selectedContact.name;
+                            //  data2 = selectedContact.emailAddress;
+                            data2 = selectedContact.phoneNumber.toString();
+                          });
+                        }),
                     SizedBox(height: 20),
                     TextField(
                       textInputAction: TextInputAction.send,
@@ -69,10 +73,12 @@ class _TestInterfaceState extends State<TestInterface> {
                       controller: emailController,
                     ),
                     RaisedButton(
+                      child: Text('Test Email feature'),
                       onPressed: () async {
                         _isLoading.value = true;
                         MailStatus status = await sendConsentViaEmail(
-                            emailController.text, 'https://www.figma.com/file/DZDYkwJGMwn2gZtM7FtZLe/Seychelles-Consent?node-id=0%3A1');
+                            emailController.text,
+                            'https://www.figma.com/file/DZDYkwJGMwn2gZtM7FtZLe/Seychelles-Consent?node-id=0%3A1');
                         setState(
                           () {
                             if (status == MailStatus.success)
@@ -83,7 +89,17 @@ class _TestInterfaceState extends State<TestInterface> {
                         );
                         _isLoading.value = false;
                       },
-                    )
+                    ),
+                    SizedBox(height: 20),
+                    Text(linkData??'', style: kBody1TextStyle),
+                    RaisedButton(
+                        child: Text('Generate Dynamic Link'),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DynamicLinkTest()));
+                        })
                   ],
                 ),
               );
