@@ -286,7 +286,7 @@ class _DashboardState extends State<Dashboard> {
 
 class Home extends StatelessWidget {
   static final _random = new Random();
-  var welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
+  final welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
 
   @override
   Widget build(BuildContext context) {
