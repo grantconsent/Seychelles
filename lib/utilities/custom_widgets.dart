@@ -179,7 +179,7 @@ class UserActionButton extends StatelessWidget {
   final Function onTap;
   final String label;
   final bool filled;
- 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -357,7 +357,7 @@ class ConsentOptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 5, top: 8),
-      constraints: BoxConstraints.tightFor(height: 23, width: 43),
+      constraints: BoxConstraints.tightFor(height: 23, width: 46),
       decoration: BoxDecoration(
         color: selected
             ? (type == ConsentOptionType.no
@@ -376,9 +376,11 @@ class ConsentOptionButton extends StatelessWidget {
       child: FlatButton(
         onPressed: responseTap,
         padding: EdgeInsets.zero,
-        child: Text(label ?? '',
-            style:
-                GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w400)),
+        child: Text(
+          label ?? '',
+          style:
+           kConsentOptionButtonTextStyle,
+        ),
       ),
     );
   }
@@ -386,7 +388,7 @@ class ConsentOptionButton extends StatelessWidget {
 
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
-          backgroundColor: kButtonColor,
+    backgroundColor: kButtonColor,
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(

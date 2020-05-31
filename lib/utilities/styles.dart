@@ -85,14 +85,19 @@ final kInputTextStyle = GoogleFonts.roboto(
   fontWeight: FontWeight.w400,
 );
 
-final questionNavigationTextStyle = GoogleFonts.quicksand(
+final kQuestionNavigationTextStyle = GoogleFonts.quicksand(
   fontSize: 12,
   fontWeight: FontWeight.w500,
   color: Colors.black,
 );
 
-final consentQuestionTextStyle = GoogleFonts.quicksand(
+final kConsentQuestionTextStyle = GoogleFonts.quicksand(
   fontSize: 20,
   fontWeight: FontWeight.w500,
   color: kButtonTextColor1,
+);
+
+final kConsentOptionButtonTextStyle = GoogleFonts.roboto(
+  fontSize: 11.5,
+  fontWeight: FontWeight.w400,
 );

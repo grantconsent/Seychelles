@@ -85,7 +85,7 @@ class CreateConsent extends StatelessWidget {
           child: Text(
             'Previous',
             textAlign: TextAlign.end,
-            style: questionNavigationTextStyle,
+            style: kQuestionNavigationTextStyle,
           ),
         ),
         Spacer(),
@@ -98,7 +98,7 @@ class CreateConsent extends StatelessWidget {
               color: Colors.white,
               child: Text(
                 '${currentPageValue + 1}/$pages',
-                style: questionNavigationTextStyle,
+                style: kQuestionNavigationTextStyle,
               ),
             );
           },
@@ -112,7 +112,7 @@ class CreateConsent extends StatelessWidget {
                 duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
           },
           child: Text('Next',
-              textAlign: TextAlign.left, style: questionNavigationTextStyle),
+              textAlign: TextAlign.left, style: kQuestionNavigationTextStyle),
         ),
         Spacer(flex: 2)
       ],
@@ -183,7 +183,7 @@ class ConsentQuestionState extends State<ConsentQuestion>
         children: <Widget>[
           Text(
             widget.question,
-            style: consentQuestionTextStyle,
+            style: kConsentQuestionTextStyle,
           ),
           Row(
             children: List.generate(
