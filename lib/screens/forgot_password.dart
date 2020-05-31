@@ -78,29 +78,28 @@ class ForgotPassword extends StatelessWidget {
   }
 
   _forgotIn(BuildContext context) async {
-    final bool isValid = EmailValidator.validate(inputEmail.text);
-    if (!isValid) {
-      //If email is empty
+    showDialog(context: context, builder: (context) => Loader());
+    ForgotStatus operationStatus = await forgotPassword(inputEmail.text);
+    Navigator.pop(context);
+    if (operationStatus == ForgotStatus.success) {
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(message: 'Check your email.'),
+      );
+    } else if (operationStatus == ForgotStatus.incorrect) {
+      // Email not in database
       scaffoldKey1.currentState.showSnackBar(
         customSnackBar(message: 'Invalid Email'),
       );
-    } else {
-      ForgotStatus operationStatus = await forgotPassword(inputEmail.text);
-      if (operationStatus == ForgotStatus.success) {
-        scaffoldKey1.currentState.showSnackBar(
-          customSnackBar(message: 'Check your email.'),
-        );
-      } else if (operationStatus == ForgotStatus.invalid) {
-        //If sign in was NOT successful - EMAIL IS INVALID
-        scaffoldKey1.currentState.showSnackBar(
-          customSnackBar(message: 'Email not in databases. Please try again'),
-        );
-      } else if (operationStatus == ForgotStatus.internal) {
-        //If sign in was NOT successful - INVALID EMAIL ENTERED
-        scaffoldKey1.currentState.showSnackBar(
-          customSnackBar(message: 'Internal Server Error'),
-        );
-      }
+    } else if (operationStatus == ForgotStatus.invalid) {
+      // Email not in database
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(message: 'Email not in databases. Please try again'),
+      );
+    } else if (operationStatus == ForgotStatus.internal) {
+      // Doesn't work at all
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(message: 'Internal Server Error'),
+      );
     }
   }
 }
