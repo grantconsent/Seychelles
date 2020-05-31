@@ -4,6 +4,7 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import "dart:math";
+import 'dart:io';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -17,14 +18,39 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kDashboardBackgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        backgroundColor: kDashboardBackgroundColor,
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit the App'),
+            actions: <Widget>[
+              new GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: Text("NO"),
+              ),
+              SizedBox(height: 16),
+              new GestureDetector(
+                onTap: () => exit(0),
+                child: Text("YES"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 
   String getHeaderText() {
