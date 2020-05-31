@@ -1,41 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-class CreateConsent extends StatefulWidget {
-  @override
-  _CreateConsentState createState() => _CreateConsentState();
-}
-
-class _CreateConsentState extends State<CreateConsent> {
-  int currentPage = 1;
-  int pages = (consentQuestions.length / 5).round();
-  var json;
-  bool questionsReady = false;
-  PageController paginationControl = PageController(keepPage: true);
-
-  void getQuestions() async {
-    questionsReady = false;
-    String x = await rootBundle
-        .loadString('assets/Consent/consent_ageement_data.json');
-    json = jsonDecode(x);
-
-    setState(() {
-      questionsReady = true;
-    });
-    return;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getQuestions();
-  }
+class CreateConsent extends StatelessWidget {
+  final ValueNotifier currentPage = ValueNotifier(0);
+  final int pages = (consentQuestions.length / 5).round();
+  final PageController paginationControl = PageController(keepPage: true);
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +39,7 @@ class _CreateConsentState extends State<CreateConsent> {
                       )
                   ],
                   onPageChanged: (int page) {
-                    setState(() {
-                      currentPage = page;
-                    });
+                    currentPage.value = page;
                   },
                   physics: NeverScrollableScrollPhysics(),
                 ),
@@ -104,30 +74,43 @@ class _CreateConsentState extends State<CreateConsent> {
     return Row(
       children: <Widget>[
         Spacer(flex: 2),
-        FlatButton(
+        RawMaterialButton(
+          padding: EdgeInsets.zero,
           onPressed: () {
             paginationControl.previousPage(
                 duration: Duration(milliseconds: 200), curve: Curves.bounceOut);
           },
-          child: Text('Previous'),
-        ),
-        Spacer(),
-        Container(
-          width: 40,
-          height: 20,
-          alignment: Alignment.center,
-          color: Colors.white,
           child: Text(
-            '${currentPage + 1}/$pages',
+            'Previous',
+            textAlign: TextAlign.end,
           ),
         ),
         Spacer(),
-        FlatButton(
+        ValueListenableBuilder(
+          builder: (BuildContext context, currentPageValue, Widget child) {
+            return Container(
+              width: 40,
+              height: 20,
+              alignment: Alignment.center,
+              color: Colors.white,
+              child: Text(
+                '${currentPageValue + 1}/$pages',
+              ),
+            );
+          },
+          valueListenable: currentPage,
+        ),
+        Spacer(),
+        RawMaterialButton(
+          padding: EdgeInsetsDirectional.zero,
           onPressed: () {
             paginationControl.nextPage(
                 duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
           },
-          child: Text('Next'),
+          child: Text(
+            'Next',
+            textAlign: TextAlign.left,
+          ),
         ),
         Spacer(flex: 2)
       ],

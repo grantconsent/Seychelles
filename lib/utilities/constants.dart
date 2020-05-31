@@ -100,10 +100,35 @@ const List<String> dynamicWelcomeText = [
 //Consent Questions list
 List<ConsentQuestion> consentQuestions = List.generate(
   23,
-  (index) => ConsentQuestion(
-    key: GlobalKey<ConsentQuestionState>(),
-    question: 'Question $index that asks whatever needs to be asked here.',
-    optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
-    labels: ['Yes', 'No'],
-  ),
+  (index) {
+    if (index % 4 == 0)
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'What will you like to do with your partner. Tell me. I need to tell your partner. $index times.',
+        optionTypes: [
+          ConsentOptionType.yes,
+          ConsentOptionType.yes,
+          ConsentOptionType.yes,
+          ConsentOptionType.no
+        ],
+        labels: ['Dance', 'Sing', 'Vacation', 'None'],
+      );
+    else if (index % 3 == 0)
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'You agree that partner has a right to decide whether or not to accept or reject these consents.',
+        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+        labels: ['Agree', 'Disagree'],
+      );
+    else
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'Contraceptives? Will you be using any contraceptives?',
+        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+        labels: ['Yes', 'No'],
+      );
+  },
 );
