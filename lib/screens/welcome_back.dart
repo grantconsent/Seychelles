@@ -51,7 +51,7 @@ class WelcomeBack extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ForgotPassword()));
