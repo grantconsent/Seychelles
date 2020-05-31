@@ -17,6 +17,7 @@ class _CreateConsentState extends State<CreateConsent> {
   int pages = (consentQuestions.length / 5).round();
   var json;
   bool questionsReady = false;
+  PageController paginationControl = PageController(keepPage: true);
 
   void getQuestions() async {
     questionsReady = false;
@@ -51,18 +52,18 @@ class _CreateConsentState extends State<CreateConsent> {
               buildHeader(),
               Expanded(
                 child: PageView(
+                  controller: paginationControl,
                   children: [
-                    for (int i = 1; i <= pages; i++)
+                    for (int pageViewPage = 1;
+                        pageViewPage <= pages;
+                        pageViewPage++)
                       ListView(
-                        children: !questionsReady
-                            ? [CircularProgressIndicator()]
-                            : [
-                                for (int i = (currentPage - 1) * 5;
-                                    i < currentPage * 5;
-                                    i++)
-                                  if (consentQuestions.length > i)
-                                    consentQuestions[i]
-                              ],
+                        children: [
+                          for (int i = (pageViewPage - 1) * 5;
+                              i < pageViewPage * 5;
+                              i++)
+                            if (consentQuestions.length > i) consentQuestions[i]
+                        ],
                       )
                   ],
                   onPageChanged: (int page) {
@@ -70,10 +71,11 @@ class _CreateConsentState extends State<CreateConsent> {
                       currentPage = page;
                     });
                   },
+                  physics: NeverScrollableScrollPhysics(),
                 ),
               ),
               buildPageNavigation(),
-              SizedBox(height: 30)
+              SizedBox(height: 20)
             ],
           ),
         ),
@@ -104,9 +106,8 @@ class _CreateConsentState extends State<CreateConsent> {
         Spacer(flex: 2),
         FlatButton(
           onPressed: () {
-            setState(() {
-              if (currentPage > 1) currentPage -= 1;
-            });
+            paginationControl.previousPage(
+                duration: Duration(milliseconds: 200), curve: Curves.bounceOut);
           },
           child: Text('Previous'),
         ),
@@ -117,15 +118,14 @@ class _CreateConsentState extends State<CreateConsent> {
           alignment: Alignment.center,
           color: Colors.white,
           child: Text(
-            '$currentPage/$pages',
+            '${currentPage + 1}/$pages',
           ),
         ),
         Spacer(),
         FlatButton(
           onPressed: () {
-            setState(() {
-              if (currentPage < pages) currentPage += 1;
-            });
+            paginationControl.nextPage(
+                duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
           },
           child: Text('Next'),
         ),
@@ -156,7 +156,8 @@ class ConsentQuestion extends StatefulWidget {
   ConsentQuestionState createState() => ConsentQuestionState();
 }
 
-class ConsentQuestionState extends State<ConsentQuestion> {
+class ConsentQuestionState extends State<ConsentQuestion>
+    with AutomaticKeepAliveClientMixin {
   List<bool> _isSelected;
 
   @override
@@ -209,4 +210,7 @@ class ConsentQuestionState extends State<ConsentQuestion> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
