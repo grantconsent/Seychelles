@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -45,7 +44,7 @@ class CreateConsent extends StatelessWidget {
                 ),
               ),
               buildPageNavigation(),
-              SizedBox(height: 20)
+              SizedBox(height: 15)
             ],
           ),
         ),
@@ -58,12 +57,15 @@ class CreateConsent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         // SizedBox(width: 20),
-        Text('Create consent'),
+        Text(
+          'Create consent',
+          style: kDashboardHeaderTextStyle,
+        ),
         Spacer(),
         Image.asset(
           "assets/cam.png",
-          width: 50,
-          height: 50,
+          width: 41,
+          height: 41,
         ),
       ],
     );
@@ -83,6 +85,7 @@ class CreateConsent extends StatelessWidget {
           child: Text(
             'Previous',
             textAlign: TextAlign.end,
+            style: questionNavigationTextStyle,
           ),
         ),
         Spacer(),
@@ -95,6 +98,7 @@ class CreateConsent extends StatelessWidget {
               color: Colors.white,
               child: Text(
                 '${currentPageValue + 1}/$pages',
+                style: questionNavigationTextStyle,
               ),
             );
           },
@@ -107,10 +111,8 @@ class CreateConsent extends StatelessWidget {
             paginationControl.nextPage(
                 duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
           },
-          child: Text(
-            'Next',
-            textAlign: TextAlign.left,
-          ),
+          child: Text('Next',
+              textAlign: TextAlign.left, style: questionNavigationTextStyle),
         ),
         Spacer(flex: 2)
       ],
@@ -181,14 +183,13 @@ class ConsentQuestionState extends State<ConsentQuestion>
         children: <Widget>[
           Text(
             widget.question,
-            style: GoogleFonts.quicksand(
-                fontSize: 20, fontWeight: FontWeight.w500),
+            style: consentQuestionTextStyle,
           ),
           Row(
             children: List.generate(
                 widget.optionTypes.length, (index) => buildButtons(index)),
           ),
-          SizedBox(height: 35),
+          SizedBox(height: 28),
         ],
       ),
     );
