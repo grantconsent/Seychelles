@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/Create_a_consent.dart';
 
 //Assets
 final ImageProvider kGrantConsentLogo =
@@ -60,7 +61,6 @@ enum ConsentOptionType {
 }
 
 //Dashboard Welcome Text
-
 const List<String> dynamicWelcomeText = [
   'Silence does not mean yes.',
   'Never assume. Ask before you proceed.',
@@ -96,3 +96,14 @@ const List<String> dynamicWelcomeText = [
   'Consent is Sexy.',
   'Have Consent From the Cutie before You Can Touch the Booty.'
 ];
+
+//Consent Questions list
+List<ConsentQuestion> consentQuestions = List.generate(
+  23,
+  (index) => ConsentQuestion(
+    key: GlobalKey<ConsentQuestionState>(),
+    question: 'Question $index that asks whatever needs to be asked here.',
+    optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+    labels: ['Yes', 'No'],
+  ),
+);

@@ -20,24 +20,16 @@ class GrantConsent extends StatelessWidget {
     return MaterialApp(
       title: 'Grant Consent',
       theme: ThemeData(
-<<<<<<< HEAD
-          scaffoldBackgroundColor: kBackgroundColor,
-          accentColor: kButtonColor,
-          primaryColor: kButtonColor,
-          ),
-      home: CreateConsent(),
-=======
         scaffoldBackgroundColor: kBackgroundColor,
         accentColor: kButtonColor,
         primaryColor: kButtonColor,
       ),
       routes: {
-        '/': (context) => LoadingAnimation(),
+        '/': (context) => CreateConsent(),
         '/request': (context) => SignUp(),
         '/getstarted': (context) => GetStarted(),
       },
       initialRoute: '/',
->>>>>>> 00fd5f5fbd14fb0e46ec4c4427f2b458eb0e4444
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,10 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-class CreateConsent extends StatelessWidget {
+class CreateConsent extends StatefulWidget {
+  @override
+  _CreateConsentState createState() => _CreateConsentState();
+}
+
+class _CreateConsentState extends State<CreateConsent> {
+  int currentPage = 1;
+  int pages = (consentQuestions.length / 5).round();
+  var json;
+  bool questionsReady = false;
+
+  void getQuestions() async {
+    questionsReady = false;
+    String x = await rootBundle
+        .loadString('assets/Consent/consent_ageement_data.json');
+    json = jsonDecode(x);
+
+    setState(() {
+      questionsReady = true;
+    });
+    return;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getQuestions();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,51 +48,31 @@ class CreateConsent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(height: kToolbarHeight),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  // SizedBox(width: 20),
-                  Text('Create consent'),
-                  Spacer(),
-                  Image.asset(
-                    "assets/cam.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
+              buildHeader(),
+              Expanded(
+                child: PageView(
+                  children: [
+                    for (int i = 1; i <= pages; i++)
+                      ListView(
+                        children: !questionsReady
+                            ? [CircularProgressIndicator()]
+                            : [
+                                for (int i = (currentPage - 1) * 5;
+                                    i < currentPage * 5;
+                                    i++)
+                                  if (consentQuestions.length > i)
+                                    consentQuestions[i]
+                              ],
+                      )
+                  ],
+                  onPageChanged: (int page) {
+                    setState(() {
+                      currentPage = page;
+                    });
+                  },
+                ),
               ),
-              SizedBox(height: 25),
-              ConsentQuestion(
-                question: 'What the question is ?',
-                optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
-                labels: ['Yes', 'No'],
-              ),
-              Spacer(),
-              Row(
-                children: <Widget>[
-                  Spacer(flex: 2),
-                  InkWell(
-                    onTap: () {},
-                    child: Text('Previous'),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 40,
-                    height: 20,
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    child: Text(
-                      '1/3',
-                    ),
-                  ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () {},
-                    child: Text('Next'),
-                  ),
-                  Spacer(flex: 2)
-                ],
-              ),
+              buildPageNavigation(),
               SizedBox(height: 30)
             ],
           ),
@@ -69,10 +80,64 @@ class CreateConsent extends StatelessWidget {
       ),
     );
   }
+
+  Row buildHeader() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        // SizedBox(width: 20),
+        Text('Create consent'),
+        Spacer(),
+        Image.asset(
+          "assets/cam.png",
+          width: 50,
+          height: 50,
+        ),
+      ],
+    );
+  }
+
+  Row buildPageNavigation(
+      /* {@required int currentPage, @required int pages} */) {
+    return Row(
+      children: <Widget>[
+        Spacer(flex: 2),
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              if (currentPage > 1) currentPage -= 1;
+            });
+          },
+          child: Text('Previous'),
+        ),
+        Spacer(),
+        Container(
+          width: 40,
+          height: 20,
+          alignment: Alignment.center,
+          color: Colors.white,
+          child: Text(
+            '$currentPage/$pages',
+          ),
+        ),
+        Spacer(),
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              if (currentPage < pages) currentPage += 1;
+            });
+          },
+          child: Text('Next'),
+        ),
+        Spacer(flex: 2)
+      ],
+    );
+  }
 }
 
 class ConsentQuestion extends StatefulWidget {
   ConsentQuestion({
+    Key key,
     @required this.question,
     @required this.optionTypes,
     @required this.labels,
@@ -80,20 +145,18 @@ class ConsentQuestion extends StatefulWidget {
 
   ConsentQuestion.fromJson(Map<String, dynamic> json)
       : question = json['question'],
-        optionTypes = json['optionTypes'],
-        labels = json['labels'];
+        optionTypes = List<ConsentOptionType>.from(json['optionTypes']),
+        labels = json['labels'].cast<String>();
 
   final String question;
   final List<ConsentOptionType> optionTypes;
   final List<String> labels;
 
   @override
-  _ConsentQuestionState createState() => _ConsentQuestionState();
+  ConsentQuestionState createState() => ConsentQuestionState();
 }
 
-class _ConsentQuestionState extends State<ConsentQuestion> {
-  _ConsentQuestionState();
-
+class ConsentQuestionState extends State<ConsentQuestion> {
   List<bool> _isSelected;
 
   @override
@@ -147,10 +210,3 @@ class _ConsentQuestionState extends State<ConsentQuestion> {
     );
   }
 }
-
-// frf() async {
-//   var x =
-//       await rootBundle.loadString('assets/Consent/consent_ageement_data.json');
-//   String result = jsonDecode(x)[0]['question'];
-//   print(result);
-// }
