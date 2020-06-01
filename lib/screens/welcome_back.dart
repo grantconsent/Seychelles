@@ -6,6 +6,8 @@ import 'package:grantconsent/screens/get_started_screen.dart';
 import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/services/firebase_sign_out.dart';
+import 'package:grantconsent/services/firebase_sign_up.dart';
+
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
