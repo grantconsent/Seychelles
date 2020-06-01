@@ -357,7 +357,7 @@ class ConsentOptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 5, top: 8),
-      constraints: BoxConstraints.tightFor(height: 23, width: 46),
+      constraints: BoxConstraints.loose(Size(55, 23)),
       decoration: BoxDecoration(
         color: selected
             ? (type == ConsentOptionType.no
@@ -373,13 +373,13 @@ class ConsentOptionButton extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(3),
       ),
-      child: FlatButton(
+      child: RawMaterialButton(
         onPressed: responseTap,
         padding: EdgeInsets.zero,
         child: Text(
           label ?? '',
-          style:
-           kConsentOptionButtonTextStyle,
+          maxLines: 1,
+          style: kConsentOptionButtonTextStyle,
         ),
       ),
     );

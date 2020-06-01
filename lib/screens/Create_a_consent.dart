@@ -126,9 +126,10 @@ class ConsentQuestion extends StatefulWidget {
     @required this.question,
     @required this.optionTypes,
     @required this.labels,
+    this.multiChoice = false,
   }) : assert(optionTypes.length == labels.length);
 
-  ConsentQuestion.fromJson(Map<String, dynamic> json)
+  ConsentQuestion.fromJson(Map<String, dynamic> json, this.multiChoice)
       : question = json['question'],
         optionTypes = List<ConsentOptionType>.from(json['optionTypes']),
         labels = json['labels'].cast<String>();
@@ -136,7 +137,7 @@ class ConsentQuestion extends StatefulWidget {
   final String question;
   final List<ConsentOptionType> optionTypes;
   final List<String> labels;
-
+  final bool multiChoice;
   @override
   ConsentQuestionState createState() => ConsentQuestionState();
 }
@@ -151,26 +152,42 @@ class ConsentQuestionState extends State<ConsentQuestion>
     _isSelected = List.generate(widget.optionTypes.length, (index) => false);
   }
 
-  void responseToTap(int index) {
-    //TODO: Use index to update storage of question answer.
+  void responseToTapSingleChoice(int index) {
     setState(() {
       for (int indexBtn = 0; indexBtn < _isSelected.length; indexBtn++) {
         if (indexBtn == index) {
-          _isSelected[indexBtn] = !_isSelected[indexBtn];
+          _isSelected[indexBtn] = true;
         } else {
           _isSelected[indexBtn] = false;
         }
       }
     });
+    //TODO: Use index to update storage of question answer.
+  }
+
+  void responseToTapMultiChoice(int index) {
+    if (index == widget.optionTypes.length - 1) {
+      responseToTapSingleChoice(index);
+    } else {
+      setState(() {
+        _isSelected[widget.optionTypes.length - 1] = false;
+        _isSelected[index] = !_isSelected[index];
+      });
+    }
+    //TODO: Use index to update storage of question answer.
   }
 
   buildButtons(int index) {
     return ConsentOptionButton(
       type: widget.optionTypes[index],
       selected: _isSelected[index],
-      responseTap: () {
-        responseToTap(index);
-      },
+      responseTap: widget.multiChoice
+          ? () {
+              responseToTapMultiChoice(index);
+            }
+          : () {
+              responseToTapSingleChoice(index);
+            },
       label: widget.labels[index],
     );
   }

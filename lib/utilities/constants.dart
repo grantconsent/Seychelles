@@ -113,6 +113,7 @@ List<ConsentQuestion> consentQuestions = List.generate(
           ConsentOptionType.no
         ],
         labels: ['Dance', 'Sing', 'Vacation', 'None'],
+        multiChoice: true,
       );
     else if (index % 3 == 0)
       return ConsentQuestion(
