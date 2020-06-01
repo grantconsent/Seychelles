@@ -13,7 +13,7 @@ import 'package:grantconsent/utilities/styles.dart';
 
 class WelcomeBack extends StatelessWidget {
   final TextEditingController _inputPassword = TextEditingController();
- // final scaffoldKey2 = new GlobalKey<ScaffoldState>();
+  // final scaffoldKey2 = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class WelcomeBack extends StatelessWidget {
               padding: const EdgeInsets.only(top: 3.0),
               child: Align(
                 alignment: Alignment.bottomRight,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Navigator.push(
                         context,
