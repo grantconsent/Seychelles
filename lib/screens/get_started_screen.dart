@@ -11,13 +11,11 @@ import 'package:grantconsent/utilities/styles.dart';
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    kScreenSize = MediaQuery
-        .of(context)
-        .size;
+    kScreenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
-        child: GestureDetector(
+        child: InkWell(
           onLongPress: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => TestInterface()));
@@ -74,7 +72,8 @@ class GetStarted extends StatelessWidget {
                 ),
                 UserActionButton(
                   onTap: () {
-                    Navigator.push(context,
+                    Navigator.push(
+                        context,
                         MaterialPageRoute(
                             builder: (context) => AgeVerification()));
                   },
@@ -90,10 +89,10 @@ class GetStarted extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Terms()));
+                          MaterialPageRoute(builder: (context) => Terms()));
                     },
                     child: Center(
                       child: Text(

@@ -4,6 +4,8 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import "dart:math";
+import 'dart:io';
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -14,21 +16,41 @@ class Dashboard extends StatefulWidget {
 //right-> right: MediaQuery.of(context).size.width - 120
 
 class _DashboardState extends State<Dashboard> {
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kDashboardBackgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        backgroundColor: kDashboardBackgroundColor,
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit the App'),
+            actions: <Widget>[
+              new GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: Text("NO"),
+              ),
+              SizedBox(height: 16),
+              new GestureDetector(
+                onTap: () => exit(0),
+                child: Text("YES"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 
   String getHeaderText() {
@@ -54,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(width: 20),
-              Text(getHeaderText(),style:kDashboardHeaderTextStyle),
+              Text(getHeaderText(), style: kDashboardHeaderTextStyle),
               Spacer(),
               Opacity(
                 opacity: profileVisible ? 0 : 1,
@@ -190,7 +212,7 @@ class _DashboardState extends State<Dashboard> {
   Alignment indicatorAlignment = Alignment.centerLeft;
 
   Widget bottomNavItem(int index) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         if (index == 0) {
           setState(() {
@@ -228,11 +250,14 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(width: 7),
-            Image.asset(getUrl(index), height: 20,),
+            Image.asset(
+              getUrl(index),
+              height: 20,
+            ),
             SizedBox(width: 5),
             Text(
               getText(index),
-              style: kDashboardFooterTextStyle ,
+              style: kDashboardFooterTextStyle,
             ),
             SizedBox(width: 7),
           ],
@@ -283,7 +308,8 @@ class _DashboardState extends State<Dashboard> {
 
 class Home extends StatelessWidget {
   static final _random = new Random();
-  final welcomeText = dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
+  final welcomeText =
+      dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
 
   @override
   Widget build(BuildContext context) {
@@ -300,10 +326,8 @@ class Home extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-
             welcomeText,
             style: TextStyle(fontSize: 18),
-
           ),
         ),
         SizedBox(height: 10),
@@ -333,8 +357,7 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Create Consent",
-                  style:kDashboardOptionTextStyle),
+              Text("Create Consent", style: kDashboardOptionTextStyle),
               Icon(
                 Icons.add,
                 color: Colors.black,
@@ -353,8 +376,7 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Review a consent",
-                  style:kDashboardOptionTextStyle),
+              Text("Review a consent", style: kDashboardOptionTextStyle),
               Icon(
                 Icons.info_outline,
                 color: Colors.black,
