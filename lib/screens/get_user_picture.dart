@@ -55,7 +55,7 @@ class _GetUserPictureState extends State<GetUserPicture> {
             Spacer(
               flex: 3,
             ),
-            InkWell(
+            GestureDetector(
               onTap: _getImageFromCamera,
               child: _uploadedImage == null
                   ? _buildPlaceholder()

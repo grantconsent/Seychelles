@@ -173,7 +173,7 @@ class SignUp extends StatelessWidget {
                       'Already have an account? ',
                       style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) => SignIn()));

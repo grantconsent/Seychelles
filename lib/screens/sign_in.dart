@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/age_verification.dart';
 import 'package:grantconsent/screens/dashboard.dart';
@@ -48,11 +47,18 @@ class SignIn extends StatelessWidget {
               SizedBox(height: 5),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  InkWell(
+                  SizedCheckBox(),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'remember me',
+                      style: TextStyle(color: kButtonTextColor2),
+                    ),
+                  ),
+                  GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ForgotPassword()));
@@ -82,12 +88,10 @@ class SignIn extends StatelessWidget {
                       'Don\'t have an account? ',
                       style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AgeVerification()));
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => AgeVerification()));
                       },
                       child: Text(
                         'Sign Up',
