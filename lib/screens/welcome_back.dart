@@ -44,6 +44,9 @@ class WelcomeBack extends StatelessWidget {
             CustomTextFormField(
                 controller: _inputPassword,
                 obscure: true,
+                onEditingComplete:  () {
+                  _signIn(context);
+                },
                 hintText: "Password"),
             Padding(
               padding: const EdgeInsets.only(top: 3.0),

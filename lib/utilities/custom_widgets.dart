@@ -280,11 +280,13 @@ class CustomTextFormField extends StatefulWidget {
       {@required this.hintText,
       this.icon,
       this.textInputType,
+      this.onEditingComplete,
       this.obscure = false,
       this.controller});
 
   final String hintText;
   final Icon icon;
+  final Function onEditingComplete;
   final TextInputType textInputType;
   final bool obscure;
   final TextEditingController controller;
@@ -307,6 +309,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: TextFormField(
         enableSuggestions: true,
         controller: widget.controller,
+        onEditingComplete: widget.onEditingComplete,
         cursorColor: kButtonColor,
         style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
         obscureText: !isVisible,
