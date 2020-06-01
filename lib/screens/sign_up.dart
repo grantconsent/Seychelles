@@ -14,7 +14,6 @@ class SignUp extends StatelessWidget {
   final TextEditingController inputPassword = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-
   Future _signUp(BuildContext context) async {
     if (inputPassword.text != confirmPassword.text) {
       //If password do not match
@@ -151,9 +150,6 @@ class SignUp extends StatelessWidget {
               CustomTextFormField(
                 hintText: 'Confirm Password',
                 controller: confirmPassword,
-                onEditingComplete:  () {
-                  _signUp(context);
-                },
                 obscure: true,
               ),
               Spacer(flex: 1),

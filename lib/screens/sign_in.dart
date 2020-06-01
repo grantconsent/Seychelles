@@ -40,9 +40,6 @@ class SignIn extends StatelessWidget {
               CustomTextFormField(
                   controller: inputPassword,
                   obscure: true,
-                  onEditingComplete:  () {
-                  _signIn(context);
-                },
                   hintText: "Password"),
               SizedBox(height: 5),
               Row(
