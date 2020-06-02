@@ -341,7 +341,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 1),),
+            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 01),),
           ),
         ),
         keyboardType: widget.textInputType,
