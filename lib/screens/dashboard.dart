@@ -302,7 +302,7 @@ class Home extends StatelessWidget {
           child: Text(
 
             welcomeText,
-            style: TextStyle(fontSize: 18),
+            style: kDashboardDynamicTextStyle,
 
           ),
         ),

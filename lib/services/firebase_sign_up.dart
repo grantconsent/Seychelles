@@ -44,9 +44,11 @@ Future sendVerificationEmail() async {
   }
 }
 
-void saveNewUserData(ConsentUser user) {
+void saveNewUserData(ConsentUser user) async{
+
+  final firebaseUser = await FirebaseAuth.instance.currentUser();
   final _seychellesFirestore = Firestore.instance;
-  _seychellesFirestore.collection('Users').add({
+  _seychellesFirestore.collection("Users").document(firebaseUser.uid).setData({
     'Name': user.name,
     'PhoneNumber': user.phoneNumber,
     'Email': user.email,
