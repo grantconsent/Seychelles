@@ -1,4 +1,5 @@
 //import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -179,7 +180,7 @@ class UserActionButton extends StatelessWidget {
   final Function onTap;
   final String label;
   final bool filled;
- 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -303,7 +304,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 45,
       child: TextFormField(
         enableSuggestions: true,
         controller: widget.controller,
@@ -311,8 +312,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
         obscureText: !isVisible,
         decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: kInputTextStyle.copyWith(fontSize: 11),
+          labelText: widget.hintText,
+          labelStyle: kInputTextStyle.copyWith(
+            fontSize: 15,
+            color: Color.fromRGBO(202, 180, 128, 0.5),
+          ),
           filled: true,
           suffixIcon: widget.obscure
               ? IconButton(
@@ -329,10 +333,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   },
                 )
               : null,
-          fillColor: Color.fromRGBO(202, 180, 128, 0.3),
-          border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(3.0))),
+//          fillColor: Color.fromRGBO(202, 180, 128, 0.05),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 0.2),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(3.0),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 1),),
+          ),
         ),
         keyboardType: widget.textInputType,
         textCapitalization:
@@ -344,7 +354,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
-          backgroundColor: kButtonColor,
+    backgroundColor: kButtonColor,
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(
