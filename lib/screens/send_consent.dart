@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/dashboard.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/styles.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class SendConsent extends StatelessWidget {
   final String user = 'Celine';
 
@@ -103,7 +103,8 @@ class SendConsent extends StatelessWidget {
                 UserSendButton(
                   onPressed: () {},
                   label: '$user\'s Whatsapp contact',
-                  icon: Icons.call,
+                  icon: FontAwesomeIcons.whatsapp,
+                  iconColor: Colors.green,
                 ),
                 Spacer(
                   flex: 8,
@@ -123,12 +124,13 @@ class UserSendButton extends StatelessWidget {
     @required this.label,
     @required this.onPressed,
     this.icon,
+    this.iconColor = Colors.black,
   });
 
   final String label;
   final IconData icon;
   final Function onPressed;
-
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -153,6 +155,7 @@ class UserSendButton extends StatelessWidget {
             Icon(
               icon,
               size: 16,
+              color: iconColor,
             )
           ],
         ),
