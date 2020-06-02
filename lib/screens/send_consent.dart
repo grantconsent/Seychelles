@@ -56,7 +56,7 @@ class SendConsent extends StatelessWidget {
                   flex: 2,
                 ),
                 Text(
-                  'This consent is NOT valid until $user accepts it',
+                  'This consent is NOT valid until $user \naccepts it',
                   style: kBody1TextStyle.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class SendConsent extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  'If $user does not accept the consent, you should not touch them, except you’re a rapist and we will find you and RAPE you.',
+                  'If $user does not accept the consent,\nyou should not touch them, except \nyou’re a rapist and we will find you \nand RAPE you.',
                   style: kBody1TextStyle.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
