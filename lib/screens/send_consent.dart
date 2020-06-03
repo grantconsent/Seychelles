@@ -152,8 +152,13 @@ class _SendConsentState extends State<SendConsent> {
                   onPressed: () async {
                     String link =
                         await DynamicLinksService().createDynamicLinks(user);
-                    sendConsentViaWhatsapp(
-                        phoneNumber: '2349060232128', link: link);
+                    LocalContact selectedContact = await pickAContact();
+                    if (selectedContact != null)
+                      sendConsentViaWhatsapp(
+                          phoneNumber: selectedContact.phoneNumber[0],
+                          link: link);
+                    else
+                      return;
                   },
                   label: '$user\'s Whatsapp contact',
                   icon: FontAwesomeIcons.whatsapp,
