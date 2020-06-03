@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grantconsent/screens/Create_a_consent.dart';
 import 'package:grantconsent/screens/loading_animation.dart';
+import 'package:grantconsent/screens/send_consent.dart';
 import 'package:grantconsent/services/dynamic_links_services.dart';
 import 'utilities/styles.dart';
 import 'screens/sign_up.dart';
@@ -25,7 +26,7 @@ class GrantConsent extends StatelessWidget {
         primaryColor: kButtonColor,
       ),
       routes: {
-        '/': (context) => CreateConsent(),
+        '/': (context) => LoadingAnimation(),
         '/request': (context) => SignUp(),
         '/getstarted': (context) => GetStarted(),
       },

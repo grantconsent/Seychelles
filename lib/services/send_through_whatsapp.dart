@@ -35,7 +35,7 @@ via Grant Consent.''';
 ///
 ///P
 sendConsentViaWhatsapp({String phoneNumber, String link}) async {
-  String message = _whatsappTemplate.replaceAll('*link*', link);
+  String message = _whatsappTemplate.replaceAll('link', link);
   var sendUrl = "whatsapp://send?phone=$phoneNumber&text=$message";
   if (await canLaunch(sendUrl)) {
     await launch(sendUrl);
