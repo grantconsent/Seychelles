@@ -83,18 +83,33 @@ class ForgotPassword extends StatelessWidget {
     ForgotStatus operationStatus = await forgotPassword(inputEmail.text);
     Navigator.pop(context);
     if (operationStatus == ForgotStatus.success) {
-      scaffoldKey1.currentState.showSnackBar(
-        customSnackBar(message: 'Check your email.'),
-      );
+      //Reset works
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                actions: <Widget>[
+                  AppIconButton(onTap: () {
+                    Navigator.pop(context);
+                  })
+                ],
+                title: Text(
+                  'Check your Email',
+                  style: kWelcomeHeadingTextStyle,
+                ),
+                content: Container(
+                    child: Text(
+                        'A password reset link has been sent to your email.\nFollow the link to change your password.')),
+              ));
     } else if (operationStatus == ForgotStatus.incorrect) {
       // Email not in database
       scaffoldKey1.currentState.showSnackBar(
-        customSnackBar(message: 'Invalid Email'),
+        customSnackBar(message: 'Invalid Email Address'),
       );
     } else if (operationStatus == ForgotStatus.invalid) {
       // Email not in database
       scaffoldKey1.currentState.showSnackBar(
-        customSnackBar(message: 'Email not in databases. Please try again'),
+        customSnackBar(
+            message: 'No user with this email address. Please try again'),
       );
     } else if (operationStatus == ForgotStatus.internal) {
       // Doesn't work at all
