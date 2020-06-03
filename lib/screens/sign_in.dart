@@ -117,6 +117,7 @@ class SignIn extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Enter Password'),
       );
+
     } else {
       showDialog(context: context, builder: (context) => Loader());
       ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
@@ -127,9 +128,13 @@ class SignIn extends StatelessWidget {
         loggedInUser = await checkForUser();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
-      } else {
-        _handleExceptions(operationStatus); //If sign in was NOT successful
-      }
+      } else if (operationStatus== SignInStatus.emailUnverified) {
+        scaffoldKey.currentState.showSnackBar(
+          customSnackBar(message: 'Email is Not Verified'),
+        );
+      }else {
+    _handleExceptions(operationStatus); //If sign in was NOT successful
+    }
     }
   }
 
