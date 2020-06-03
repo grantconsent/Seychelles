@@ -35,7 +35,7 @@ class WelcomeBack extends StatelessWidget {
               style: kWelcomeHeadingTextStyle,
             ),
             Text(
-              "${loggedInUser.name}",
+              "${loggedInUser.firstName}",
               style: kWelcomeHeadingTextStyle,
             ),
             Text(

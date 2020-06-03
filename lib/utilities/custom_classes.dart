@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 ConsentUser loggedInUser;
 
 class ConsentUser {
-  String name;
+  String firstName;
+  String fullName;
+  String lastName;
   String email;
   String phoneNumber;
   String pictureURL;
   ConsentUser(
-      {@required this.name,
+      {@required this.firstName,
+        @required this.lastName,
       @required this.email,
       this.phoneNumber,
+        this.fullName,
       this.pictureURL});
 }
 

@@ -5,7 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<ConsentUser> checkForUser() async {
   final _seychellesFirestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
-  String userName;
+  String firstName;
+  String fullName;
+  String lastName;
   String phoneNumber;
   final user = await _auth.currentUser();
   if (user != null) {
@@ -14,16 +16,20 @@ Future<ConsentUser> checkForUser() async {
         .document(user.uid)
         .get()
         .then((value) {
-      userName = value.data['Name'];
+      firstName = value.data['FirstName'];
+      lastName = value.data['LastName'];
       phoneNumber = value.data['PhoneNumber'];
     });
 
     //--Capitalize name
-    userName = userName[0].toUpperCase() + userName.substring(1);
-
+    firstName = firstName[0].toUpperCase() + firstName.substring(1);
+    lastName =lastName[0].toUpperCase() + lastName.substring(1);
+    fullName = firstName + " " + lastName;
     //--Consent User
     ConsentUser existingUser = ConsentUser(
-      name: userName,
+      fullName: fullName,
+      lastName: lastName,
+      firstName: firstName,
       email: user.email,
       phoneNumber: phoneNumber,
     );
