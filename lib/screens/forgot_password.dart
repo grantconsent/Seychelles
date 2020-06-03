@@ -103,7 +103,7 @@ class ForgotPassword extends StatelessWidget {
     } else if (operationStatus == ForgotStatus.incorrect) {
       // Email not in database
       scaffoldKey1.currentState.showSnackBar(
-        customSnackBar(message: 'Invalid Email Address'),
+        customSnackBar(message: 'Invalid Email Address. Check your input'),
       );
     } else if (operationStatus == ForgotStatus.invalid) {
       // Email not in database
@@ -114,7 +114,7 @@ class ForgotPassword extends StatelessWidget {
     } else if (operationStatus == ForgotStatus.internal) {
       // Doesn't work at all
       scaffoldKey1.currentState.showSnackBar(
-        customSnackBar(message: 'Internal Server Error'),
+        customSnackBar(message: 'Internal Server Error. Please try again.'),
       );
     }
   }
