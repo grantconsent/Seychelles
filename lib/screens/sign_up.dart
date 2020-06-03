@@ -150,9 +150,6 @@ class SignUp extends StatelessWidget {
               CustomTextFormField(
                 hintText: 'Confirm Password',
                 controller: confirmPassword,
-                onEditingComplete:  () {
-                  _signUp(context);
-                },
                 obscure: true,
               ),
               Spacer(flex: 1),
