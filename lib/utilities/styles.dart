@@ -9,6 +9,20 @@ const Color kButtonTextColor2 = Color(0xFFCAB480);
 const Color kInactiveSlideDotColor = Color(0xFF535353);
 const Color kGoogleButtonColor = Color(0xff4285f4);
 const Color kDashboardBackgroundColor = Color(0xffdcd4c4);
+const Map<ColorType, Color> yesColor = {
+  ColorType.border: Color(0xFF00A313),
+  ColorType.fill: Color(0xFF9BC791),
+};
+enum ColorType { border, fill }
+const Map<ColorType, Color> noColor = {
+  ColorType.border: Color(0xFFD11100),
+  ColorType.fill: Color(0xFFDA9C8B),
+};
+
+const Map<ColorType, Color> neutralColor = {
+  ColorType.border: Color(0xFFFFFFFF),
+  ColorType.fill: Color(0xFFE8E3D8),
+};
 //Text Styles
 
 final kBody1TextStyle = GoogleFonts.quicksand(
@@ -26,31 +40,21 @@ final kWelcomeHeadingTextStyle = GoogleFonts.quicksand(
 final kWelcomeDashboardTextStyle = GoogleFonts.quicksand(
   fontSize: 40,
   fontWeight: FontWeight.w500,
-
 );
-final kDashboardOptionTextStyle = GoogleFonts.roboto(
-
-
-);
+final kDashboardOptionTextStyle = GoogleFonts.roboto();
 final kDashboardLoggedInEmailTextStyle = GoogleFonts.openSans(
   fontWeight: FontWeight.bold,
   color: Color(0xffCAB480),
 );
-final kDashboardFooterTextStyle = GoogleFonts.openSans(
-    color: Colors.white,
-    fontSize: 14
-);
-final kDashboardLoggedInNameTextStyle = GoogleFonts.openSans(
-    fontSize: 18
-);
+final kDashboardFooterTextStyle =
+    GoogleFonts.openSans(color: Colors.white, fontSize: 14);
+final kDashboardLoggedInNameTextStyle = GoogleFonts.openSans(fontSize: 18);
 final kDashboardHeaderTextStyle = GoogleFonts.quicksand(
-
   fontWeight: FontWeight.w500,
 );
 final kDashboardDynamicTextStyle = GoogleFonts.quicksand(
   fontSize: 20,
   fontWeight: FontWeight.w300,
-
 );
 final kButtonTextStyle = GoogleFonts.roboto(
   fontSize: 15,
@@ -60,7 +64,7 @@ final kButtonTextStyle = GoogleFonts.roboto(
 );
 final kOrTextStyle = GoogleFonts.roboto(
   fontSize: 15,
-  color:Colors.white,
+  color: Colors.white,
 );
 final kGoogleButtonLabelStyle = GoogleFonts.roboto(
   fontSize: 15,
@@ -77,6 +81,23 @@ final kGrantConsentTextStyle = GoogleFonts.quicksand(
 
 final kInputTextStyle = GoogleFonts.roboto(
   fontSize: 17,
-color: kButtonTextColor2,
-fontWeight: FontWeight.w400,
+  color: kButtonTextColor2,
+  fontWeight: FontWeight.w400,
+);
+
+final kQuestionNavigationTextStyle = GoogleFonts.quicksand(
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+
+final kConsentQuestionTextStyle = GoogleFonts.quicksand(
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+  color: kButtonTextColor1,
+);
+
+final kConsentOptionButtonTextStyle = GoogleFonts.roboto(
+  fontSize: 11.5,
+  fontWeight: FontWeight.w400,
 );

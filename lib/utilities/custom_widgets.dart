@@ -352,6 +352,50 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 }
 
+class ConsentOptionButton extends StatelessWidget {
+  ConsentOptionButton(
+      {@required this.type,
+      this.label,
+      this.selected = false,
+      @required this.responseTap});
+  final ConsentOptionType type;
+  final String label;
+  final bool selected;
+  final Function responseTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 5, top: 8),
+      constraints: BoxConstraints.loose(Size(55, 23)),
+      decoration: BoxDecoration(
+        color: selected
+            ? (type == ConsentOptionType.no
+                ? noColor[ColorType.fill]
+                : yesColor[ColorType.fill])
+            : neutralColor[ColorType.fill],
+        border: Border.all(
+          color: selected
+              ? (type == ConsentOptionType.no
+                  ? noColor[ColorType.border]
+                  : yesColor[ColorType.border])
+              : neutralColor[ColorType.border],
+        ),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: RawMaterialButton(
+        onPressed: responseTap,
+        padding: EdgeInsets.zero,
+        child: Text(
+          label ?? '',
+          maxLines: 1,
+          style: kConsentOptionButtonTextStyle,
+        ),
+      ),
+    );
+  }
+}
+
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
     backgroundColor: kButtonColor,

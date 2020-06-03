@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/Create_a_consent.dart';
 
 //Assets
 final ImageProvider kGrantConsentLogo =
@@ -54,49 +55,81 @@ enum LogoType {
   largeWithText,
   largeWithoutText,
 }
+enum ConsentOptionType {
+  yes,
+  no,
+}
 
 //Dashboard Welcome Text
-
-const List<String> dynamicWelcomeText=[
-'Silence does not mean yes.',
-'Never assume. Ask before you proceed.',
-'The right to say no is a right you ought to exercise if you want your yes to mean something.',
-'Hesitance is not consent.',
-'Being in a relationship is not consent.',
-'No means No.',
-'Wait means No.',
-'Not now means No.',
-'No is a complete Sentence. It doesn\'t require justification or Explanation.',
-'We\'ve had sex before is not consent.',
-'Consent to one act is not consent to all acts.',
-'If they aren\'t sober they can\'t consent.',
-'Coercion is not Consent.',
-'Flirting is not Consent.',
-'If they don\'t feel free to say "NO", it\'s not consent.',
-'No does not mean convince me.',
-'Consent is Mandatory.',
-'Only do it with Consent.',
-'Consent: if you don\'t get it you don\'t get it.',
-'Rape is not the presence of NO, it\'s the absence of yes.',
-'Alone is not Consent.',
-'Drunk is not Consent.',
-'Ask before Unwrapping.',
-'It\'s okay to say No.',
-'I would give you infinate cuddles if you properly consented me to do so.',
-'Consent Matters.',
-'Sex you want? Ask for Consent You Must.',
-'Clothing is Not Consent',
-'Never assume consent.',
-'Got Consent?',
-'You never Owe Sex, Your Sex is your own.',
-'Consent is Sexy.',
-'Have Consent From the Cutie before You Can Touch the Booty.'
+const List<String> dynamicWelcomeText = [
+  'Silence does not mean yes.',
+  'Never assume. Ask before you proceed.',
+  'The right to say no is a right you ought to exercise if you want your yes to mean something.',
+  'Hesitance is not consent.',
+  'Being in a relationship is not consent.',
+  'No means No.',
+  'Wait means No.',
+  'Not now means No.',
+  'No is a complete Sentence. It doesn\'t require justification or Explanation.',
+  'We\'ve had sex before is not consent.',
+  'Consent to one act is not consent to all acts.',
+  'If they aren\'t sober they can\'t consent.',
+  'Coercion is not Consent.',
+  'Flirting is not Consent.',
+  'If they don\'t feel free to say "NO", it\'s not consent.',
+  'No does not mean convince me.',
+  'Consent is Mandatory.',
+  'Only do it with Consent.',
+  'Consent: if you don\'t get it you don\'t get it.',
+  'Rape is not the presence of NO, it\'s the absence of yes.',
+  'Alone is not Consent.',
+  'Drunk is not Consent.',
+  'Ask before Unwrapping.',
+  'It\'s okay to say No.',
+  'I would give you infinate cuddles if you properly consented me to do so.',
+  'Consent Matters.',
+  'Sex you want? Ask for Consent You Must.',
+  'Clothing is Not Consent',
+  'Never assume consent.',
+  'Got Consent?',
+  'You never Owe Sex, Your Sex is your own.',
+  'Consent is Sexy.',
+  'Have Consent From the Cutie before You Can Touch the Booty.'
 ];
 
-
-
-
-
-
-
-
+//Consent Questions list
+List<ConsentQuestion> consentQuestions = List.generate(
+  23,
+  (index) {
+    if (index % 4 == 0)
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'What will you like to do with your partner. Tell me. I need to tell your partner. $index times.',
+        optionTypes: [
+          ConsentOptionType.yes,
+          ConsentOptionType.yes,
+          ConsentOptionType.yes,
+          ConsentOptionType.no
+        ],
+        labels: ['Dance', 'Sing', 'Vacation', 'None'],
+        multiChoice: true,
+      );
+    else if (index % 3 == 0)
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'You agree that partner has a right to decide whether or not to accept or reject these consents.',
+        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+        labels: ['Agree', 'Disagree'],
+      );
+    else
+      return ConsentQuestion(
+        key: GlobalKey<ConsentQuestionState>(),
+        question:
+            'Contraceptives? Will you be using any contraceptives?',
+        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+        labels: ['Yes', 'No'],
+      );
+  },
+);
