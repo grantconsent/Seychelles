@@ -83,7 +83,7 @@ class _SendConsentState extends State<SendConsent> {
                 ),
                 Spacer(),
                 Text(
-                  'If $user does not accept the consent,\nyou should not touch them, except \nyou’re a rapist and we will find you \nand RAPE you.',
+                  'If $user does not accept the consent,\nyou should not touch them.\nThat would be RAPE',
                   style: kBody1TextStyle.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
