@@ -16,15 +16,25 @@ class SignUp extends StatelessWidget {
   final TextEditingController confirmPassword = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   Future _signUp(BuildContext context) async {
-    if (inputPassword.text != confirmPassword.text) {
+    if (inputFirstName.text == "" || inputLastName.text == '') {
+      //If name is empty
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Name cannot be empty.'),
+      );
+    }else if (inputEmail.text==''|| inputPhoneNumber.text =='') {
+      //If password do not match
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Please fill all fields.'),
+      );
+    }  else if (inputPassword.text == '') {
+      //If password do not match
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(message: 'Enter a password.'),
+      );
+    } else if (inputPassword.text != confirmPassword.text) {
       //If password do not match
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Password fields do not match.'),
-      );
-    } else if (inputFirstName.text == "" || inputLastName.text== '') {
-      //If name is empty
-      scaffoldKey.currentState.showSnackBar(
-        customSnackBar(message: 'Name cannot be empty'),
       );
     } else if (inputPhoneNumber.text.length < 11) {
       //If phone number is invalid
@@ -52,7 +62,7 @@ class SignUp extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                                 maintainState: true,
+                              maintainState: true,
                               builder: (context) => SignIn()));
                     })
                   ],
