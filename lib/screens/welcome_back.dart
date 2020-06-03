@@ -101,7 +101,11 @@ class WelcomeBack extends StatelessWidget {
       if (operationStatus == SignInStatus.success) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
-      } else {
+      }  else if (operationStatus== SignInStatus.emailUnverified) {
+        Scaffold.of(context).showSnackBar(
+          customSnackBar(message: 'Email is Not Verified')
+        );
+      }else {
         _handleExceptions(
             operationStatus, context); //If sign in was NOT successful
       }
