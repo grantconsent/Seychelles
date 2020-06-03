@@ -40,6 +40,9 @@ class SignIn extends StatelessWidget {
               CustomTextFormField(
                   controller: inputPassword,
                   obscure: true,
+                  onEditingComplete: () {
+                    _signIn(context);
+                  },
                   hintText: "Password"),
               SizedBox(height: 5),
               Row(
@@ -87,8 +90,10 @@ class SignIn extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => AgeVerification()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AgeVerification()));
                       },
                       child: Text(
                         'Sign Up',
