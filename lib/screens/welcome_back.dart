@@ -6,6 +6,8 @@ import 'package:grantconsent/screens/get_started_screen.dart';
 import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/services/firebase_sign_out.dart';
+import 'package:grantconsent/services/firebase_sign_up.dart';
+
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
@@ -33,7 +35,7 @@ class WelcomeBack extends StatelessWidget {
               style: kWelcomeHeadingTextStyle,
             ),
             Text(
-              "${loggedInUser.name}",
+              "${loggedInUser.firstName}",
               style: kWelcomeHeadingTextStyle,
             ),
             Text(
@@ -99,7 +101,11 @@ class WelcomeBack extends StatelessWidget {
       if (operationStatus == SignInStatus.success) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
-      } else {
+      }  else if (operationStatus== SignInStatus.emailUnverified) {
+        Scaffold.of(context).showSnackBar(
+          customSnackBar(message: 'Email is Not Verified')
+        );
+      }else {
         _handleExceptions(
             operationStatus, context); //If sign in was NOT successful
       }

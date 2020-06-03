@@ -1,0 +1,52 @@
+[
+    {
+        "question": "This is a question?",
+        "optionTypes": [
+            "ConsentOptionType.yes",
+            "ConsentOptionType.no"
+        ],
+        "labels": [
+            "Yes",
+            "No"
+        ]
+    },
+    {
+        "question": "This is 2 question?",
+        "optionTypes": [
+            "ConsentOptionType.yes",
+            "ConsentOptionType.yes",
+            "ConsentOptionType.no"
+        ],
+        "labels": [
+            "Sex",
+            "Anything you want",
+            "No"
+        ]
+    },
+    {
+        "question": "This is a some other question?",
+        "optionTypes": [
+            "ConsentOptionType.yes",
+            "ConsentOptionType.yes",
+            "ConsentOptionType.yes",
+            "ConsentOptionType.no"
+        ],
+        "labels": [
+            "Vagina",
+            "Mouth",
+            "Butthole",
+            "None"
+        ]
+    },
+    {
+        "question": "This is a the last question? I hope this works out. Oga",
+        "optionTypes": [
+            "ConsentOptionType.yes",
+            "ConsentOptionType.no"
+        ],
+        "labels": [
+            "Agree",
+            "Disagree"
+        ]
+    }
+]

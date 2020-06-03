@@ -1,4 +1,5 @@
 //import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -179,7 +180,7 @@ class UserActionButton extends StatelessWidget {
   final Function onTap;
   final String label;
   final bool filled;
- 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -303,7 +304,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 45,
       child: TextFormField(
         enableSuggestions: true,
         controller: widget.controller,
@@ -311,8 +312,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         style: kInputTextStyle, //TextStyle(color: kButtonTextColor2),
         obscureText: !isVisible,
         decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: kInputTextStyle.copyWith(fontSize: 11),
+          labelText: widget.hintText,
+          labelStyle: kInputTextStyle.copyWith(
+            fontSize: 15,
+            color: Color.fromRGBO(202, 180, 128, 0.5),
+          ),
           filled: true,
           suffixIcon: widget.obscure
               ? IconButton(
@@ -329,10 +333,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   },
                 )
               : null,
-          fillColor: Color.fromRGBO(202, 180, 128, 0.3),
-          border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(3.0))),
+//          fillColor: Color.fromRGBO(202, 180, 128, 0.05),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 0.2),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(3.0),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 01),),
+          ),
         ),
         keyboardType: widget.textInputType,
         textCapitalization:
@@ -342,9 +352,53 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 }
 
+class ConsentOptionButton extends StatelessWidget {
+  ConsentOptionButton(
+      {@required this.type,
+      this.label,
+      this.selected = false,
+      @required this.responseTap});
+  final ConsentOptionType type;
+  final String label;
+  final bool selected;
+  final Function responseTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 5, top: 8),
+      constraints: BoxConstraints.loose(Size(55, 23)),
+      decoration: BoxDecoration(
+        color: selected
+            ? (type == ConsentOptionType.no
+                ? noColor[ColorType.fill]
+                : yesColor[ColorType.fill])
+            : neutralColor[ColorType.fill],
+        border: Border.all(
+          color: selected
+              ? (type == ConsentOptionType.no
+                  ? noColor[ColorType.border]
+                  : yesColor[ColorType.border])
+              : neutralColor[ColorType.border],
+        ),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: RawMaterialButton(
+        onPressed: responseTap,
+        padding: EdgeInsets.zero,
+        child: Text(
+          label ?? '',
+          maxLines: 1,
+          style: kConsentOptionButtonTextStyle,
+        ),
+      ),
+    );
+  }
+}
+
 SnackBar customSnackBar({String message, int durationInSeconds}) {
   return SnackBar(
-          backgroundColor: kButtonColor,
+    backgroundColor: kButtonColor,
     behavior: SnackBarBehavior.fixed,
     duration: Duration(seconds: durationInSeconds ?? 2),
     content: Container(

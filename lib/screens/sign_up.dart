@@ -8,7 +8,8 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/services/firebase_sign_up.dart';
 
 class SignUp extends StatelessWidget {
-  final TextEditingController inputName = TextEditingController();
+  final TextEditingController inputFirstName = TextEditingController();
+  final TextEditingController inputLastName = TextEditingController();
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPhoneNumber = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
@@ -20,7 +21,7 @@ class SignUp extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Password fields do not match.'),
       );
-    } else if (inputName.text == "") {
+    } else if (inputFirstName.text == "" || inputLastName.text== '') {
       //If name is empty
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Name cannot be empty'),
@@ -34,14 +35,15 @@ class SignUp extends StatelessWidget {
       //if input data is valid
       showDialog(context: context, builder: (context) => Loader());
       ConsentUser newUser = ConsentUser(
-          name: inputName.text,
+          lastName: inputLastName.text,
+          firstName: inputFirstName.text,
           email: inputEmail.text,
           phoneNumber: inputPhoneNumber.text);
       SignUpStatus operationStatus =
           await signUpUser(newUser: newUser, password: inputPassword.text);
       Navigator.pop(context);
       if (operationStatus == SignUpStatus.success) {
-        // If sign up was successfull
+        // If sign up was successful
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -50,7 +52,7 @@ class SignUp extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              maintainState: true,
+                                 maintainState: true,
                               builder: (context) => SignIn()));
                     })
                   ],
@@ -91,7 +93,7 @@ class SignUp extends StatelessWidget {
             durationInSeconds: 3),
       );
     } else if (operationStatus == SignUpStatus.unknownException) {
-      //If sign up was NOT successful - UNKNOWN ERROR OCCURED
+      //If sign up was NOT successful - UNKNOWN ERROR OCCURRED
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(
             message: 'An unknown error occured. Try again',
@@ -118,8 +120,16 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: CustomTextFormField(
-                  hintText: 'Name',
-                  controller: inputName,
+                  hintText: 'First Name',
+                  controller: inputFirstName,
+                  textInputType: TextInputType.text,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: CustomTextFormField(
+                  hintText: 'Last Name',
+                  controller: inputLastName,
                   textInputType: TextInputType.text,
                 ),
               ),
