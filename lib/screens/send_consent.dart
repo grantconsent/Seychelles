@@ -93,7 +93,7 @@ class _SendConsentState extends State<SendConsent> {
                   flex: 3,
                 ),
                 Builder(
-                  builder : (context)=> TextField(
+                  builder: (context) => TextField(
                     onChanged: (String email) {
                       setState(() {
                         myMail = email;
@@ -101,7 +101,6 @@ class _SendConsentState extends State<SendConsent> {
                       print(myMail);
                     },
                     onEditingComplete: () async {
-
                       String link =
                           await DynamicLinksService().createDynamicLinks(user);
                       await sendConsentViaEmail(myMail, link);
@@ -109,9 +108,9 @@ class _SendConsentState extends State<SendConsent> {
                         content: Text('Message Sent'),
                         behavior: SnackBarBehavior.floating,
                       ));
-                     setState(() {
-                       TextEditingController().text = '';
-                     });
+                      setState(() {
+                        TextEditingController().text = '';
+                      });
                     },
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.send,
@@ -119,6 +118,10 @@ class _SendConsentState extends State<SendConsent> {
                     textCapitalization: TextCapitalization.none,
                     maxLines: null,
                     decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.mail_outline,
+                        size: 16,
+                      ),
                       filled: true,
                       fillColor: kButtonColor.withOpacity(0.3),
                       contentPadding: EdgeInsets.all(8),
