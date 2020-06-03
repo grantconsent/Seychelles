@@ -48,15 +48,8 @@ class SignIn extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedCheckBox(),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'remember me',
-                      style: TextStyle(color: kButtonTextColor2),
-                    ),
-                  ),
-                  GestureDetector(
+                  Spacer(),
+                  InkResponse(
                     onTap: () {
                       Navigator.pushReplacement(
                           context,
@@ -88,7 +81,7 @@ class SignIn extends StatelessWidget {
                       'Don\'t have an account? ',
                       style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                     ),
-                    GestureDetector(
+                    InkResponse(
                       onTap: () {
                         Navigator.pushReplacement(
                             context,
