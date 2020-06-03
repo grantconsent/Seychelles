@@ -76,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
                   width: 60,
                 ),
                 Text(
-                  loggedInUser.name,
+                  loggedInUser.fullName ,
                   style: kDashboardLoggedInNameTextStyle,
                 ),
                 SizedBox(height: 4),
@@ -292,7 +292,7 @@ class Home extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Hi, ${loggedInUser.name}",
+            "Hi, ${loggedInUser.firstName}",
             style: kWelcomeDashboardTextStyle,
           ),
         ),

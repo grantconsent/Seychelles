@@ -49,7 +49,8 @@ void saveNewUserData(ConsentUser user) async{
   final firebaseUser = await FirebaseAuth.instance.currentUser();
   final _seychellesFirestore = Firestore.instance;
   _seychellesFirestore.collection("Users").document(firebaseUser.uid).setData({
-    'Name': user.name,
+    'FirstName': user.firstName,
+      'LastName': user.lastName,
     'PhoneNumber': user.phoneNumber,
     'Email': user.email,
   });
