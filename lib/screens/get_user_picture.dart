@@ -11,15 +11,18 @@ class GetUserPicture extends StatefulWidget {
 }
 
 class _GetUserPictureState extends State<GetUserPicture> {
-  File _uploadedImage;
+  File uploadedImage;
   bool pictureAdded = false;
   final keyToScaffold = new GlobalKey<ScaffoldState>();
 
   Future _getImageFromCamera() async {
+
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
-      _uploadedImage = image;
+      uploadedImage = image;
+
     });
+
     if (image != null)
       pictureAdded = true;
     else
@@ -57,10 +60,10 @@ class _GetUserPictureState extends State<GetUserPicture> {
             ),
             GestureDetector(
               onTap: _getImageFromCamera,
-              child: _uploadedImage == null
+              child: uploadedImage == null
                   ? _buildPlaceholder()
                   : Image.file(
-                      _uploadedImage,
+                      uploadedImage,
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
                       width: kScreenSize.width,
@@ -78,7 +81,7 @@ class _GetUserPictureState extends State<GetUserPicture> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UploadPicture(),
+                            builder: (context) => UploadPicture( uploadedImage),
                           ),
                         );
                       },
