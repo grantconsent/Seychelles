@@ -48,15 +48,8 @@ class SignIn extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedCheckBox(),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'remember me',
-                      style: TextStyle(color: kButtonTextColor2),
-                    ),
-                  ),
-                  GestureDetector(
+                  Spacer(),
+                  InkResponse(
                     onTap: () {
                       Navigator.pushReplacement(
                           context,
@@ -88,7 +81,7 @@ class SignIn extends StatelessWidget {
                       'Don\'t have an account? ',
                       style: TextStyle(color: kButtonTextColor2, fontSize: 13),
                     ),
-                    GestureDetector(
+                    InkResponse(
                       onTap: () {
                         Navigator.pushReplacement(
                             context,
@@ -122,24 +115,27 @@ class SignIn extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Enter Password'),
       );
-
     } else {
       showDialog(context: context, builder: (context) => Loader());
       ConsentUserSignIn email = ConsentUserSignIn(email: inputEmail.text);
       SignInStatus operationStatus =
           await signInUser(newUser: email, password: inputPassword.text);
-      Navigator.pop(context);
       if (operationStatus == SignInStatus.success) {
         loggedInUser = await checkForUser();
+        Navigator.pop(context);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
-      } else if (operationStatus== SignInStatus.emailUnverified) {
+      } else if (operationStatus == SignInStatus.emailUnverified) {
+        Navigator.pop(context);
         scaffoldKey.currentState.showSnackBar(
-          customSnackBar(message: 'Email is Not Verified'),
+          customSnackBar(
+              message:
+                  'Please verify your email. Follow the link mailed to you'),
         );
-      }else {
-    _handleExceptions(operationStatus); //If sign in was NOT successful
-    }
+      } else {
+        Navigator.pop(context);
+        _handleExceptions(operationStatus); //If sign in was NOT successful
+      }
     }
   }
 
