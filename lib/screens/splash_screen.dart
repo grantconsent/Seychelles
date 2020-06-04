@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
@@ -8,10 +10,32 @@ import 'package:grantconsent/utilities/styles.dart';
 class SplashScreen extends StatelessWidget {
   final PageController splashPageController = PageController();
 
+  void animateSplashScroll(BuildContext context) {
+    if (splashPageController.page < kNumberOfSplashPages - 1) {
+      splashPageController.nextPage(
+        duration: kSplashScreenPageAnimationDuration,
+        curve: Curves.easeOut,
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GetStarted(),
+        ),
+      );
+    }
+  }
+
+  runSplashScroll(BuildContext context) {
+    Timer.periodic(kSplashScreenScrollDuration, (T) {
+      animateSplashScroll(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ValueNotifier pageNotifier = ValueNotifier(0);
-
+    runSplashScroll(context);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/send_consent.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -43,7 +44,7 @@ class CreateConsent extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                 ),
               ),
-              buildPageNavigation(),
+              buildPageNavigation(context),
               SizedBox(height: 15)
             ],
           ),
@@ -71,8 +72,7 @@ class CreateConsent extends StatelessWidget {
     );
   }
 
-  Row buildPageNavigation(
-      /* {@required int currentPage, @required int pages} */) {
+  Row buildPageNavigation(BuildContext context) {
     return Row(
       children: <Widget>[
         Spacer(flex: 2),
@@ -108,6 +108,11 @@ class CreateConsent extends StatelessWidget {
         RawMaterialButton(
           padding: EdgeInsetsDirectional.zero,
           onPressed: () {
+            if (paginationControl.page == pages + 1) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SendConsent()));
+              return;
+            }
             paginationControl.nextPage(
                 duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
           },
