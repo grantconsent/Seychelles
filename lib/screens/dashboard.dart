@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/edit_profile.dart';
 import 'package:flutter/services.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
+import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import "dart:math";
@@ -112,7 +114,14 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(height: 4),
                 RaisedButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ),
+                    );
+                  },
                   child: Text("Edit Profile"),
                   color: Color(0xffCAB480),
                 ),
@@ -135,7 +144,7 @@ class _DashboardState extends State<Dashboard> {
   Widget body() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
         color: kDashboardBackgroundColor,
         child: getBody(),
       ),
@@ -316,83 +325,86 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Hi, ${loggedInUser.firstName}",
-            style: kWelcomeDashboardTextStyle,
-          ),
-        ),
-        SizedBox(height: 10),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            welcomeText,
-            style: kDashboardDynamicTextStyle,
-          ),
-        ),
-        SizedBox(height: 10),
-        Expanded(
-          child: Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Hi, ${loggedInUser.firstName}",
+              style: kWelcomeDashboardTextStyle,
             ),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
+          ),
+          SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              welcomeText,
+              style: kDashboardDynamicTextStyle,
+            ),
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Image.asset(
-                "assets/GIFs/peep.gif",
-                width: double.maxFinite,
+              child: Container(
+                padding: EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Image.asset(
+                  "assets/GIFs/peep.gif",
+                  width: double.maxFinite,
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 10),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.all(12.3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Create Consent", style: kDashboardOptionTextStyle),
-              Icon(
-                Icons.add,
-                color: Colors.black,
-              )
-            ],
+          SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.all(12.3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Create Consent", style: kDashboardOptionTextStyle),
+                Icon(
+                  Icons.add,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+                color: Color(0xff222222).withOpacity(0.4),
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(5)),
           ),
-          decoration: BoxDecoration(
+          SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.all(12.3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Review a consent", style: kDashboardOptionTextStyle),
+                Icon(
+                  Icons.info_outline,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
               color: Color(0xff222222).withOpacity(0.4),
               border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5)),
-        ),
-        SizedBox(height: 10),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.all(12.3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Review a consent", style: kDashboardOptionTextStyle),
-              Icon(
-                Icons.info_outline,
-                color: Colors.black,
-              )
-            ],
+              borderRadius: BorderRadius.circular(5),
+            ),
           ),
-          decoration: BoxDecoration(
-            color: Color(0xff222222).withOpacity(0.4),
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(5),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -407,6 +419,55 @@ class Consent extends StatelessWidget {
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/notificationsbell.png',
+              height: 100,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Notification',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Consent.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Terms and Conditions',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Consent.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Privacy Policy',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Subtract.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'About Grant Consent',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/log-out.png',
+              height: 20,
+            ),
+            label: 'Log Out',
+          ),
+          SizedBox(height: 5),
+        ],
+      ),
+    );
   }
 }
