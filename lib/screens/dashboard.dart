@@ -325,7 +325,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -336,7 +335,6 @@ class Home extends StatelessWidget {
               "Hi, ${loggedInUser.firstName}",
               style: kWelcomeDashboardTextStyle,
             ),
-
           ),
           SizedBox(height: 10),
           Align(
@@ -366,7 +364,6 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(height: 10),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 5),
@@ -385,7 +382,25 @@ class Home extends StatelessWidget {
                 color: Color(0xff222222).withOpacity(0.4),
                 border: Border.all(color: Colors.black),
                 borderRadius: BorderRadius.circular(5)),
-
+          ),
+          SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.all(12.3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Review a consent", style: kDashboardOptionTextStyle),
+                Icon(
+                  Icons.info_outline,
+                  color: Colors.black,
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+                color: Color(0xff222222).withOpacity(0.4),
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(5)),
           ),
           SizedBox(height: 10),
           Container(
@@ -404,29 +419,9 @@ class Home extends StatelessWidget {
             decoration: BoxDecoration(
               color: Color(0xff222222).withOpacity(0.4),
               border: Border.all(color: Colors.black),
-
-              borderRadius: BorderRadius.circular(5)),
-        
-        SizedBox(height: 10),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.all(12.3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Review a consent", style: kDashboardOptionTextStyle),
-              Icon(
-                Icons.info_outline,
-                color: Colors.black,
-              )
-            ],
-          ),
-          decoration: BoxDecoration(
-            color: Color(0xff222222).withOpacity(0.4),
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(5),
-
-          ),
+              borderRadius: BorderRadius.circular(5),
+            ),
+          )
         ],
       ),
     );
