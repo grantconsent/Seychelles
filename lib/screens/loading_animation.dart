@@ -33,7 +33,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
   ConsentUser
       user; //is null if no current user, is NOT null if user exists. Screen responds to change in this value.
 
-  void _runAnimation() async{
+  void _runAnimation() async {
     scaleAnimationController.forward();
     scaleAnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -54,7 +54,9 @@ class _AnimatedLogoState extends State<AnimatedLogo>
 
   void _checkPreviousUser() async {
     user = await checkForUser();
-    _finishedCheckingPreviousUser = true;
+    setState(() {
+      _finishedCheckingPreviousUser = true;
+    });
   }
 
   @override
@@ -64,31 +66,10 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         vsync: this, duration: kLoadingScreenAnimationDuration);
     scaleAnimationController = AnimationController(
         vsync: this, duration: kLoadingScreenAnimationDuration);
-    handleDynamicLinks();
     _runAnimation();
     _checkPreviousUser();
   }
-  Future handleDynamicLinks ()async{
-    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
-    _handleDeepLink(data);
 
-    FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLinksData)async{
-          _handleDeepLink(dynamicLinksData);
-        },
-        onError: (OnLinkErrorException e)async{
-          print('Dynamic Link error ${e.message}');
-        }
-    );
-
-  }
-  void _handleDeepLink (PendingDynamicLinkData data){
-    Uri deeplink = data?.link;
-    if (deeplink != null){
-      print('deeplink : $deeplink');
-    Navigator.pushNamed(context, deeplink.path);
-    }
-  }
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -139,9 +120,11 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     return Stack(
       children: <Widget>[
         AnimatedOpacity(
-          child: user == null
-              ? SplashScreen()
-              : WelcomeBack(), //Pass user to WelcomeBack() screen //Global variable for user created and used 
+          child: !_finishedCheckingPreviousUser
+              ? null
+              : user == null
+                  ? SplashScreen()
+                  : WelcomeBack(), //Pass user to WelcomeBack() screen //Global variable for user created and used
           opacity: opacity,
           duration: kLoadingScreenAnimationDuration,
         ),
@@ -177,5 +160,12 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    slideAnimationController.dispose();
+    scaleAnimationController.dispose();
   }
 }
