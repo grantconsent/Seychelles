@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/edit_profile.dart';
 import 'package:flutter/services.dart';
 import 'package:grantconsent/screens/dashboard_consent.dart';
 import 'package:grantconsent/screens/dashboard_home.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
+import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class Dashboard extends StatefulWidget {
@@ -111,6 +113,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 SizedBox(height: 4),
                 RaisedButton(
+
                   elevation: 0,
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   onPressed: () {},
@@ -126,6 +129,19 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     borderRadius: BorderRadius.circular(4),
                   ),
+
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ),
+                    );
+                  },
+                  child: Text("Edit Profile"),
+                  color: Color(0xffCAB480),
+
                 ),
               ],
             ),
@@ -333,6 +349,55 @@ class _DashboardState extends State<Dashboard> {
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/notificationsbell.png',
+              height: 100,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Notification',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Consent.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Terms and Conditions',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Consent.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'Privacy Policy',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/Subtract.png',
+              height: 20,
+            ),
+            icon: Icons.chevron_right,
+            label: 'About Grant Consent',
+          ),
+          SizedBox(height: 5),
+          ProfileTabsWidget(
+            image: Image.asset(
+              'assets/log-out.png',
+              height: 20,
+            ),
+            label: 'Log Out',
+          ),
+          SizedBox(height: 5),
+        ],
+      ),
+    );
   }
 }
