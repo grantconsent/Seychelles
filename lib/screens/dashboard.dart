@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/edit_profile.dart';
+import 'package:flutter/services.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -19,14 +20,42 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kDashboardBackgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        backgroundColor: kDashboardBackgroundColor,
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[header(), SizedBox(height: 2), body(), bottom()],
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?',
+                style: kBody1TextStyle.copyWith(fontWeight: FontWeight.bold)),
+            content:
+                new Text('Do you want to exit the App', style: kBody1TextStyle),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text("NO"),
+              ),
+              SizedBox(height: 16),
+              new FlatButton(
+                onPressed: () =>
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
+                child: Text("YES"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 
   String getHeaderText() {
@@ -296,6 +325,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -306,6 +336,7 @@ class Home extends StatelessWidget {
               "Hi, ${loggedInUser.firstName}",
               style: kWelcomeDashboardTextStyle,
             ),
+
           ),
           SizedBox(height: 10),
           Align(
@@ -335,6 +366,7 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
+
           SizedBox(height: 10),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 5),
@@ -353,6 +385,7 @@ class Home extends StatelessWidget {
                 color: Color(0xff222222).withOpacity(0.4),
                 border: Border.all(color: Colors.black),
                 borderRadius: BorderRadius.circular(5)),
+
           ),
           SizedBox(height: 10),
           Container(
@@ -371,8 +404,28 @@ class Home extends StatelessWidget {
             decoration: BoxDecoration(
               color: Color(0xff222222).withOpacity(0.4),
               border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
+
+              borderRadius: BorderRadius.circular(5)),
+        
+        SizedBox(height: 10),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.all(12.3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("Review a consent", style: kDashboardOptionTextStyle),
+              Icon(
+                Icons.info_outline,
+                color: Colors.black,
+              )
+            ],
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xff222222).withOpacity(0.4),
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(5),
+
           ),
         ],
       ),

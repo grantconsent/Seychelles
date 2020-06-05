@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/services/firebase_forgot_password.dart';
-import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/utilities/constants.dart';
+import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -61,48 +61,8 @@ class ForgotPassword extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: UserActionButton(
-                  onTap: () async {
-                    final bool isValid =
-                        EmailValidator.validate(inputEmail.text);
-                    if (!isValid) {
-                      scaffoldKey1.currentState.showSnackBar(
-                        customSnackBar(message: 'Invalid Email.'),
-                      );
-                    } else {
-                      SignInStatus operationStatus =
-                          await forgotPassword(inputEmail.text);
-                      if (operationStatus == SignInStatus.success) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            actions: <Widget>[
-                              AppIconButton(onTap: () {
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     maintainState: true,
-                                //     builder: (context) => GetStarted(),
-                                //   ),
-                                // );
-                                Navigator.pop(context);
-                              })
-                            ],
-                            title: Text(
-                              'Retrieve Password',
-                              style: kWelcomeHeadingTextStyle,
-                            ),
-                            content: Container(
-                              child: Text(
-                                  'Please click the link in the email sent to you to retrieve password.'),
-                            ),
-                          ),
-                        );
-                      } else {
-                        scaffoldKey1.currentState.showSnackBar(
-                          customSnackBar(message: 'Please try again later.'),
-                        );
-                      }
-                    }
+                  onTap: () {
+                    _forgotIn(context);
                   },
                   label: 'Retrieve Password',
                   filled: true,
@@ -116,5 +76,46 @@ class ForgotPassword extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _forgotIn(BuildContext context) async {
+    showDialog(context: context, builder: (context) => Loader());
+    ForgotStatus operationStatus = await forgotPassword(inputEmail.text);
+    Navigator.pop(context);
+    if (operationStatus == ForgotStatus.success) {
+      //Reset works
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                actions: <Widget>[
+                  AppIconButton(onTap: () {
+                    Navigator.pop(context);
+                  })
+                ],
+                title: Text(
+                  'Check your Email',
+                  style: kWelcomeHeadingTextStyle,
+                ),
+                content: Container(
+                    child: Text(
+                        'A password reset link has been sent to your email.\nFollow the link to change your password.')),
+              ));
+    } else if (operationStatus == ForgotStatus.incorrect) {
+      // Email not in database
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(message: 'Invalid Email Address. Check your input'),
+      );
+    } else if (operationStatus == ForgotStatus.invalid) {
+      // Email not in database
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(
+            message: 'No user with this email address. Please try again'),
+      );
+    } else if (operationStatus == ForgotStatus.internal) {
+      // Doesn't work at all
+      scaffoldKey1.currentState.showSnackBar(
+        customSnackBar(message: 'Internal Server Error. Please try again.'),
+      );
+    }
   }
 }

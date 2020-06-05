@@ -48,6 +48,7 @@ class Terms extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 height: kScreenSize.height * 0.6,
+                width: kScreenSize.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(5),
