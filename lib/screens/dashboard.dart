@@ -177,7 +177,7 @@ class _DashboardState extends State<Dashboard> {
   Widget bottom() {
     final Radius radius = Radius.circular(6);
     return Container(
-      padding: EdgeInsets.all(13),
+      padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
       decoration: BoxDecoration(
         color: Color(0xff222222),
         borderRadius: BorderRadius.only(topLeft: radius, topRight: radius),
@@ -186,7 +186,7 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           Positioned(
             child: Container(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(0),
               child: Opacity(
                 opacity: 0,
                 child: bottomNavItem(100),
@@ -199,20 +199,14 @@ class _DashboardState extends State<Dashboard> {
           ),
           Positioned.fill(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   width: 6,
                 ),
-                bottomNavItem(0),
-                Spacer(),
-                bottomNavItem(1),
-                Spacer(),
-                bottomNavItem(2),
-                SizedBox(
-                  width: 8,
-                ),
+                Expanded(child: bottomNavItem(0)),
+                Expanded(child: bottomNavItem(1)),
+                Expanded(child: bottomNavItem(2)),
               ],
             ),
           ),
@@ -270,23 +264,25 @@ class _DashboardState extends State<Dashboard> {
           });
         }
       },
-      child: Container(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox(width: 7),
-            Image.asset(
-              getUrl(index),
-              height: 20,
-            ),
-            SizedBox(width: 5),
-            Text(
-              getText(index),
-              style: kDashboardFooterTextStyle,
-            ),
-            SizedBox(width: 7),
-          ],
+      child: Expanded(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            mainAxisAlignment: index == 2 ? MainAxisAlignment.end  : index == 0 ?  MainAxisAlignment.start: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(width: 7),
+              Image.asset(
+                getUrl(index),
+                height: 20,
+              ),
+              SizedBox(width: 5),
+              Text(
+                getText(index),
+                style: kDashboardFooterTextStyle,
+              ),
+              SizedBox(width: 7),
+            ],
+          ),
         ),
       ),
     );
