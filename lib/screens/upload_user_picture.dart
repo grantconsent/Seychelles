@@ -8,18 +8,25 @@ import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 
 class UploadPicture extends StatefulWidget {
-  final uploadedImage;
-  UploadPicture( this.uploadedImage);
+  final File uploadedImage;
+  UploadPicture( this.uploadedImage,{Key key}): super(key: key);
   @override
   _UploadPictureState createState() => _UploadPictureState();
 }
 
+
 class _UploadPictureState extends State<UploadPicture> {
   final keyToScaffold = new GlobalKey<ScaffoldState>();
-  var uploadedImage;
   bool done = false;
   String url;
 
+
+
+  @override
+  void initState() {
+    super.initState();
+    uploadImage(image:widget.uploadedImage);
+  }
   void _showToastInformation() {
     keyToScaffold.currentState.showSnackBar(
       customSnackBar(message: 'Something Went Wrong. Try again Later.'),
@@ -27,18 +34,23 @@ class _UploadPictureState extends State<UploadPicture> {
   }
 
   Future<CloudStorageResult> uploadImage({
-    @required File uploadedImage,
+    @required File image,
   }) async {
+
     final user = await FirebaseAuth.instance.currentUser();
     final StorageReference firebaseStorageRef = FirebaseStorage.instance
         .ref()
         .child("profileImages/${user.uid}");
-    StorageUploadTask uploadImage = firebaseStorageRef.putFile(uploadedImage);
+    StorageUploadTask uploadImage =  firebaseStorageRef.putFile(image);
     StorageTaskSnapshot storageSnapshot = await uploadImage.onComplete;
     if (uploadImage.isSuccessful || uploadImage.isComplete) {
       var downloadUrl = await storageSnapshot.ref.getDownloadURL();
       var url = downloadUrl.toString();
-      done = true;
+      print( url );
+      setState(() {
+        done = true;
+      });
+
       return CloudStorageResult(
         imageUrl: url,
       );
@@ -47,14 +59,9 @@ class _UploadPictureState extends State<UploadPicture> {
     }else{
       var showToastInformation = _showToastInformation;
     }
-    return null;
+return null;
   }
 
-@override
-    void initState() {
-     uploadImage;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
