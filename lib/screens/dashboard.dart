@@ -72,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       padding: EdgeInsets.all(5),
-      height: profileVisible ? 230 : 60,
+      height: profileVisible ? 280 : 60,
       child: Column(
         children: <Widget>[
           Row(
@@ -97,8 +97,8 @@ class _DashboardState extends State<Dashboard> {
               children: <Widget>[
                 Image.asset(
                   "assets/cam.png",
-                  height: 60,
-                  width: 60,
+                  height: 100,
+                  width: 100,
                 ),
                 Text(
                   loggedInUser.fullName,
@@ -109,22 +109,25 @@ class _DashboardState extends State<Dashboard> {
                   loggedInUser.email,
                   style: kDashboardLoggedInEmailTextStyle,
                 ),
-                SizedBox(height: 4),
-                RaisedButton(
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  onPressed: () {},
-                  child: Text(
-                    "Edit Profile",
-                    style: kEditProfileTextStyle,
-                  ),
-                  color: kDashboardBackgroundColor,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Color(0xffCAB480),
-                      width: 2
+                SizedBox(height: 13),
+                SizedBox(
+                  height: 30,
+                  child: RaisedButton(
+                    elevation: 0,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    onPressed: () {},
+                    child: Text(
+                      "Edit Profile",
+                      style: kEditProfileTextStyle,
                     ),
-                    borderRadius: BorderRadius.circular(4),
+                    color: kDashboardBackgroundColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xffCAB480),
+                        width: 1
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
                 ),
               ],
@@ -264,25 +267,23 @@ class _DashboardState extends State<Dashboard> {
           });
         }
       },
-      child: Expanded(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            mainAxisAlignment: index == 2 ? MainAxisAlignment.end  : index == 0 ?  MainAxisAlignment.start: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(width: 7),
-              Image.asset(
-                getUrl(index),
-                height: 20,
-              ),
-              SizedBox(width: 5),
-              Text(
-                getText(index),
-                style: kDashboardFooterTextStyle,
-              ),
-              SizedBox(width: 7),
-            ],
-          ),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisAlignment: index == 2 ? MainAxisAlignment.end  : index == 0 ?  MainAxisAlignment.start: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(width: 7),
+            Image.asset(
+              getUrl(index),
+              height: 20,
+            ),
+            SizedBox(width: 5),
+            Text(
+              getText(index),
+              style: kDashboardFooterTextStyle,
+            ),
+            SizedBox(width: 7),
+          ],
         ),
       ),
     );
