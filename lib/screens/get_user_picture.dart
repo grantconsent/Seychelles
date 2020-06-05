@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 
+
 class GetUserPicture extends StatefulWidget {
   @override
   _GetUserPictureState createState() => _GetUserPictureState();
@@ -81,7 +82,7 @@ class _GetUserPictureState extends State<GetUserPicture> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UploadPicture( uploadedImage),
+                            builder: (context) => UploadPicture(uploadedImage),
                           ),
                         );
                       },

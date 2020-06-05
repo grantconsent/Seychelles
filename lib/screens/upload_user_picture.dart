@@ -3,7 +3,9 @@ import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:grantconsent/screens/get_user_picture.dart';
+import 'dart:io';
+import 'package:grantconsent/utilities/custom_widgets.dart';
+import 'package:grantconsent/utilities/custom_classes.dart';
 
 class UploadPicture extends StatefulWidget {
   final uploadedImage;
@@ -13,30 +15,46 @@ class UploadPicture extends StatefulWidget {
 }
 
 class _UploadPictureState extends State<UploadPicture> {
+  final keyToScaffold = new GlobalKey<ScaffoldState>();
   var uploadedImage;
-  UploadPicture(uploadedImage);
+  bool done = false;
+  String url;
 
-  Future _addImageToFirebase() async{
-    FirebaseStorage storage = FirebaseStorage.instance;
-    final user = await FirebaseAuth.instance.currentUser();
-
-    //Create a reference to the location you want to upload to in firebase
-    StorageReference reference =
-    storage.ref().child("profileImages/${user.uid}");
-
-    //Upload the file to firebase
-    StorageUploadTask uploadTask = reference.putFile(uploadedImage);
-    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
-    // Waits till the file is uploaded then stores the download url
-    String imageUrl = await taskSnapshot.ref.getDownloadURL();
+  void _showToastInformation() {
+    keyToScaffold.currentState.showSnackBar(
+      customSnackBar(message: 'Something Went Wrong. Try again Later.'),
+    );
   }
 
-  ///This variable controls which GIF and text is displayed
-  ///
-  ///Set to true after uploading picture successfully.
-  /// Future _addImageToFirebase() async{
+  Future<CloudStorageResult> uploadImage({
+    @required File uploadedImage,
+  }) async {
+    final user = await FirebaseAuth.instance.currentUser();
+    final StorageReference firebaseStorageRef = FirebaseStorage.instance
+        .ref()
+        .child("profileImages/${user.uid}");
+    StorageUploadTask uploadImage = firebaseStorageRef.putFile(uploadedImage);
+    StorageTaskSnapshot storageSnapshot = await uploadImage.onComplete;
+    if (uploadImage.isSuccessful || uploadImage.isComplete) {
+      var downloadUrl = await storageSnapshot.ref.getDownloadURL();
+      var url = downloadUrl.toString();
+      done = true;
+      return CloudStorageResult(
+        imageUrl: url,
+      );
+    } else if (uploadImage.isInProgress) {
 
-  final bool done = false;
+    }else{
+      var showToastInformation = _showToastInformation;
+    }
+    return null;
+  }
+
+@override
+    void initState() {
+     uploadImage;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +81,7 @@ class _UploadPictureState extends State<UploadPicture> {
             ),
             Spacer(flex: 4),
           ],
-        ),
+         ),
       ),
     );
   }

@@ -10,7 +10,7 @@ import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-
+import 'package:grantconsent/screens/get_user_picture.dart';
 class SignIn extends StatelessWidget {
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPassword = TextEditingController();
@@ -132,7 +132,7 @@ class SignIn extends StatelessWidget {
       if (operationStatus == SignInStatus.success) {
         loggedInUser = await checkForUser();
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+            context, MaterialPageRoute(builder: (context) => GetUserPicture()));
       } else if (operationStatus== SignInStatus.emailUnverified) {
         scaffoldKey.currentState.showSnackBar(
           customSnackBar(message: 'Email is Not Verified'),
