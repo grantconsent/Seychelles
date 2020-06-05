@@ -470,7 +470,7 @@ class Profile extends StatelessWidget {
               height: 20,
             ),
             icon: Icons.chevron_right,
-            label: 'Privacy Policy',
+            label: 'Consent Agreement Template',
           ),
           SizedBox(height: 5),
           ProfileTabsWidget(
