@@ -7,7 +7,6 @@ import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class LoadingAnimation extends StatelessWidget {
   @override

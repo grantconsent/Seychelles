@@ -338,13 +338,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               : null,
 //          fillColor: Color.fromRGBO(202, 180, 128, 0.05),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 0.2),),
+            borderSide: BorderSide(
+              color: Color.fromRGBO(202, 180, 128, 0.2),
+            ),
             borderRadius: BorderRadius.all(
               Radius.circular(3.0),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(202, 180, 128, 01),),
+            borderSide: BorderSide(
+              color: Color.fromRGBO(202, 180, 128, 01),
+            ),
           ),
         ),
         keyboardType: widget.textInputType,
@@ -415,4 +419,53 @@ SnackBar customSnackBar({String message, int durationInSeconds}) {
       ),
     ),
   );
+}
+
+class ProfileTabsWidget extends StatelessWidget {
+  ProfileTabsWidget({
+    @required this.image,
+    @required this.label,
+    this.icon,
+  });
+  final IconData icon;
+  final Image image;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(35, 35, 35, 0.1),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: RawMaterialButton(
+          onPressed: () {},
+          splashColor: Color(0xffCAB480),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(children: <Widget>[
+                  CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.white,
+                    child: image,
+                  ),
+                  SizedBox(width: 20),
+                  Text(
+                    label,
+                    style: GoogleFonts.roboto(fontSize: 15),
+                  ),
+                ]),
+                Icon(
+                  icon,
+                  color: Color.fromRGBO(35, 35, 35, 0.3),
+                ),
+              ]),
+        ),
+      ),
+    );
+  }
 }

@@ -9,7 +9,7 @@ import 'package:grantconsent/utilities/styles.dart';
 
 class SplashScreen extends StatelessWidget {
   final PageController splashPageController = PageController();
-
+  Timer timer;
   void animateSplashScroll(BuildContext context) {
     if (splashPageController.page < kNumberOfSplashPages - 1) {
       splashPageController.nextPage(
@@ -17,6 +17,8 @@ class SplashScreen extends StatelessWidget {
         curve: Curves.easeOut,
       );
     } else {
+      timer?.cancel();
+      timer = null;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -27,7 +29,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   runSplashScroll(BuildContext context) {
-    Timer.periodic(kSplashScreenScrollDuration, (T) {
+    timer = Timer(kSplashScreenScrollDuration, () {
       animateSplashScroll(context);
     });
   }
@@ -35,7 +37,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ValueNotifier pageNotifier = ValueNotifier(0);
-    runSplashScroll(context);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
@@ -50,6 +51,7 @@ class SplashScreen extends StatelessWidget {
                 child: PageView.builder(
                   itemCount: kNumberOfSplashPages,
                   itemBuilder: (context, page) {
+                    runSplashScroll(context);
                     return SplashPage(page: page);
                   },
                   onPageChanged: (page) {
@@ -81,6 +83,7 @@ class SplashScreen extends StatelessWidget {
                             //     curve: Curves.easeOut,
                             //   );
                             // } else {
+                            timer.cancel();
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
