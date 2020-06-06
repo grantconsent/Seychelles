@@ -11,9 +11,9 @@ Future<SignUpStatus> signUpUser(
 
   final checkPhone = await Firestore.instance
       .collection('Users')
-      .document(newUser.phoneNumber)
-      .get();
-  if (checkPhone == null && !checkPhone.exists) {
+      .where('PhoneNumber', isEqualTo: newUser.phoneNumber)
+      .getDocuments();
+  if (checkPhone.documents.length == 0) {
     // Phone number doesn't exist.
     try {
       final result = await _auth.createUserWithEmailAndPassword(
