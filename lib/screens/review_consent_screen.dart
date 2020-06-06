@@ -26,11 +26,12 @@ class ReviewConsent extends StatelessWidget {
     );
   }
 
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
           width: kScreenSize.width,
+          height: kScreenSize.height *0.5,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),
@@ -48,6 +49,15 @@ class ReviewConsent extends StatelessWidget {
               buttonType: ConsentOptionType.yes,
               onTap: () {
                 print('GRANT');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReviewConsentFeedback(
+                      context,
+                      type: FeedbackType.accepted,
+                    ),
+                  ),
+                );
               },
             ),
             Spacer(),
@@ -56,6 +66,15 @@ class ReviewConsent extends StatelessWidget {
               buttonType: ConsentOptionType.no,
               onTap: () {
                 print('DENY');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReviewConsentFeedback(
+                      context,
+                      type: FeedbackType.rejected,
+                    ),
+                  ),
+                );
               },
             )
           ],
@@ -109,7 +128,7 @@ class ReviewConsent extends StatelessWidget {
               ),
               Spacer(flex: 1),
               Text('Consent Review', style: kDashboardDynamicTextStyle),
-              Expanded(flex: 20, child: getBody()),
+              Expanded(flex: 20, child: getBody(context)),
             ],
           ),
         ),
@@ -117,3 +136,29 @@ class ReviewConsent extends StatelessWidget {
     );
   }
 }
+
+class ReviewConsentFeedback extends ReviewConsent {
+  ReviewConsentFeedback(BuildContext context, {this.type});
+
+  final FeedbackType type;
+  @override
+  Widget getBody(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(height: 20),
+        Text(
+            'You have ${type == FeedbackType.accepted ? "accepted" : "rejected"} consent from $proposerName'),
+        ConsentActionButton(
+            labelText: 'DISMISS',
+            buttonType: ConsentOptionType.no,
+            onTap: () {
+              Navigator.pop(context);
+            }),
+      ],
+    );
+  }
+}
+
+enum FeedbackType { accepted, rejected }
