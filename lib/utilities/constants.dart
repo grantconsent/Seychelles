@@ -34,7 +34,7 @@ const int kNumberOfSplashPages = 2;
 
 //Strings
 const String kSplashPage1Text =
-    'Digitise your consent. Yes is Yes and No is No.';
+    'Digitise your consent. Yes is Yes and No 0is No.';
 const String kSplashPage2Text = 'Get consent before you get in trouble.';
 const String kWelcomeBack = 'Welcome back,';
 const String kGrantConsent = 'Grant consent today.';
@@ -99,38 +99,149 @@ const List<String> dynamicWelcomeText = [
 ];
 
 //Consent Questions list
-List<ConsentQuestion> consentQuestions = List.generate(
-  23,
-  (index) {
-    if (index % 4 == 0)
-      return ConsentQuestion(
-        key: GlobalKey<ConsentQuestionState>(),
-        question:
-            'What will you like to do with your partner. Tell me. I need to tell your partner. $index times.',
-        optionTypes: [
-          ConsentOptionType.yes,
-          ConsentOptionType.yes,
-          ConsentOptionType.yes,
-          ConsentOptionType.no
-        ],
-        labels: ['Dance', 'Sing', 'Vacation', 'None'],
-        multiChoice: true,
-      );
-    else if (index % 3 == 0)
-      return ConsentQuestion(
-        key: GlobalKey<ConsentQuestionState>(),
-        question:
-            'You agree that partner has a right to decide whether or not to accept or reject these consents.',
-        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
-        labels: ['Agree', 'Disagree'],
-      );
-    else
-      return ConsentQuestion(
-        key: GlobalKey<ConsentQuestionState>(),
-        question:
-            'Contraceptives? Will you be using any contraceptives?',
-        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
-        labels: ['Yes', 'No'],
-      );
-  },
-);
+List<ConsentQuestion> consentQuestions = [
+  ConsentQuestion(
+    question: 'Are you comfortable when I have direct eye contact?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable when I touch your hands?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable when I cuddle you?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable having your shirt/top off when with me?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question:
+        'Are you comfortable with me having my shirt/top off when with you?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable when I kiss you?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable having your pants or boxers off with me?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable when I touch your breast/chest?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question:
+        'Are you comfortable being completely naked with the lights on/off/low?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question:
+        'Are you comfortable when I have direct eye contact with you while you are naked?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable when I cuddle you?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+  ConsentQuestion(
+    question: 'Are you comfortable having sex with me?',
+    optionTypes: [
+      ConsentOptionType.yes,
+      ConsentOptionType.no,
+    ],
+    labels: ['Yes', 'No'],
+    multiChoice: false,
+  ),
+];
+
+//List.generate(
+//  23,
+//  (index) {
+//    if (index % 4 == 0)
+//      return ConsentQuestion(
+//        key: GlobalKey<ConsentQuestionState>(),
+//        question:
+//            'What will you like to do with your partner. Tell me. I need to tell your partner. $index times.',
+//        optionTypes: [
+//          ConsentOptionType.yes,
+//          ConsentOptionType.yes,
+//          ConsentOptionType.yes,
+//          ConsentOptionType.no
+//        ],
+//        labels: ['Dance', 'Sing', 'Vacation', 'None'],
+//        multiChoice: true,
+//      );
+//    else if (index % 3 == 0)
+//      return ConsentQuestion(
+//        key: GlobalKey<ConsentQuestionState>(),
+//        question:
+//            'You agree that partner has a right to decide whether or not to accept or reject these consents.',
+//        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+//        labels: ['Agree', 'Disagree'],
+//      );
+//    else
+//      return ConsentQuestion(
+//        key: GlobalKey<ConsentQuestionState>(),
+//        question: 'Contraceptives? Will you be using any contraceptives?',
+//        optionTypes: [ConsentOptionType.yes, ConsentOptionType.no],
+//        labels: ['Yes', 'No'],
+//      );
