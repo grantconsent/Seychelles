@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/edit_profile.dart';
 import 'package:flutter/services.dart';
+import 'package:grantconsent/screens/dashboard_consent.dart';
+import 'package:grantconsent/screens/dashboard_home.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-import 'package:grantconsent/utilities/constants.dart';
-import "dart:math";
 
 class Dashboard extends StatefulWidget {
   @override
@@ -74,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       padding: EdgeInsets.all(5),
-      height: profileVisible ? 230 : 60,
+      height: profileVisible ? 280 : 60,
       child: Column(
         children: <Widget>[
           Row(
@@ -99,8 +99,8 @@ class _DashboardState extends State<Dashboard> {
               children: <Widget>[
                 Image.asset(
                   "assets/cam.png",
-                  height: 60,
-                  width: 60,
+                  height: 100,
+                  width: 100,
                 ),
                 Text(
                   loggedInUser.fullName,
@@ -111,8 +111,45 @@ class _DashboardState extends State<Dashboard> {
                   loggedInUser.email,
                   style: kDashboardLoggedInEmailTextStyle,
                 ),
+<<<<<<< HEAD
+                SizedBox(height: 13),
+                SizedBox(
+                  height: 30,
+                  child: RaisedButton(
+                    elevation: 0,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    onPressed: () {},
+                    child: Text(
+                      "Edit Profile",
+                      style: kEditProfileTextStyle,
+                    ),
+                    color: kDashboardBackgroundColor,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xffCAB480),
+                        width: 1
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+=======
                 SizedBox(height: 4),
                 RaisedButton(
+
+                  elevation: 0,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  onPressed: () {},
+                  child: Text(
+                    "Edit Profile",
+                    style: kEditProfileTextStyle,
+                  ),
+                  color: kDashboardBackgroundColor,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Color(0xffCAB480),
+                      width: 2
+>>>>>>> 4cb2f2d3e4ad19db00942c29b1ba90d878ebaf25
+                    ),
+                  ),
+
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     Navigator.push(
@@ -124,27 +161,34 @@ class _DashboardState extends State<Dashboard> {
                   },
                   child: Text("Edit Profile"),
                   color: Color(0xffCAB480),
+
                 ),
               ],
             ),
           )
         ],
       ),
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          color: Colors.grey,
-          blurRadius: 0.02,
-          spreadRadius: 0.02,
-          offset: Offset(0, 1.5),
-        ),
-      ]),
+      decoration: BoxDecoration(
+        color: indicatorAlignment == Alignment.centerRight
+            ? Colors.white
+            : kDashboardBackgroundColor,
+        boxShadow: indicatorAlignment == Alignment.centerRight
+            ? [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 0.02,
+                  spreadRadius: 0.02,
+                  offset: Offset(0, 1.5),
+                ),
+              ]
+            : [],
+      ),
     );
   }
 
   Widget body() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
         color: kDashboardBackgroundColor,
         child: getBody(),
       ),
@@ -153,7 +197,13 @@ class _DashboardState extends State<Dashboard> {
 
   Widget getBody() {
     if (indicatorAlignment == Alignment.centerLeft) {
-      return Home();
+      return Padding(
+        child: Home(),
+        padding: EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 25,
+        ),
+      );
     } else if (indicatorAlignment == Alignment.center) {
       return Consent();
     }
@@ -163,7 +213,7 @@ class _DashboardState extends State<Dashboard> {
   Widget bottom() {
     final Radius radius = Radius.circular(6);
     return Container(
-      padding: EdgeInsets.all(13),
+      padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
       decoration: BoxDecoration(
         color: Color(0xff222222),
         borderRadius: BorderRadius.only(topLeft: radius, topRight: radius),
@@ -172,7 +222,7 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           Positioned(
             child: Container(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(0),
               child: Opacity(
                 opacity: 0,
                 child: bottomNavItem(100),
@@ -185,20 +235,14 @@ class _DashboardState extends State<Dashboard> {
           ),
           Positioned.fill(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   width: 6,
                 ),
-                bottomNavItem(0),
-                Spacer(),
-                bottomNavItem(1),
-                Spacer(),
-                bottomNavItem(2),
-                SizedBox(
-                  width: 8,
-                ),
+                Expanded(child: bottomNavItem(0)),
+                Expanded(child: bottomNavItem(1)),
+                Expanded(child: bottomNavItem(2)),
               ],
             ),
           ),
@@ -249,7 +293,7 @@ class _DashboardState extends State<Dashboard> {
 //            rightValue = 0;
 //            leftValue = null;
           });
-          Timer(Duration(milliseconds: 200), () {
+          Timer(Duration(milliseconds: 100), () {
             setState(() {
               profileBodyVisible = true;
             });
@@ -257,9 +301,9 @@ class _DashboardState extends State<Dashboard> {
         }
       },
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: index == 2 ? MainAxisAlignment.end  : index == 0 ?  MainAxisAlignment.start: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(width: 7),
             Image.asset(
@@ -318,103 +362,7 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-class Home extends StatelessWidget {
-  static final _random = new Random();
-  final welcomeText =
-      dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Hi, ${loggedInUser.firstName}",
-              style: kWelcomeDashboardTextStyle,
-            ),
-          ),
-          SizedBox(height: 10),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              welcomeText,
-              style: kDashboardDynamicTextStyle,
-            ),
-          ),
-          SizedBox(height: 10),
-          Expanded(
-            child: Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Image.asset(
-                  "assets/GIFs/peep.gif",
-                  width: double.maxFinite,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 5),
-            padding: EdgeInsets.all(12.3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Create Consent", style: kDashboardOptionTextStyle),
-                Icon(
-                  Icons.add,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            decoration: BoxDecoration(
-                color: Color(0xff222222).withOpacity(0.4),
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(5)),
-          ),
-          SizedBox(height: 10),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 5),
-            padding: EdgeInsets.all(12.3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("Review a consent", style: kDashboardOptionTextStyle),
-                Icon(
-                  Icons.info_outline,
-                  color: Colors.black,
-                )
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xff222222).withOpacity(0.4),
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Consent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 class Profile extends StatelessWidget {
   @override
