@@ -23,7 +23,7 @@ class Profile extends StatelessWidget {
           ProfileTabsWidget(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => TermsTwo(),
+                builder: (context) => TermAndConditions(),
               ));
             },
             image: Image.asset(
@@ -46,7 +46,7 @@ class Profile extends StatelessWidget {
           ProfileTabsWidget(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => About(),
+                builder: (context) => AboutPage(),
               ));
             },
             image: Image.asset(

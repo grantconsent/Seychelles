@@ -1,6 +1,7 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
@@ -16,6 +17,8 @@ import 'styles.dart';
 /// + largeWithText
 /// + largeWithoutText
 ///
+///
+
 class GrantConsentLogo extends StatelessWidget {
   final LogoType type;
 
@@ -468,6 +471,67 @@ class ProfileTabsWidget extends StatelessWidget {
                     color: Color.fromRGBO(35, 35, 35, 0.3),
                   ),
                 ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AboutPageTemplate extends StatelessWidget {
+  AboutPageTemplate({@required this.onTap,@required this.title,@required this.valueListenableBuilder});
+  final Function onTap;
+  final String title;
+  final ValueListenableBuilder valueListenableBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    kScreenSize = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Color(0xFFDED7C7),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: InkResponse(
+                  onTap: onTap,
+                  child: Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15,5,5,0),
+                child: Text(
+                  title,
+                  style: kBody1TextStyle.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Spacer(),
+              Container(
+                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                height: kScreenSize.height * 0.7,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                child: SingleChildScrollView(
+                  child: valueListenableBuilder,
+                ),
+              ),
+              Spacer(
+                flex: 3,
+              )
+            ],
           ),
         ),
       ),
