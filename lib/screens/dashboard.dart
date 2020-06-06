@@ -111,7 +111,7 @@ class _DashboardState extends State<Dashboard> {
                   loggedInUser.email,
                   style: kDashboardLoggedInEmailTextStyle,
                 ),
-<<<<<<< HEAD
+
                 SizedBox(height: 13),
                 SizedBox(
                   height: 30,
@@ -130,23 +130,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 1
                       ),
                       borderRadius: BorderRadius.circular(4),
-=======
-                SizedBox(height: 4),
-                RaisedButton(
 
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  onPressed: () {},
-                  child: Text(
-                    "Edit Profile",
-                    style: kEditProfileTextStyle,
-                  ),
-                  color: kDashboardBackgroundColor,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Color(0xffCAB480),
-                      width: 2
->>>>>>> 4cb2f2d3e4ad19db00942c29b1ba90d878ebaf25
                     ),
                   ),
 
@@ -363,7 +347,6 @@ class _DashboardState extends State<Dashboard> {
 }
 
 
-
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -394,7 +377,7 @@ class Profile extends StatelessWidget {
               height: 20,
             ),
             icon: Icons.chevron_right,
-            label: 'Privacy Policy',
+            label: 'Consent Agreement Template',
           ),
           SizedBox(height: 5),
           ProfileTabsWidget(
