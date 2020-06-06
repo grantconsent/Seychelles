@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/dashboard_profile.dart';
 import 'package:grantconsent/screens/edit_profile.dart';
 import 'package:flutter/services.dart';
 import 'package:grantconsent/screens/dashboard_consent.dart';
 import 'package:grantconsent/screens/dashboard_home.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
-import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class Dashboard extends StatefulWidget {
@@ -38,19 +38,19 @@ class _DashboardState extends State<Dashboard> {
           context: context,
           builder: (context) => new AlertDialog(
             title: new Text('Are you sure?',
-                style: kBody1TextStyle.copyWith(fontWeight: FontWeight.bold)),
+                style: kBody1TextStyle.copyWith(fontWeight: FontWeight.bold, color: Colors.black87)),
             content:
-                new Text('Do you want to exit the App', style: kBody1TextStyle),
+                new Text('Do you want to exit the App?', style: kBody1TextStyle.copyWith(color: Colors.black87)),
             actions: <Widget>[
               new FlatButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
+                child: Text("NO", style: kDashboardFooterTextStyle.copyWith(color: Colors.black87)),
               ),
               SizedBox(height: 16),
               new FlatButton(
                 onPressed: () =>
                     SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
-                child: Text("YES"),
+                child: Text("YES",style: kDashboardFooterTextStyle.copyWith(color: Colors.black87)),
               ),
             ],
           ),
@@ -111,41 +111,30 @@ class _DashboardState extends State<Dashboard> {
                   loggedInUser.email,
                   style: kDashboardLoggedInEmailTextStyle,
                 ),
-
                 SizedBox(height: 13),
                 SizedBox(
                   height: 30,
                   child: RaisedButton(
                     elevation: 0,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    onPressed: () {},
                     child: Text(
                       "Edit Profile",
                       style: kEditProfileTextStyle,
                     ),
                     color: kDashboardBackgroundColor,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xffCAB480),
-                        width: 1
-                      ),
+                      side: BorderSide(color: Color(0xffCAB480), width: 1),
                       borderRadius: BorderRadius.circular(4),
-
                     ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditProfile(),
+                        ),
+                      );
+                    },
                   ),
-
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProfile(),
-                      ),
-                    );
-                  },
-                  child: Text("Edit Profile"),
-                  color: Color(0xffCAB480),
-
                 ),
               ],
             ),
@@ -287,7 +276,9 @@ class _DashboardState extends State<Dashboard> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10),
         child: Row(
-          mainAxisAlignment: index == 2 ? MainAxisAlignment.end  : index == 0 ?  MainAxisAlignment.start: MainAxisAlignment.center,
+          mainAxisAlignment: index == 2
+              ? MainAxisAlignment.end
+              : index == 0 ? MainAxisAlignment.start : MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(width: 7),
             Image.asset(
@@ -343,62 +334,5 @@ class _DashboardState extends State<Dashboard> {
         break;
     }
     return text;
-  }
-}
-
-
-class Profile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          ProfileTabsWidget(
-            image: Image.asset(
-              'assets/notificationsbell.png',
-              height: 100,
-            ),
-            icon: Icons.chevron_right,
-            label: 'Notification',
-          ),
-          SizedBox(height: 5),
-          ProfileTabsWidget(
-            image: Image.asset(
-              'assets/Consent.png',
-              height: 20,
-            ),
-            icon: Icons.chevron_right,
-            label: 'Terms and Conditions',
-          ),
-          SizedBox(height: 5),
-          ProfileTabsWidget(
-            image: Image.asset(
-              'assets/Consent.png',
-              height: 20,
-            ),
-            icon: Icons.chevron_right,
-            label: 'Consent Agreement Template',
-          ),
-          SizedBox(height: 5),
-          ProfileTabsWidget(
-            image: Image.asset(
-              'assets/Subtract.png',
-              height: 20,
-            ),
-            icon: Icons.chevron_right,
-            label: 'About Grant Consent',
-          ),
-          SizedBox(height: 5),
-          ProfileTabsWidget(
-            image: Image.asset(
-              'assets/log-out.png',
-              height: 20,
-            ),
-            label: 'Log Out',
-          ),
-          SizedBox(height: 5),
-        ],
-      ),
-    );
   }
 }

@@ -47,8 +47,8 @@ class EditProfile extends StatelessWidget {
                       children: <Widget>[
                         Image.asset(
                           "assets/cam.png",
-                          height: 60,
-                          width: 60,
+                          height: 100,
+                          width: 100,
                         ),
                         Text(
                           loggedInUser.fullName,
