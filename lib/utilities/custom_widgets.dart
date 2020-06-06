@@ -369,12 +369,13 @@ class ConsentOptionButton extends StatelessWidget {
   final String label;
   final bool selected;
   final Function responseTap;
-
+  final size = Size(53, 23);
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 5, top: 8),
-      constraints: BoxConstraints.loose(Size(55, 23)),
+      margin: EdgeInsets.only(right: 5, top: 8, bottom: 8),
+      constraints:
+          BoxConstraints.tightFor(width: size.width, height: size.height),
       decoration: BoxDecoration(
         color: selected
             ? (type == ConsentOptionType.no
@@ -401,6 +402,27 @@ class ConsentOptionButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class ConsentActionButton extends ConsentOptionButton {
+  ConsentActionButton({
+    this.labelText,
+    this.buttonType,
+    this.onTap,
+  });
+  final ConsentOptionType buttonType;
+  final String labelText;
+  final Function onTap;
+  @override
+  Function get responseTap => onTap;
+  @override
+  ConsentOptionType get type => buttonType;
+  @override
+  String get label => labelText;
+  @override
+  Size get size => Size(150, 50);
+  @override
+  bool get selected => true;
 }
 
 SnackBar customSnackBar({String message, int durationInSeconds}) {
