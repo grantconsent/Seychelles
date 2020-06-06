@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/get_started_screen.dart';
@@ -7,11 +9,34 @@ import 'package:grantconsent/utilities/styles.dart';
 
 class SplashScreen extends StatelessWidget {
   final PageController splashPageController = PageController();
+  Timer timer;
+  void animateSplashScroll(BuildContext context) {
+    if (splashPageController.page < kNumberOfSplashPages - 1) {
+      splashPageController.nextPage(
+        duration: kSplashScreenPageAnimationDuration,
+        curve: Curves.easeOut,
+      );
+    } else {
+      timer?.cancel();
+      timer = null;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GetStarted(),
+        ),
+      );
+    }
+  }
+
+  runSplashScroll(BuildContext context) {
+    timer = Timer(kSplashScreenScrollDuration, () {
+      animateSplashScroll(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     ValueNotifier pageNotifier = ValueNotifier(0);
-
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
@@ -26,6 +51,7 @@ class SplashScreen extends StatelessWidget {
                 child: PageView.builder(
                   itemCount: kNumberOfSplashPages,
                   itemBuilder: (context, page) {
+                    runSplashScroll(context);
                     return SplashPage(page: page);
                   },
                   onPageChanged: (page) {
@@ -57,6 +83,7 @@ class SplashScreen extends StatelessWidget {
                             //     curve: Curves.easeOut,
                             //   );
                             // } else {
+                            timer.cancel();
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

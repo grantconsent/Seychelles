@@ -41,6 +41,15 @@ final kWelcomeDashboardTextStyle = GoogleFonts.quicksand(
   fontSize: 40,
   fontWeight: FontWeight.w500,
 );
+
+final kConsentTabTextStyle = GoogleFonts.quicksand(
+//  fontSize: 40,
+  fontWeight: FontWeight.bold,
+);
+
+final kEditProfileTextStyle = GoogleFonts.quicksand(
+//  fontSize: 40,
+);
 final kDashboardOptionTextStyle = GoogleFonts.roboto();
 final kDashboardLoggedInEmailTextStyle = GoogleFonts.openSans(
   fontWeight: FontWeight.bold,
