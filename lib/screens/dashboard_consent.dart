@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/review_consent_screen.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class Consent extends StatefulWidget {
@@ -70,17 +71,27 @@ class _ConsentState extends State<Consent> with SingleTickerProviderStateMixin {
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 30),
-                          padding: EdgeInsets.all(12.3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text("Bami agree to consent",
-                                  style: kDashboardOptionTextStyle),
-                              Icon(
-                                Icons.info_outline,
-                                color: Colors.black,
-                              )
-                            ],
+                          child: RawMaterialButton(
+                            padding: EdgeInsets.all(12.3),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ReviewConsent(),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Bami agree to consent",
+                                    style: kDashboardOptionTextStyle),
+                                Icon(
+                                  Icons.info_outline,
+                                  color: Colors.black,
+                                )
+                              ],
+                            ),
                           ),
                           decoration: BoxDecoration(
                             color: Color(0xff222222).withOpacity(0.4),

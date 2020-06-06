@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/Create_a_consent.dart';
+import 'package:grantconsent/screens/review_consent_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
@@ -51,16 +53,26 @@ class Home extends StatelessWidget {
         SizedBox(height: 10),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.all(12.3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Create Consent", style: kDashboardOptionTextStyle),
-              Icon(
-                Icons.add,
-                color: Colors.black,
-              )
-            ],
+          child: RawMaterialButton(
+            padding: EdgeInsets.all(12.3),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateConsent(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Create Consent", style: kDashboardOptionTextStyle),
+                Icon(
+                  Icons.add,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
           decoration: BoxDecoration(
               color: Color(0xff222222).withOpacity(0.4),
@@ -70,16 +82,21 @@ class Home extends StatelessWidget {
         SizedBox(height: 10),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          padding: EdgeInsets.all(12.3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Review a consent", style: kDashboardOptionTextStyle),
-              Icon(
-                Icons.info_outline,
-                color: Colors.black,
-              )
-            ],
+          child: RawMaterialButton(
+            padding: EdgeInsets.all(12.3),
+            onPressed: () {
+              print('Oh well. ');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Review a consent", style: kDashboardOptionTextStyle),
+                Icon(
+                  Icons.info_outline,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
           decoration: BoxDecoration(
             color: Color(0xff222222).withOpacity(0.4),
