@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/terms_and_conditions_two.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
+
+import 'about_screen.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -18,6 +21,11 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 5),
           ProfileTabsWidget(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => TermsTwo(),
+              ));
+            },
             image: Image.asset(
               'assets/Consent.png',
               height: 20,
@@ -36,6 +44,11 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 5),
           ProfileTabsWidget(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => About(),
+              ));
+            },
             image: Image.asset(
               'assets/Subtract.png',
               height: 20,

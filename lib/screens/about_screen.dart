@@ -27,7 +27,7 @@ class About extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+
                   },
                   child: Icon(
                     Icons.arrow_back,

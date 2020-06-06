@@ -426,44 +426,49 @@ class ProfileTabsWidget extends StatelessWidget {
     @required this.image,
     @required this.label,
     this.icon,
+    this.onTap,
   });
   final IconData icon;
   final Image image;
   final String label;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(35, 35, 35, 0.1),
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: RawMaterialButton(
-          onPressed: () {},
-          splashColor: Color(0xffCAB480),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(children: <Widget>[
-                  CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.white,
-                    child: image,
-                  ),
-                  SizedBox(width: 20),
-                  Text(
-                    label,
-                    style: GoogleFonts.roboto(fontSize: 15),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(35, 35, 35, 0.1),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: RawMaterialButton(
+            onPressed: () {},
+            splashColor: Color(0xffCAB480),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(children: <Widget>[
+                    CircleAvatar(
+                      radius: 10,
+                      backgroundColor: Colors.white,
+                      child: image,
+                    ),
+                    SizedBox(width: 20),
+                    Text(
+                      label,
+                      style: GoogleFonts.roboto(fontSize: 15),
+                    ),
+                  ]),
+                  Icon(
+                    icon,
+                    color: Color.fromRGBO(35, 35, 35, 0.3),
                   ),
                 ]),
-                Icon(
-                  icon,
-                  color: Color.fromRGBO(35, 35, 35, 0.3),
-                ),
-              ]),
+          ),
         ),
       ),
     );
