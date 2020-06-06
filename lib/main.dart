@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grantconsent/screens/loading_animation.dart';
+import 'package:grantconsent/screens/review_consent_screen.dart';
 import 'package:grantconsent/services/dynamic_links_services.dart';
 import 'utilities/styles.dart';
 import 'screens/sign_up.dart';
 import 'screens/get_started_screen.dart';
+
 void main() {
   runApp(GrantConsent());
 }
