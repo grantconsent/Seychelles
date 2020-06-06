@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class GetUserPicture extends StatefulWidget {
   @override
@@ -11,15 +13,16 @@ class GetUserPicture extends StatefulWidget {
 }
 
 class _GetUserPictureState extends State<GetUserPicture> {
-  File _uploadedImage;
+  File uploadedImage;
   bool pictureAdded = false;
   final keyToScaffold = new GlobalKey<ScaffoldState>();
 
   Future _getImageFromCamera() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
-      _uploadedImage = image;
+      uploadedImage = image;
     });
+
     if (image != null)
       pictureAdded = true;
     else
@@ -31,62 +34,65 @@ class _GetUserPictureState extends State<GetUserPicture> {
       customSnackBar(message: 'Please pick a picture first.'),
     );
   }
+    ConstrainedBox _buildPlaceholder() {
+      return ConstrainedBox(
+          constraints: BoxConstraints.tightFor(
+            width: kScreenSize.width,
+            height: kScreenSize.height * 0.65,
+          ),
+          child: kUserPicturePlaceholder);
+    }
 
-  ConstrainedBox _buildPlaceholder() {
-    return ConstrainedBox(
-        constraints: BoxConstraints.tightFor(
-          width: kScreenSize.width,
-          height: kScreenSize.height * 0.65,
-        ),
-        child: kUserPicturePlaceholder);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    kScreenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      key: keyToScaffold,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 37),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Spacer(
-              flex: 3,
-            ),
-            GestureDetector(
-              onTap: _getImageFromCamera,
-              child: _uploadedImage == null
-                  ? _buildPlaceholder()
-                  : Image.file(
-                      _uploadedImage,
-                      alignment: Alignment.center,
-                      fit: BoxFit.cover,
-                      width: kScreenSize.width,
-                      height: kScreenSize.height * 0.65,
-                    ),
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            UserActionButton(
+    @override
+    Widget build(BuildContext context) {
+      kScreenSize = MediaQuery
+          .of(context)
+          .size;
+      return Scaffold(
+        key: keyToScaffold,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 37),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Spacer(
+                flex: 3,
+              ),
+              GestureDetector(
+                onTap: _getImageFromCamera,
+                child: uploadedImage == null
+                    ? _buildPlaceholder()
+                    : Image.file(
+                  uploadedImage,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                  width: kScreenSize.width,
+                  height: kScreenSize.height * 0.65,
+                ),
+              ),
+              Spacer(
+                flex: 2,
+              ),
+              UserActionButton(
                 //locked: !pictureAdded,
-                onTap: !pictureAdded
-                    ? _showToastInformation
-                    : () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UploadPicture(),
-                          ),
-                        );
-                      },
-                label: 'Continue'),
-            Spacer(flex: 3),
-          ],
+                  onTap: !pictureAdded
+                      ? _showToastInformation
+                      : () {
+//                    uploadFile();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UploadPicture(uploadedImage)
+                      ),
+                    );
+                  },
+                  label: 'Continue'),
+              Spacer(flex: 3),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
-}
+
