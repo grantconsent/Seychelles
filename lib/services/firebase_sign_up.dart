@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_sign_out.dart';
-
+import 'package:grantconsent/services/firebase_sign_up.dart';
 Future<SignUpStatus> signUpUser(
     {@required ConsentUser newUser, @required String password}) async {
   signOutUser();
@@ -53,6 +53,7 @@ void saveNewUserData(ConsentUser user) async{
       'LastName': user.lastName,
     'PhoneNumber': user.phoneNumber,
     'Email': user.email,
+  'Picture' :user.pictureURL
   });
   return;
 }

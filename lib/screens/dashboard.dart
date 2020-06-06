@@ -4,6 +4,8 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import "dart:math";
+import 'package:grantconsent/screens/get_user_picture.dart';
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -87,7 +89,12 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(height: 4),
                 RaisedButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GetUserPicture()));
+                  },
                   child: Text("Edit Profile"),
                   color: Color(0xffCAB480),
                 ),

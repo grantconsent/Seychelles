@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UploadPicture extends StatefulWidget {
   final File uploadedImage;
@@ -29,7 +30,7 @@ class _UploadPictureState extends State<UploadPicture> {
   }
   void _showToastInformation() {
     keyToScaffold.currentState.showSnackBar(
-      customSnackBar(message: 'Something Went Wrong. Try again Later.'),
+      customSnackBar(message: 'Something Went Wrong. Try again '),
     );
   }
 
@@ -46,11 +47,8 @@ class _UploadPictureState extends State<UploadPicture> {
     if (uploadImage.isSuccessful || uploadImage.isComplete) {
       var downloadUrl = await storageSnapshot.ref.getDownloadURL();
       var url = downloadUrl.toString();
-      print( url );
-      setState(() {
-        done = true;
-      });
-
+          ConsentUser newUser = ConsentUser(
+              pictureURL:url);
       return CloudStorageResult(
         imageUrl: url,
       );
