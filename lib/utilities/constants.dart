@@ -47,6 +47,7 @@ Size kScreenSize;
 const Duration kLoadingScreenAnimationDuration = Duration(seconds: 1);
 const double kLoadingScreenAnimationScale = 1.85;
 const Duration kSplashScreenPageAnimationDuration = Duration(milliseconds: 500);
+const Duration kSplashScreenScrollDuration = Duration(seconds: 3);
 
 //Enums
 enum LogoType {

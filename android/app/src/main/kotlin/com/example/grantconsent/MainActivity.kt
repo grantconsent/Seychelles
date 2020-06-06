@@ -15,7 +15,7 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
     }
-
+}/*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!setSecureSurfaceView()) {
@@ -56,3 +56,4 @@ class MainActivity: FlutterActivity() {
         return true
     }
 }
+*/
