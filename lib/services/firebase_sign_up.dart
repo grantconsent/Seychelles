@@ -4,6 +4,7 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_sign_out.dart';
 
+var userCreated;
 Future<SignUpStatus> signUpUser(
     {@required ConsentUser newUser, @required String password}) async {
   signOutUser();
@@ -20,6 +21,7 @@ Future<SignUpStatus> signUpUser(
       final result = await _auth.createUserWithEmailAndPassword(
           email: newUser.email, password: password);
       if (result != null) {
+        userCreated = await _auth.currentUser();
         sendVerificationEmail();
         saveNewUserData(newUser);
         return SignUpStatus.success;
@@ -43,11 +45,8 @@ Future<SignUpStatus> signUpUser(
 }
 
 Future sendVerificationEmail() async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-
-  final FirebaseUser user = await _auth.currentUser();
   try {
-    user.sendEmailVerification();
+    userCreated.sendEmailVerification();
   } catch (e) {
     //TODO: take action to handle sending email failure.
     print(e);
@@ -55,9 +54,9 @@ Future sendVerificationEmail() async {
 }
 
 void saveNewUserData(ConsentUser user) async {
-  final firebaseUser = await FirebaseAuth.instance.currentUser();
+//  final firebaseUser = await FirebaseAuth.instance.currentUser();
   final _seychellesFirestore = Firestore.instance;
-  _seychellesFirestore.collection("Users").document(firebaseUser.uid).setData({
+  _seychellesFirestore.collection("Users").document(userCreated.uid).setData({
     'FirstName': user.firstName,
     'LastName': user.lastName,
     'PhoneNumber': user.phoneNumber,
