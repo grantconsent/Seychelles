@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/get_user_picture.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -30,25 +31,24 @@ class EditProfile extends StatelessWidget {
                         },
                         icon: Icon(Icons.arrow_back),
                       ),
-                      Spacer(),
-                      Opacity(
-                        opacity: profileVisible ? 0 : 1,
-                        child: Image.asset(
-                          "assets/cam.png",
-                          width: 50,
-                          height: 50,
-                        ),
-                      )
                     ],
                   ),
                   Visibility(
                     visible: profileBodyVisible,
                     child: Column(
                       children: <Widget>[
-                        Image.asset(
-                          "assets/cam.png",
-                          height: 100,
-                          width: 100,
+                        InkResponse(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => GetUserPicture()));
+                          },
+                          child: Image.asset(
+                            "assets/cam.png",
+                            height: 100,
+                            width: 100,
+                          ),
                         ),
                         Text(
                           loggedInUser.fullName,
@@ -84,7 +84,7 @@ class EditProfile extends StatelessWidget {
                     style: kWelcomeHeadingTextStyle,
                   ),
                 ),
-              ), 
+              ),
             ),
           ],
         ),
