@@ -4,8 +4,8 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class EditProfile extends StatelessWidget {
-  bool profileBodyVisible = true;
-  bool profileVisible = true;
+  final bool profileBodyVisible = true;
+  final bool profileVisible = true;
 
   @override
   Widget build(BuildContext context) {

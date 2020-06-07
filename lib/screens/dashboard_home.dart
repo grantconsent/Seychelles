@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/Create_a_consent.dart';
+import 'package:grantconsent/screens/create_consent_1.dart';
 import 'package:grantconsent/screens/review_consent_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
@@ -59,7 +60,7 @@ class Home extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateConsent(),
+                  builder: (context) => ConsentScreen1(),
                 ),
               );
             },

@@ -167,6 +167,39 @@ class _SendConsentState extends State<SendConsent> {
                 Spacer(
                   flex: 8,
                 ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 1),
+                  constraints: BoxConstraints.tightFor(
+                      width: kScreenSize.width, height: 40),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color.fromRGBO(35, 35, 35, 0.1),
+                  ),
+                  child: RawMaterialButton(
+                    padding: EdgeInsets.only(left: 40, right: 14.4),
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => CreateConsent(),
+                      //   ),
+                      // );
+                    },
+                    constraints: BoxConstraints.expand(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Send",
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height:50),
               ],
             ),
           ),
