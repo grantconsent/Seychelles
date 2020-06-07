@@ -8,55 +8,55 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(10, 17, 17, 0),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 17),
           ProfileTabsWidget(
             image: Image.asset(
               'assets/notificationsbell.png',
               height: 100,
             ),
-            icon: Icons.chevron_right,
+            //        icon: Icons.chevron_right,
             label: 'Notifications',
           ),
-          SizedBox(height: 5),
           ProfileTabsWidget(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) => TermAndConditions(),
-              ));
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TermAndConditions(),
+                  ));
             },
             image: Image.asset(
               'assets/Consent.png',
               height: 20,
             ),
-            icon: Icons.chevron_right,
+            // icon: Icons.chevron_right,
             label: 'Terms and Conditions',
           ),
-          SizedBox(height: 5),
           ProfileTabsWidget(
             image: Image.asset(
               'assets/Consent.png',
               height: 20,
             ),
-            icon: Icons.chevron_right,
+            // icon: Icons.chevron_right,
             label: 'Consent Agreement Template',
           ),
-          SizedBox(height: 5),
           ProfileTabsWidget(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) => AboutPage(),
-              ));
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutPage(),
+                  ));
             },
             image: Image.asset(
               'assets/Subtract.png',
               height: 20,
             ),
-            icon: Icons.chevron_right,
+            // icon: Icons.chevron_right,
             label: 'About Grant Consent',
           ),
-          SizedBox(height: 5),
           ProfileTabsWidget(
             image: Image.asset(
               'assets/log-out.png',
@@ -64,7 +64,6 @@ class Profile extends StatelessWidget {
             ),
             label: 'Log Out',
           ),
-          SizedBox(height: 5),
         ],
       ),
     );

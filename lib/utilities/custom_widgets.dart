@@ -438,40 +438,41 @@ class ProfileTabsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.5),
+      child: SizedBox(
+        height: 30,
+        // decoration: BoxDecoration(
+        //  // color: Color.fromRGBO(35, 35, 35, 0.1),
+        //   //borderRadius: BorderRadius.circular(50),
+        // ),
+        child: FlatButton(
+          onPressed: onTap,
           color: Color.fromRGBO(35, 35, 35, 0.1),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: RawMaterialButton(
-            onPressed: () {},
-            splashColor: Color(0xffCAB480),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(children: <Widget>[
-                    CircleAvatar(
-                      radius: 10,
-                      backgroundColor: Colors.white,
-                      child: image,
-                    ),
-                    SizedBox(width: 20),
-                    Text(
-                      label,
-                      style: GoogleFonts.roboto(fontSize: 15),
-                    ),
-                  ]),
-                  Icon(
-                    icon,
-                    color: Color.fromRGBO(35, 35, 35, 0.3),
-                  ),
-                ]),
+          disabledColor: Color.fromRGBO(35, 35, 35, 0.1),
+          padding: const EdgeInsets.only(left: 6.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
           ),
+          splashColor: Color(0x55CAB480),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 10,
+                  backgroundColor: Colors.white,
+                  child: image,
+                ),
+                SizedBox(width: 13),
+                Text(
+                  label,
+                  style: GoogleFonts.roboto(fontSize: 14),
+                ),
+                // Icon(
+                //   icon,
+                //   color: Color.fromRGBO(35, 35, 35, 0.3),
+                // ),
+              ]),
         ),
       ),
     );
@@ -479,7 +480,10 @@ class ProfileTabsWidget extends StatelessWidget {
 }
 
 class AboutPageTemplate extends StatelessWidget {
-  AboutPageTemplate({@required this.onTap,@required this.title,@required this.valueListenableBuilder});
+  AboutPageTemplate(
+      {@required this.onTap,
+      @required this.title,
+      @required this.valueListenableBuilder});
   final Function onTap;
   final String title;
   final ValueListenableBuilder valueListenableBuilder;
@@ -506,7 +510,7 @@ class AboutPageTemplate extends StatelessWidget {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(15,5,5,0),
+                padding: const EdgeInsets.fromLTRB(15, 5, 5, 0),
                 child: Text(
                   title,
                   style: kBody1TextStyle.copyWith(
