@@ -8,10 +8,18 @@ import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-class ConsentScreen1 extends StatelessWidget {
+class ConsentScreen1 extends StatefulWidget {
   static final _random = new Random();
-  final welcomeText =
-      dynamicWelcomeText[_random.nextInt(dynamicWelcomeText.length)];
+
+  @override
+  _ConsentScreen1State createState() => _ConsentScreen1State();
+}
+
+class _ConsentScreen1State extends State<ConsentScreen1> {
+  DateTime _dateTime;
+
+  final welcomeText = dynamicWelcomeText[
+      ConsentScreen1._random.nextInt(dynamicWelcomeText.length)];
 
   @override
   Widget build(BuildContext context) {
@@ -69,31 +77,28 @@ class ConsentScreen1 extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 45,
-                child: Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 5),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(202, 180, 128, 0.5),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: SizedBox(
+                  height: 45,
                   child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Partner's Name",
-                      labelStyle: kInputTextStyle.copyWith(
+                    enableSuggestions: true,
+                    style: TextStyle(
                         fontSize: 15,
-                        color: Color.fromRGBO(202, 180, 128, 0.5),
+                        color: Colors.black,
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(202, 180, 128, 0.2),
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(3.0),
-                        ),
+                    decoration: InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      hintText: "Enter Partner's Name",
+                      hintStyle: TextStyle(
+                        fontSize: 15,
                       ),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(202, 180, 128, 0.5),
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
               ),
@@ -106,36 +111,40 @@ class ConsentScreen1 extends StatelessWidget {
               ),
               SizedBox(
                 height: 45,
-                child: Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Date and Tme",
-                      labelStyle: kInputTextStyle.copyWith(
-                        fontSize: 15,
-                        color: Color.fromRGBO(202, 180, 128, 0.5),
-                      ),
-                      suffixIcon: Icon(Icons.calendar_today),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(202, 180, 128, 0.2),
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(3.0),
-                        ),
-                      ),
+                child: InkWell(
+                  onTap: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2030),
+                    ).then((date) {
+                      setState(() {
+                        _dateTime = date;
+                      });
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(202, 180, 128, 0.5),
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(202, 180, 128, 0.5),
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(5),
+                    child: Row(children: <Widget>[
+                      Text(
+                        _dateTime == null
+                            ? 'Select Date and Time'
+                            : _dateTime.toString(),
+                      ),
+                      Spacer(),
+                      Icon(Icons.calendar_today),
+                    ]),
                   ),
                 ),
               ),
               Spacer(),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 1),
                 constraints: BoxConstraints.tightFor(
                     width: kScreenSize.width, height: 40),
                 decoration: BoxDecoration(
@@ -145,7 +154,7 @@ class ConsentScreen1 extends StatelessWidget {
                 child: RawMaterialButton(
                   padding: EdgeInsets.only(left: 40, right: 14.4),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SendConsent(), //CreateConsent(),

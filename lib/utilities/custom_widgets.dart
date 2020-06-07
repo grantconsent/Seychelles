@@ -485,7 +485,7 @@ class ProfileTabsWidget extends StatelessWidget {
                   icon,
                   color: Color.fromRGBO(35, 35, 35, 0.3),
                 ),
-              ]),
+              ],),
         ),
       ),
     );
