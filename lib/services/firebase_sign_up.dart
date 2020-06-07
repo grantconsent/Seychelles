@@ -12,6 +12,7 @@ Future<SignUpStatus> signUpUser(
   final checkPhone = await Firestore.instance
       .collection('Users')
       .where('PhoneNumber', isEqualTo: newUser.phoneNumber)
+      .limit(1)
       .getDocuments();
   if (checkPhone.documents.length == 0) {
     // Phone number doesn't exist.
