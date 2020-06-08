@@ -17,6 +17,7 @@ Future<SignUpStatus> signUpUser(
       return SignUpStatus.success;
     } else {
       print('Failed!');
+      return SignUpStatus.unknownException;
     }
   } catch (e) {
     print(e);

@@ -44,11 +44,18 @@ class EditProfile extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => GetUserPicture()));
                           },
-                          child: Image.asset(
-                            "assets/cam.png",
-                            height: 100,
-                            width: 100,
-                          ),
+                          child: loggedInUser.pictureURL == null
+                              ? Image(
+                                  height: 100,
+                                  width: 100,
+                                  image: AssetImage(
+                                    "assets/cam.png",
+                                  ))
+                              : CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(loggedInUser.pictureURL),
+                                  radius: 50,
+                                ),
                         ),
                         Text(
                           loggedInUser.fullName,

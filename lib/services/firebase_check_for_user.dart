@@ -9,6 +9,7 @@ Future<ConsentUser> checkForUser() async {
   String fullName;
   String lastName;
   String phoneNumber;
+  String picture;
   final user = await _auth.currentUser();
   if (user != null) {
     await _seychellesFirestore
@@ -19,6 +20,7 @@ Future<ConsentUser> checkForUser() async {
       firstName = value.data['FirstName'];
       lastName = value.data['LastName'];
       phoneNumber = value.data['PhoneNumber'];
+      picture = value.data['Picture'];
     });
 
     //--Capitalize name
@@ -27,11 +29,13 @@ Future<ConsentUser> checkForUser() async {
     fullName = firstName + " " + lastName;
     //--Consent User
     ConsentUser existingUser = ConsentUser(
+      uID: user.uid,
       fullName: fullName,
       lastName: lastName,
       firstName: firstName,
       email: user.email,
       phoneNumber: phoneNumber,
+      pictureURL: picture,
     );
     loggedInUser = existingUser;
     return existingUser;
