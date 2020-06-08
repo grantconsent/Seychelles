@@ -4,8 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class GetUserPicture extends StatefulWidget {
   @override
@@ -80,7 +78,7 @@ class _GetUserPictureState extends State<GetUserPicture> {
                       ? _showToastInformation
                       : () {
 //                    uploadFile();
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => UploadPicture(uploadedImage)

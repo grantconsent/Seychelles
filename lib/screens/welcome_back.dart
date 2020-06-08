@@ -6,22 +6,23 @@ import 'package:grantconsent/screens/get_started_screen.dart';
 import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/services/firebase_sign_in.dart';
 import 'package:grantconsent/services/firebase_sign_out.dart';
-import 'package:grantconsent/services/firebase_sign_up.dart';
 
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-class WelcomeBack extends StatelessWidget {
+class WelcomeBack extends StatefulWidget {
+  @override
+  _WelcomeBackState createState() => _WelcomeBackState();
+}
+
+class _WelcomeBackState extends State<WelcomeBack> {
   final TextEditingController _inputPassword = TextEditingController();
- // final scaffoldKey2 = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //   key: scaffoldKey2,
-      backgroundColor: kBackgroundColor,
-      body: Container(
+    return SingleChildScrollView(
+      child: Container(
         padding: EdgeInsets.symmetric(horizontal: 38),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +47,7 @@ class WelcomeBack extends StatelessWidget {
             CustomTextFormField(
                 controller: _inputPassword,
                 obscure: true,
-                onEditingComplete:  () {
+                onEditingComplete: () {
                   _signIn(context);
                 },
                 hintText: "Password"),
@@ -86,6 +87,68 @@ class WelcomeBack extends StatelessWidget {
         ),
       ),
     );
+
+    // child: Column(
+    //   mainAxisAlignment: MainAxisAlignment.start,
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: <Widget>[
+    //     SizedBox(
+    //       height: 120,
+    //     ),
+    //     Text(
+    //       kWelcomeBack,
+    //       style: kWelcomeHeadingTextStyle,
+    //     ),
+    //     Text(
+    //       "${loggedInUser.firstName}",
+    //       style: kWelcomeHeadingTextStyle,
+    //     ),
+    //     Text(
+    //       kGrantConsent,
+    //       style: kGrantConsentTextStyle,
+    //     ),
+    //     SizedBox(height: 80),
+    //     CustomTextFormField(
+    //         controller: _inputPassword,
+    //         obscure: true,
+    //         onEditingComplete:  () {
+    //           _signIn(context);
+    //         },
+    //         hintText: "Password"),
+    //     Padding(
+    //       padding: const EdgeInsets.only(top: 3.0),
+    //       child: Align(
+    //         alignment: Alignment.bottomRight,
+    //         child: GestureDetector(
+    //           onTap: () {
+    //             Navigator.pushReplacement(
+    //                 context,
+    //                 MaterialPageRoute(
+    //                     builder: (context) => ForgotPassword()));
+    //           },
+    //           child: Text(
+    //             'forgot password?',
+    //             style: TextStyle(color: kButtonTextColor2),
+    //           ),
+    //         ),
+    //       ),
+    //     ),
+    //     SizedBox(height: 20),
+    //     UserActionButton(
+    //         onTap: () {
+    //           _signIn(context);
+    //         },
+    //         label: 'Log In'),
+    //     SizedBox(height: 20),
+    //     UserActionButton(
+    //         onTap: () {
+    //           signOutUser();
+    //           Navigator.push(context,
+    //               MaterialPageRoute(builder: (context) => GetStarted()));
+    //         },
+    //         label: 'Not You?'),
+    //   ],
+    // );
   }
 
   _signIn(BuildContext context) async {
@@ -93,7 +156,7 @@ class WelcomeBack extends StatelessWidget {
       //If password is empty
       // scaffoldKey2.currentState
       Scaffold.of(context).showSnackBar(
-        customSnackBar(message: 'Enter Password'),
+        customSnackBar(message: 'Enter your Password'),
       );
     } else {
       showDialog(context: context, builder: (context) => Loader());
@@ -104,11 +167,10 @@ class WelcomeBack extends StatelessWidget {
       if (operationStatus == SignInStatus.success) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
-      }  else if (operationStatus== SignInStatus.emailUnverified) {
-        Scaffold.of(context).showSnackBar(
-          customSnackBar(message: 'Email is Not Verified')
-        );
-      }else {
+      } else if (operationStatus == SignInStatus.emailUnverified) {
+        Scaffold.of(context)
+            .showSnackBar(customSnackBar(message: 'Email is Not Verified'));
+      } else {
         _handleExceptions(
             operationStatus, context); //If sign in was NOT successful
       }

@@ -37,6 +37,7 @@ Future<SignUpStatus> signUpUser(
               : e.toString().contains('ALREADY_IN_USE')
                   ? SignUpStatus.userExists
                   : SignUpStatus.unknownException;
+
     }
     return SignUpStatus.unknownException;
   } else {
@@ -61,6 +62,7 @@ void saveNewUserData(ConsentUser user) async {
     'LastName': user.lastName,
     'PhoneNumber': user.phoneNumber,
     'Email': user.email,
+  'Picture' :user.pictureURL
   });
   return;
 }

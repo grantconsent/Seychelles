@@ -8,6 +8,7 @@ import 'package:grantconsent/screens/dashboard_home.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -111,30 +112,22 @@ class _DashboardState extends State<Dashboard> {
                   loggedInUser.email,
                   style: kDashboardLoggedInEmailTextStyle,
                 ),
-                SizedBox(height: 13),
-                SizedBox(
-                  height: 30,
-                  child: RaisedButton(
-                    elevation: 0,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    child: Text(
-                      "Edit Profile",
-                      style: kEditProfileTextStyle,
-                    ),
-                    color: kDashboardBackgroundColor,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Color(0xffCAB480), width: 1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditProfile(),
-                        ),
-                      );
-                    },
-                  ),
+
+                SizedBox(height: 4),
+                RaisedButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ),
+                    );
+
+                  },
+                  child: Text("Edit Profile"),
+                  color: Color(0xffCAB480),
+
                 ),
               ],
             ),

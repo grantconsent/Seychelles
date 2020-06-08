@@ -7,7 +7,6 @@ import 'package:grantconsent/screens/test_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
-import 'package:grantconsent/screens/get_user_picture.dart';
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
