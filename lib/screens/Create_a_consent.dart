@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/screens/send_consent.dart';
 import 'package:grantconsent/utilities/constants.dart';
@@ -8,8 +9,8 @@ import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class CreateConsent extends StatelessWidget {
-  Future<dynamic> getQuestions(BuildContext context) async {
-    return DefaultAssetBundle.of(context)
+  Future<dynamic> getQuestions() async {
+    return rootBundle
         .loadString('assets/Consent/consent_ageement_data.json')
         .then((jsonOfQuestions) => jsonDecode(jsonOfQuestions));
   }
@@ -33,7 +34,7 @@ class CreateConsent extends StatelessWidget {
               buildHeader(),
               Expanded(
                 child: FutureBuilder(
-                  future: getQuestions(context),
+                  future: getQuestions(),
                   builder:
                       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -152,24 +153,6 @@ class CreateConsent extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class ConsentQuestion extends StatefulWidget {
   ConsentQuestion({
