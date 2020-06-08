@@ -1,6 +1,7 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
@@ -16,6 +17,8 @@ import 'styles.dart';
 /// + largeWithText
 /// + largeWithoutText
 ///
+///
+
 class GrantConsentLogo extends StatelessWidget {
   final LogoType type;
 
@@ -448,42 +451,94 @@ class ProfileTabsWidget extends StatelessWidget {
     @required this.image,
     @required this.label,
     this.icon,
+    this.onTap,
   });
   final IconData icon;
   final Image image;
   final String label;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(35, 35, 35, 0.1),
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: RawMaterialButton(
-          onPressed: () {},
-          splashColor: Color(0xffCAB480),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.5),
+      child: SizedBox(
+        height: 30,
+        // decoration: BoxDecoration(
+        //  // color: Color.fromRGBO(35, 35, 35, 0.1),
+        //   //borderRadius: BorderRadius.circular(50),
+        // ),
+        child: FlatButton(
+          onPressed: onTap,
+          color: Color.fromRGBO(35, 35, 35, 0.1),
+          disabledColor: Color.fromRGBO(35, 35, 35, 0.1),
+          padding: const EdgeInsets.only(left: 6.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          splashColor: Color(0x55CAB480),
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Row(children: <Widget>[
-                  CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.white,
-                    child: image,
+                CircleAvatar(
+                  radius: 10,
+                  backgroundColor: Colors.white,
+                  child: image,
+                ),
+                SizedBox(width: 13),
+                Text(
+                  label,
+                  style: GoogleFonts.roboto(fontSize: 14),
+                ),
+                // Icon(
+                //   icon,
+                //   color: Color.fromRGBO(35, 35, 35, 0.3),
+                // ),
+              ]),
+        ),
+      ),
+    );
+  }
+}
+
+class AboutPageTemplate extends StatelessWidget {
+  AboutPageTemplate(
+      {@required this.onTap,
+      @required this.title,
+      @required this.valueListenableBuilder});
+  final Function onTap;
+  final String title;
+  final ValueListenableBuilder valueListenableBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    kScreenSize = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Color(0xFFDED7C7),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: InkResponse(
+                  onTap: onTap,
+                  child: Icon(
+                    Icons.arrow_back,
                   ),
-                  SizedBox(width: 20),
-                  Text(
-                    label,
-                    style: GoogleFonts.roboto(fontSize: 15),
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 5, 5, 0),
+                child: Text(
+                  title,
+                  style: kBody1TextStyle.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                ]),
-                Icon(
-                  icon,
-                  color: Color.fromRGBO(35, 35, 35, 0.3),
                 ),
               ],),
         ),
