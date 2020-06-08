@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 ConsentUser loggedInUser;
 
@@ -26,12 +25,6 @@ class ConsentUserSignIn {
   ConsentUserSignIn({
     @required this.email,
   });
-}
-
-class CloudStorageService {
-  Future<CloudStorageResult> uploadImage({
-    @required File imageToUpload,
-  }) async {}
 }
 
 class CloudStorageResult {

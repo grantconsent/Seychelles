@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:grantconsent/screens/Create_a_consent.dart';
-import 'package:grantconsent/screens/review_consent_screen.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';

@@ -1,12 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:grantconsent/screens/loader.dart';
 import 'package:grantconsent/screens/send_consent.dart';
 import 'package:grantconsent/utilities/constants.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
 class CreateConsent extends StatelessWidget {
-  final ValueNotifier currentPage = ValueNotifier(0);
-  final int pages = (consentQuestions.length / 5).round();
+  Future<dynamic> getQuestions(BuildContext context) async {
+    return DefaultAssetBundle.of(context)
+        .loadString('assets/Consent/consent_ageement_data.json')
+        .then((jsonOfQuestions) => jsonDecode(jsonOfQuestions));
+  }
+
+  final ValueNotifier<int> currentPage = ValueNotifier(0);
+  // = ValueNotifier(0);
   final PageController paginationControl = PageController(keepPage: true);
 
   @override
@@ -23,28 +32,47 @@ class CreateConsent extends StatelessWidget {
               SizedBox(height: kToolbarHeight),
               buildHeader(),
               Expanded(
-                child: PageView(
-                  controller: paginationControl,
-                  children: [
-                    for (int pageViewPage = 1;
-                        pageViewPage <= pages;
-                        pageViewPage++)
-                      ListView(
-                        children: [
-                          for (int i = (pageViewPage - 1) * 5;
-                              i < pageViewPage * 5;
-                              i++)
-                            if (consentQuestions.length > i) consentQuestions[i]
+                child: FutureBuilder(
+                  future: getQuestions(context),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      int pages = (snapshot.data.length / 5).ceil();
+                      return Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: PageView(
+                              controller: paginationControl,
+                              children: [
+                                for (int pageViewPage = 1;
+                                    pageViewPage <= pages;
+                                    pageViewPage++)
+                                  ListView(
+                                    children: [
+                                      for (int i = (pageViewPage - 1) * 5;
+                                          i < pageViewPage * 5;
+                                          i++)
+                                        if (snapshot.data.length > i)
+                                          ConsentQuestion.fromJson(
+                                              snapshot.data[i])
+                                    ],
+                                  )
+                              ],
+                              onPageChanged: (int pageNow) {
+                                currentPage.value = pageNow;
+                              },
+                              physics: NeverScrollableScrollPhysics(),
+                            ),
+                          ),
+                          buildPageNavigation(context, numberOfPages: pages),
                         ],
-                      )
-                  ],
-                  onPageChanged: (int page) {
-                    currentPage.value = page;
+                      );
+                    } else {
+                      return Loader();
+                    }
                   },
-                  physics: NeverScrollableScrollPhysics(),
                 ),
               ),
-              buildPageNavigation(context),
               SizedBox(height: 15)
             ],
           ),
@@ -72,7 +100,7 @@ class CreateConsent extends StatelessWidget {
     );
   }
 
-  Row buildPageNavigation(BuildContext context) {
+  Row buildPageNavigation(BuildContext context, {int numberOfPages}) {
     return Row(
       children: <Widget>[
         Spacer(flex: 2),
@@ -97,7 +125,7 @@ class CreateConsent extends StatelessWidget {
               alignment: Alignment.center,
               color: Colors.white,
               child: Text(
-                '${currentPageValue + 1}/$pages',
+                '${currentPageValue + 1}/$numberOfPages',
                 style: kQuestionNavigationTextStyle,
               ),
             );
@@ -108,7 +136,7 @@ class CreateConsent extends StatelessWidget {
         RawMaterialButton(
           padding: EdgeInsetsDirectional.zero,
           onPressed: () {
-            if (paginationControl.page == pages + 1) {
+            if (paginationControl.page + 1 == numberOfPages) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SendConsent()));
               return;
@@ -125,6 +153,24 @@ class CreateConsent extends StatelessWidget {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class ConsentQuestion extends StatefulWidget {
   ConsentQuestion({
     Key key,
@@ -134,10 +180,15 @@ class ConsentQuestion extends StatefulWidget {
     this.multiChoice = false,
   }) : assert(optionTypes.length == labels.length);
 
-  ConsentQuestion.fromJson(Map<String, dynamic> json, this.multiChoice)
+  ConsentQuestion.fromJson(Map<String, dynamic> json)
       : question = json['question'],
-        optionTypes = List<ConsentOptionType>.from(json['optionTypes']),
-        labels = json['labels'].cast<String>();
+        optionTypes = List.generate(
+            json['optionTypes'].length,
+            (index) => json['optionTypes'][index] == 'yes'
+                ? ConsentOptionType.yes
+                : ConsentOptionType.no),
+        labels = json['labels'].cast<String>(),
+        multiChoice = json['multichoice'] == 'true' ? true : false;
 
   final String question;
   final List<ConsentOptionType> optionTypes;

@@ -4,9 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 
-Future<PictureUploadStatus> uploadImage({
-  @required File image,
-}) async {
+Future<PictureUploadStatus> uploadImage({@required File image}) async {
   final StorageReference firebaseStorageRef =
       FirebaseStorage.instance.ref().child("profileImages/${loggedInUser.uID}");
 

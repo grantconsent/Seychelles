@@ -8,10 +8,6 @@ import 'package:grantconsent/screens/dashboard_home.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
-import 'package:grantconsent/utilities/constants.dart';
-import "dart:math";
-import 'package:grantconsent/screens/get_user_picture.dart';
-
 
 class Dashboard extends StatefulWidget {
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/constants.dart';
-import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:grantconsent/utilities/custom_widgets.dart';
 import 'package:grantconsent/utilities/styles.dart';
 
@@ -86,9 +85,7 @@ class ReviewConsent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: REMOVE THIS LINE
-    kScreenSize = MediaQuery.of(context).size;
-    return Scaffold(
+   return Scaffold(
       backgroundColor: kDashboardBackgroundColor,
       body: Container(
         child: Padding(

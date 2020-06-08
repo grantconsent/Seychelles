@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:grantconsent/utilities/custom_classes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_sign_out.dart';
-import 'package:grantconsent/services/firebase_sign_up.dart';
 Future<SignUpStatus> signUpUser(
     {@required ConsentUser newUser, @required String password}) async {
   signOutUser();
@@ -29,7 +28,6 @@ Future<SignUpStatus> signUpUser(
                 ? SignUpStatus.userExists
                 : SignUpStatus.unknownException;
   }
-  return SignUpStatus.unknownException;
 }
 
 
