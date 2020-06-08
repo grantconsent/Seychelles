@@ -1,0 +1,4 @@
+Hello! \n
+a sexual consent request has been sent to you.\n
+Follow this link to review - {link} \n
+via Grant Consent.

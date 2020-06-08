@@ -21,12 +21,12 @@ class SignUp extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Name cannot be empty.'),
       );
-    }else if (inputEmail.text==''|| inputPhoneNumber.text =='') {
-      //If password do not match
+    } else if (inputEmail.text == '' || inputPhoneNumber.text == '') {
+      //If email and number is empty
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Please fill all fields.'),
       );
-    }  else if (inputPassword.text == '') {
+    } else if (inputPassword.text == '') {
       //If password do not match
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(message: 'Enter a password.'),
@@ -100,6 +100,13 @@ class SignUp extends StatelessWidget {
       scaffoldKey.currentState.showSnackBar(
         customSnackBar(
             message: 'This email address is tied to another user account',
+            durationInSeconds: 3),
+      );
+    } else if (operationStatus == SignUpStatus.phoneExists) {
+      //If sign up was NOT successful - USER ALREADY EXISTS
+      scaffoldKey.currentState.showSnackBar(
+        customSnackBar(
+            message: 'This phone number is tied to another user account',
             durationInSeconds: 3),
       );
     } else if (operationStatus == SignUpStatus.unknownException) {

@@ -83,19 +83,6 @@ class Terms extends StatelessWidget {
               Spacer(
                 flex: 3,
               ),
-              Center(
-                child: Text(
-                  'Download Terms Of Service',
-                  style: kBody1TextStyle.copyWith(
-                    color: Colors.white,
-                    fontSize: 11,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-              Spacer(
-                flex: 3,
-              ),
             ],
           ),
         ),
