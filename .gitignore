@@ -15,10 +15,8 @@
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -44,3 +42,6 @@ app.*.map.json
 beefree-aim6lddh1ic.html
 beefree-aim6lddh1ic.zip
 demo/
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
