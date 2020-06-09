@@ -27,6 +27,7 @@ dependencies:
   firebase_dynamic_links: ^0.5.1
   email_validator: ^1.0.0
   font_awesome_flutter: ^8.8.1
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
