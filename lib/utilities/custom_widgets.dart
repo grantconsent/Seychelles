@@ -540,25 +540,7 @@ class AboutPageTemplate extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              Spacer(),
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                height: kScreenSize.height * 0.7,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                child: SingleChildScrollView(
-                  child: valueListenableBuilder,
-                ),
-              ),
-              Spacer(
-                flex: 3,
-              )
-            ],
-          ),
+              ],),
         ),
       ),
     );
