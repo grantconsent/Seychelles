@@ -1,4 +1,3 @@
-
 /// This file contains functions to handle sending a whatsapp message to a contact selected by the user in app.
 
 /// Format the string [_whatsappTemplate] to a template of the whatsapp message you want to send.
@@ -9,16 +8,17 @@
 
 /// To use:
 /// Call [pickAContact()] first, to allow user select a contact from their native contact list.
-/// This returns a Future of a LocalContact object, that contains 
+/// This returns a Future of a LocalContact object, that contains
 ///  + String name
 ///  + List<String> phoneNumber
 
 /// Call [sendConsentViaWhatsapp] with phoneNumber from the phoneNumber list property of the LocalContact object returned.
- 
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
 
 const iOSLocalizedLabels = false;
 
@@ -26,15 +26,18 @@ const iOSLocalizedLabels = false;
 ///Format the string by replacing ```
 ///{link}```
 /// with the link to send.
-const String _whatsappTemplate = '''Hello! \n 
-a sexual consent request has been sent to you.\n
-Follow this link to review - {link} \n
-via Grant Consent.''';
+String _whatsappTemplate = '#';
 
 ///Creates a preformatted message to the input [phoneNumber] on whatsapp
 ///
 ///P
+Future getWhatsappTemplate() async {
+  _whatsappTemplate = await rootBundle.loadString('assets/whatsapp.txt');
+}
+
 sendConsentViaWhatsapp({String phoneNumber, String link}) async {
+  await getWhatsappTemplate();
+  print(_whatsappTemplate);
   String message = _whatsappTemplate.replaceAll('link', link);
   var sendUrl = "whatsapp://send?phone=$phoneNumber&text=$message";
   if (await canLaunch(sendUrl)) {
